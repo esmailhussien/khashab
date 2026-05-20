@@ -52,11 +52,16 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         })
         .catch(error => {
-            console.error('Error submitting form:', error);
-            submitBtn.innerText = originalText;
-            submitBtn.disabled = false;
-            emailInput.disabled = false;
-            alert('Something went wrong. Please check your connection and try again.');
+            console.warn('AJAX submit failed, falling back to standard submit:', error);
+            
+            // If running on file:// protocol, browser CORS blocks AJAX fetches.
+            // We will let the standard form submission take over.
+            if (window.location.protocol === 'file:') {
+                console.info('FormSubmit AJAX is blocked on file:// protocol. Submitting via standard redirection.');
+            }
+            
+            // Submit the form using standard post redirect fallback
+            form.submit();
         });
     });
 });
