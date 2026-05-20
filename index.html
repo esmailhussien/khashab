@@ -18,8 +18,9 @@
     <div class="overlay"></div>
 
     <main class="content">
-        <header class="logo-container">
+        <header class="header-nav">
             <h1 class="logo">Khashab.</h1>
+            <a href="mailto:sales@khashab.store" class="contact-link">sales@khashab.store</a>
         </header>
 
         <section class="hero-text">
@@ -27,8 +28,13 @@
             <p class="subheadline">Our exclusive collection of premium wooden serving and cutting boards is launching soon. Join the waitlist for early access.</p>
             
             <form id="waitlist-form" class="waitlist-form">
+                <!-- Honeypot to prevent spam -->
+                <input type="text" name="_honey" style="display:none">
+                <!-- Disable captcha for seamless AJAX submission -->
+                <input type="hidden" name="_captcha" value="false">
+                
                 <div class="input-group">
-                    <input type="email" id="email" placeholder="Enter your email address" required autocomplete="email">
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required autocomplete="email">
                     <button type="submit" class="btn-submit">
                         Notify Me
                     </button>
@@ -40,8 +46,7 @@
         <footer class="footer">
             <p>&copy; 2026 Khashab. All rights reserved.</p>
             <div class="social-links">
-                <!-- Social Icons can be added here in the future -->
-                <span>Awaiting perfection.</span>
+                <a href="mailto:sales@khashab.store" class="footer-link">sales@khashab.store</a>
             </div>
         </footer>
     </main>

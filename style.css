@@ -61,7 +61,10 @@ body {
     z-index: 1;
 }
 
-.logo-container {
+.header-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     animation: fadeInDown 1s ease forwards;
 }
 
@@ -71,6 +74,21 @@ body {
     font-weight: 600;
     letter-spacing: -0.02em;
     color: var(--color-text);
+}
+
+.contact-link, .footer-link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 400;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+}
+
+.contact-link:hover, .footer-link:hover {
+    color: var(--color-accent);
+    border-bottom: 1px solid var(--color-accent);
 }
 
 .hero-text {

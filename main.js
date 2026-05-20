@@ -8,13 +8,35 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         
-        // Simulate a network request for the waitlist subscription
         const originalText = submitBtn.innerText;
         submitBtn.innerText = 'Subscribing...';
         submitBtn.disabled = true;
         emailInput.disabled = true;
 
-        setTimeout(() => {
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        // Add a clean email subject line
+        data['_subject'] = "New Waitlist Subscriber - Khashab";
+
+        fetch('https://formsubmit.co/ajax/sales@khashab.store', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(res => {
             // Hide the input fields and show the success message
             inputGroup.style.display = 'none';
             successMessage.style.display = 'block';
@@ -28,6 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 easing: 'ease-out',
                 fill: 'forwards'
             });
-        }, 1500); // 1.5 seconds mock delay
+        })
+        .catch(error => {
+            console.error('Error submitting form:', error);
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+            emailInput.disabled = false;
+            alert('Something went wrong. Please check your connection and try again.');
+        });
     });
 });
