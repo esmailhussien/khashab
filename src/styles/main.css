@@ -5,3 +5,10 @@
 @import './components.css';
 @import './pages/home.css';
 @import './pages/store.css';
+@import './pages/product.css';
+@import './pages/checkout.css';
+@import './pages/wishlist.css';
+@import './pages/discover.css';
+@import './pages/story.css';
+@import './pages/contact.css';
+@import './pages/configurator.css';

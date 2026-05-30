@@ -32,7 +32,17 @@ export const Navbar = {
                   <li><a href="#/store?category=care-maintenance" class="dropdown-link">Care & Maintenance</a></li>
                 </ul>
               </li>
-              <li><a href="#/discover" class="nav-link" id="nav-link-discover">Discover</a></li>
+              <li class="nav-item-dropdown">
+                <a href="#/discover" class="nav-link" id="nav-link-discover">Discover <span class="nav-link-dropdown-arrow">▼</span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#/discover" class="dropdown-link">Discover Hub</a></li>
+                  <li><a href="#/discover?tab=care" class="dropdown-link">Care & Maintenance</a></li>
+                  <li><a href="#/discover?tab=wiki" class="dropdown-link">Wood Wiki / Materials</a></li>
+                  <li><a href="#/discover?tab=blog" class="dropdown-link">Blog & News</a></li>
+                  <li><a href="#/discover?tab=videos" class="dropdown-link">Videos</a></li>
+                  <li><a href="#/discover?tab=faq" class="dropdown-link">FAQ</a></li>
+                </ul>
+              </li>
               <li><a href="#/our-story" class="nav-link" id="nav-link-story">Our Story</a></li>
               <li><a href="#/contact" class="nav-link" id="nav-link-contact">Contact</a></li>
             </ul>
@@ -86,7 +96,17 @@ export const Navbar = {
               <li><a href="#/store?category=care-maintenance" class="mobile-sub-link">Care & Oil</a></li>
             </ul>
           </li>
-          <li><a href="#/discover" class="nav-link">Discover</a></li>
+          <li>
+            <a href="#/discover" class="nav-link" style="font-weight: 500;">Discover</a>
+            <ul class="mobile-sub-links">
+              <li><a href="#/discover" class="mobile-sub-link">Discover Hub</a></li>
+              <li><a href="#/discover?tab=care" class="mobile-sub-link">Care & Maintenance</a></li>
+              <li><a href="#/discover?tab=wiki" class="mobile-sub-link">Wood Wiki</a></li>
+              <li><a href="#/discover?tab=blog" class="mobile-sub-link">Blog & News</a></li>
+              <li><a href="#/discover?tab=videos" class="mobile-sub-link">Videos</a></li>
+              <li><a href="#/discover?tab=faq" class="mobile-sub-link">FAQ</a></li>
+            </ul>
+          </li>
           <li><a href="#/our-story" class="nav-link">Our Story</a></li>
           <li><a href="#/contact" class="nav-link">Contact</a></li>
         </ul>

@@ -2,37 +2,25 @@
 
 import { Home } from './pages/home.js';
 import { Store } from './pages/store.js';
-
-// Placeholder mock renderers for Phase 2/3 pages so routing doesn't crash if clicked
-const placeholderRender = (title) => {
-  return {
-    render: () => `
-      <div class="page-container container">
-        <div class="section-header" style="padding: 100px 0; text-align: center;">
-          <h2 style="font-family: var(--font-headings); font-size: 3rem; margin-bottom: 20px;">${title}</h2>
-          <p style="color: var(--color-text-muted); font-size: 1.2rem;">Coming soon in Phase 2 & 3 of development.</p>
-          <a href="#/store" class="btn btn-primary" style="margin-top: 30px;">Return to Store</a>
-        </div>
-      </div>
-    `,
-    init: () => {
-      console.log(`${title} initialized`);
-      window.scrollTo(0, 0);
-    }
-  };
-};
+import { Product } from './pages/product.js';
+import { Checkout } from './pages/checkout.js';
+import { Wishlist } from './pages/wishlist.js';
+import { Discover } from './pages/discover.js';
+import { Story } from './pages/story.js';
+import { Contact } from './pages/contact.js';
+import { Configurator } from './pages/configurator.js';
 
 const routes = {
   '': Home,
   '/': Home,
   '/store': Store,
-  '/product': placeholderRender('Product Detail'),
-  '/discover': placeholderRender('Discover Hub'),
-  '/our-story': placeholderRender('Our Story'),
-  '/contact': placeholderRender('Contact Us'),
-  '/checkout': placeholderRender('Checkout'),
-  '/wishlist': placeholderRender('Wishlist'),
-  '/configurator': placeholderRender('Build Your Board')
+  '/product': Product,
+  '/discover': Discover,
+  '/our-story': Story,
+  '/contact': Contact,
+  '/checkout': Checkout,
+  '/wishlist': Wishlist,
+  '/configurator': Configurator
 };
 
 export const router = {

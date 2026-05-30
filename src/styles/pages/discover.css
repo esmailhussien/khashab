@@ -1,0 +1,306 @@
+/* 🪵 Khashab Discover Page CSS */
+
+/* Discover Dashboard Grid */
+.discover-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+}
+
+.discover-hero-card {
+  position: relative;
+  height: 400px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border-light);
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+}
+
+.discover-hero-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.discover-hero-card:hover .discover-hero-card-img {
+  transform: scale(1.03);
+}
+
+.discover-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 80%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 3rem;
+  color: #fff;
+}
+
+.discover-card-badge {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.discover-card-title {
+  font-family: var(--font-headings);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.discover-card-desc {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+}
+
+/* Discover Detail Template */
+.article-detail-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem auto;
+}
+
+.article-meta {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.article-hero-frame {
+  max-width: 900px;
+  height: 450px;
+  margin: 0 auto 4rem auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+}
+
+.article-body-content {
+  max-width: 700px;
+  margin: 0 auto 6rem auto;
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: #333;
+  line-height: 1.8;
+}
+
+.article-body-content p {
+  margin-bottom: 2rem;
+}
+
+.article-body-content h3 {
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.article-body-content ul {
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+
+.article-body-content li {
+  margin-bottom: 0.5rem;
+}
+
+/* Wood Wiki Cards styling */
+.wiki-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+}
+
+.wiki-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.wiki-card-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.wiki-color-swatch {
+  height: 180px;
+  border-radius: var(--radius-md);
+  background-size: cover;
+  border: 1px solid var(--color-border-light);
+}
+
+.wiki-card-title {
+  font-family: var(--font-headings);
+  font-size: 2.2rem;
+  font-weight: 500;
+}
+
+.wiki-scientific {
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  margin-top: -0.5rem;
+  display: block;
+}
+
+.wiki-attrs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.wiki-attr-row {
+  border-bottom: 1px solid var(--color-border-light);
+  padding-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.wiki-attr-row:last-child {
+  border-bottom: none;
+}
+
+.wiki-attr-label {
+  font-weight: 600;
+  color: var(--color-text);
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.wiki-attr-val {
+  color: var(--color-text-muted);
+  font-weight: 300;
+}
+
+/* Video Gallery Grid */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+}
+
+.video-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.01);
+}
+
+.video-thumb-frame {
+  position: relative;
+  aspect-ratio: 16/9;
+  background-color: var(--color-bg-alt);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.video-thumb-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.video-card:hover .video-thumb-frame img {
+  transform: scale(1.03);
+}
+
+.video-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  color: var(--color-text);
+  transition: all var(--transition-fast);
+}
+
+.video-card:hover .video-play-btn {
+  transform: translate(-50%, -50%) scale(1.1);
+  background-color: var(--color-accent);
+  color: #fff;
+}
+
+.video-info {
+  padding: 1.5rem;
+}
+
+.video-title {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.video-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-weight: 300;
+}
+
+/* FAQ page styles */
+.faq-container {
+  max-width: 800px;
+  margin: 3rem auto 6rem auto;
+}
+
+/* Responsive discover details */
+@media (max-width: 900px) {
+  .discover-dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .wiki-card {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .article-hero-frame {
+    height: 300px;
+  }
+}

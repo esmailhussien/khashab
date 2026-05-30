@@ -1,0 +1,285 @@
+/* 🪵 Khashab Build Your Board Configurator Page CSS */
+
+.configurator-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  margin-top: 2rem;
+  margin-bottom: 6rem;
+  align-items: start;
+}
+
+/* Left Column: Live Visual Board Preview */
+.configurator-preview-box {
+  background-color: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 100px;
+  min-height: 480px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.02);
+}
+
+.board-canvas-frame {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+}
+
+/* Dynamic Board Mockup */
+.board-mockup {
+  width: 90%;
+  height: 90%;
+  position: relative;
+  transition: all var(--transition-normal);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+  border: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Shapes configurations */
+.board-mockup.shape-rectangular {
+  width: 95%;
+  height: 70%;
+  border-radius: var(--radius-lg);
+}
+
+.board-mockup.shape-round {
+  width: 85%;
+  height: 85%;
+  border-radius: 50%;
+}
+
+.board-mockup.shape-paddle {
+  width: 80%;
+  height: 80%;
+  border-radius: var(--radius-lg);
+  position: relative;
+}
+
+/* Handle element for Paddle shape */
+.board-mockup-handle {
+  display: none;
+  position: absolute;
+  background-color: inherit;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.board-mockup.shape-paddle .board-mockup-handle {
+  display: block;
+  width: 25%;
+  height: 40%;
+  bottom: -35%;
+  left: 37.5%;
+  border-radius: 0 0 100px 100px;
+  border-top: none;
+  z-index: -1;
+}
+
+/* Engraving Text Overlay */
+.board-engraving-overlay {
+  position: absolute;
+  color: rgba(0, 0, 0, 0.45); /* Engraved burnt look */
+  text-shadow: -1px -1px 0px rgba(255,255,255,0.1), 1px 1px 0px rgba(0,0,0,0.3);
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  text-align: center;
+  user-select: none;
+  pointer-events: none;
+  max-width: 80%;
+  word-wrap: break-word;
+  transition: all var(--transition-fast);
+}
+
+/* Positions of engraving */
+.engrave-pos-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.engrave-pos-bottom-center {
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.95rem;
+}
+
+.engrave-pos-bottom-right {
+  bottom: 12%;
+  right: 12%;
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+/* Options Controls (Right) */
+.configurator-controls {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+}
+
+.configurator-option-group {
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--color-border-light);
+  padding-bottom: 2rem;
+}
+
+.configurator-option-group:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.config-btn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.config-choice-btn {
+  padding: 0.85rem 0.5rem;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  transition: all var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.config-choice-btn:hover {
+  border-color: var(--color-text-muted);
+}
+
+.config-choice-btn.active {
+  background-color: var(--color-text);
+  color: #fff;
+  border-color: var(--color-text);
+}
+
+/* Wood selection with texture preview */
+.config-wood-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.config-wood-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.config-wood-card:hover {
+  border-color: var(--color-text-muted);
+}
+
+.config-wood-card.active {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent-light);
+}
+
+.config-wood-preview {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border-light);
+}
+
+.config-wood-info {
+  flex: 1;
+}
+
+.config-wood-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.config-wood-desc {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-weight: 300;
+}
+
+/* Sizing slider values helper */
+.size-spec-text {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
+  display: block;
+}
+
+/* Engraving fonts selection classes */
+.font-serif {
+  font-family: var(--font-headings) !important;
+  font-style: italic;
+}
+
+.font-sans {
+  font-family: var(--font-body) !important;
+  font-weight: 500;
+}
+
+.font-mono {
+  font-family: monospace !important;
+}
+
+/* Price block */
+.configurator-price-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-bg-alt);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 2rem;
+  margin-top: 3rem;
+  border: 1px solid var(--color-border);
+}
+
+.config-price-val {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+/* Responsive configurator layout */
+@media (max-width: 900px) {
+  .configurator-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .configurator-preview-box {
+    position: static;
+    min-height: 350px;
+    padding: 2rem 1rem;
+  }
+  .board-canvas-frame {
+    max-width: 250px;
+  }
+}

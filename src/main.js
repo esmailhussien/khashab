@@ -4,6 +4,7 @@ import './styles/main.css';
 import { Navbar } from './components/navbar.js';
 import { Footer } from './components/footer.js';
 import { CartPanel } from './components/cart-panel.js';
+import { Lightbox } from './components/lightbox.js';
 import { router } from './router.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,17 +24,22 @@ document.addEventListener('DOMContentLoaded', () => {
     
     <!-- Footer Container -->
     <div id="footer-container"></div>
+    
+    <!-- Global Lightbox Zoom Container -->
+    <div id="lightbox-container"></div>
   `;
 
   // Render static components inside their containers
   document.getElementById('navbar-container').innerHTML = Navbar.render();
   document.getElementById('cart-panel-container').innerHTML = CartPanel.render();
   document.getElementById('footer-container').innerHTML = Footer.render();
+  document.getElementById('lightbox-container').innerHTML = Lightbox.render();
 
   // Initialize interactive javascript handlers for static components
   Navbar.init();
   CartPanel.init();
   Footer.init();
+  Lightbox.init();
 
   // Initialize Router to render active page in <main>
   router.init();
