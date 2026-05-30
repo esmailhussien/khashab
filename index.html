@@ -1,56 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khashab | Premium Wooden Boards</title>
-    <meta name="description" content="Discover premium handcrafted wooden serving and cutting boards. Coming soon.">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khashab | Premium Handcrafted Wooden Products</title>
+    <meta name="description" content="Discover premium handcrafted wooden serving boards, butcher blocks, decorative items, and care products. 100% natural hardwood, designed for modern living." />
     
-    <!-- Fonts: Inter for UI, Playfair Display for elegant headings -->
+    <!-- Google Fonts: Inter for UI, Playfair Display for elegant serif headings -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- App Container -->
+    <div id="app"></div>
     
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="background-container"></div>
-    <div class="overlay"></div>
-
-    <main class="content">
-        <header class="header-nav">
-            <h1 class="logo">Khashab.</h1>
-            <a href="mailto:sales@khashab.store" class="contact-link">sales@khashab.store</a>
-        </header>
-
-        <section class="hero-text">
-            <h2 class="headline">Crafted by nature.<br>Refined by hand.</h2>
-            <p class="subheadline">Our exclusive collection of premium wooden serving and cutting boards is launching soon. Join the waitlist for early access.</p>
-            
-            <form id="waitlist-form" action="https://formsubmit.co/sales@khashab.store" method="POST" class="waitlist-form">
-                <!-- Honeypot to prevent spam -->
-                <input type="text" name="_honey" style="display:none">
-                <!-- Disable captcha for seamless AJAX submission -->
-                <input type="hidden" name="_captcha" value="false">
-                
-                <div class="input-group">
-                    <input type="email" id="email" name="email" placeholder="Enter your email address" required autocomplete="email">
-                    <button type="submit" class="btn-submit">
-                        Notify Me
-                    </button>
-                </div>
-                <p class="success-message" id="success-message" style="display: none;">Thank you! We'll be in touch soon.</p>
-            </form>
-        </section>
-
-        <footer class="footer">
-            <p>&copy; 2026 Khashab. All rights reserved.</p>
-            <div class="social-links">
-                <a href="mailto:sales@khashab.store" class="footer-link">sales@khashab.store</a>
-            </div>
-        </footer>
-    </main>
-
-    <script src="main.js"></script>
-</body>
+    <!-- JavaScript Entry -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>

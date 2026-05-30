@@ -1,0 +1,40 @@
+/* 🪵 Khashab Main JavaScript Entrypoint */
+
+import './styles/main.css';
+import { Navbar } from './components/navbar.js';
+import { Footer } from './components/footer.js';
+import { CartPanel } from './components/cart-panel.js';
+import { router } from './router.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  const appContainer = document.getElementById('app');
+  if (!appContainer) return;
+
+  // Render the static page shell
+  appContainer.innerHTML = `
+    <!-- Navbar Container -->
+    <div id="navbar-container"></div>
+    
+    <!-- Main Dynamically Routed Content -->
+    <main id="main-content"></main>
+    
+    <!-- Cart Slide-out Panel Container -->
+    <div id="cart-panel-container"></div>
+    
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+  `;
+
+  // Render static components inside their containers
+  document.getElementById('navbar-container').innerHTML = Navbar.render();
+  document.getElementById('cart-panel-container').innerHTML = CartPanel.render();
+  document.getElementById('footer-container').innerHTML = Footer.render();
+
+  // Initialize interactive javascript handlers for static components
+  Navbar.init();
+  CartPanel.init();
+  Footer.init();
+
+  // Initialize Router to render active page in <main>
+  router.init();
+});
