@@ -122,17 +122,6 @@ export const Discover = {
     }
 
     if (activeTab === 'wiki') {
-      // Swatch colors helper based on wood name
-      const getWoodColor = (wood) => {
-        const name = wood.toLowerCase();
-        if (name.includes('walnut')) return '#4E3629';
-        if (name.includes('oak')) return '#C0A37E';
-        if (name.includes('maple')) return '#E6D2B8';
-        if (name.includes('olive')) return '#A67F52';
-        if (name.includes('teak')) return '#9E7446';
-        return '#B8860B';
-      };
-
       return `
         <div class="page-container container">
           <div class="section-header" style="text-align: left; margin-bottom: 3rem;">
@@ -159,22 +148,14 @@ export const Discover = {
               <div class="form-group" style="flex: 1; min-width: 220px;">
                 <label class="form-label" for="compare-wood-1">Wood Type 1</label>
                 <select id="compare-wood-1" class="form-input" style="background-color: var(--color-surface); cursor: pointer; appearance: none; background-image: url(&quot;data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E&quot;); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1rem; padding-right: 2.5rem;">
-                  <option value="walnut">North American Walnut</option>
-                  <option value="oak">European White Oak</option>
-                  <option value="maple" selected>Hard Rock Maple</option>
-                  <option value="olive-wood">Tunisian Olive Wood</option>
-                  <option value="teak">Burmese Teak</option>
+                  ${woodsWiki.map(wood => `<option value="${wood.id}" ${wood.id === 'maple' ? 'selected' : ''}>${wood.name}</option>`).join('')}
                 </select>
               </div>
               
               <div class="form-group" style="flex: 1; min-width: 220px;">
                 <label class="form-label" for="compare-wood-2">Wood Type 2</label>
                 <select id="compare-wood-2" class="form-input" style="background-color: var(--color-surface); cursor: pointer; appearance: none; background-image: url(&quot;data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E&quot;); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1rem; padding-right: 2.5rem;">
-                  <option value="walnut" selected>North American Walnut</option>
-                  <option value="oak">European White Oak</option>
-                  <option value="maple">Hard Rock Maple</option>
-                  <option value="olive-wood">Tunisian Olive Wood</option>
-                  <option value="teak">Burmese Teak</option>
+                  ${woodsWiki.map(wood => `<option value="${wood.id}" ${wood.id === 'walnut' ? 'selected' : ''}>${wood.name}</option>`).join('')}
                 </select>
               </div>
             </div>
@@ -200,10 +181,24 @@ export const Discover = {
             ${woodsWiki.map(wood => `
               <div class="wiki-card">
                 <div class="wiki-card-left">
-                  <div class="wiki-color-swatch" style="background-color: ${getWoodColor(wood.name)}"></div>
+                  <div class="wiki-color-swatch" style="background: ${wood.swatch}"></div>
                   <div>
                     <h3 class="wiki-card-title">${wood.name}</h3>
                     <span class="wiki-scientific">${wood.scientific}</span>
+                  </div>
+                  <div class="wiki-specs-badge-group">
+                    <div class="wiki-spec-badge">
+                      <span class="badge-label">Origin</span>
+                      <span class="badge-value">${wood.origin}</span>
+                    </div>
+                    <div class="wiki-spec-badge">
+                      <span class="badge-label">Classification</span>
+                      <span class="badge-value">${wood.type}</span>
+                    </div>
+                    <div class="wiki-spec-badge">
+                      <span class="badge-label">Price Range</span>
+                      <span class="badge-value price-tier">${wood.price}</span>
+                    </div>
                   </div>
                 </div>
                 
@@ -420,6 +415,9 @@ export const Discover = {
 
         const rows = [
           { label: "Scientific Name", val1: w1.scientific, val2: w2.scientific, italic: true },
+          { label: "Geographic Origin", val1: w1.origin, val2: w2.origin },
+          { label: "Classification", val1: w1.type, val2: w2.type },
+          { label: "Price Range", val1: w1.price, val2: w2.price },
           { label: "Natural Color", val1: w1.color, val2: w2.color },
           { label: "Hardness & Durability", val1: w1.durability, val2: w2.durability },
           { label: "Grain Pattern", val1: w1.grain, val2: w2.grain },
