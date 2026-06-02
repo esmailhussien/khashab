@@ -13,7 +13,7 @@ export const Navbar = {
         <div class="container">
           <!-- Logo -->
           <a href="#/" class="logo">
-            Khashab<span class="logo-dot">.</span>
+            <img src="/assets/khashablogo.png" alt="Khashab Logo">
           </a>
 
           <!-- Desktop Navigation -->

@@ -8,7 +8,7 @@ export const Footer = {
           <div class="footer-grid">
             <!-- Brand Column -->
             <div class="footer-col footer-brand">
-              <a href="#/" class="logo">Khashab<span class="logo-dot">.</span></a>
+              <a href="#/" class="logo"><img src="/assets/khashablogo.png" alt="Khashab Logo"></a>
               <p>Premium handcrafted wooden products designed for modern living. Crafted by nature, refined by hand.</p>
             </div>
 
