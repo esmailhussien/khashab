@@ -36,6 +36,21 @@ export const Footer = {
               </ul>
             </div>
 
+            <!-- Customer Care / Return Policy -->
+            <div class="footer-col">
+              <h4>Support</h4>
+              <ul class="footer-links">
+                <li><a href="#/contact">Help Center</a></li>
+                <li><a href="#/contact">Track Order</a></li>
+              </ul>
+              <div style="margin-top: 2rem;">
+                <h4 style="margin-bottom: 0.75rem; font-size: 0.75rem; color: var(--color-text);">Return Policy</h4>
+                <p style="font-size: 0.8rem; color: var(--color-text-muted); line-height: 1.6;">
+                  15-day return policy for unopened boxes. Used boards or custom-engraved items are final sale.
+                </p>
+              </div>
+            </div>
+
             <!-- Newsletter -->
             <div class="footer-col footer-newsletter">
               <h4>Stay Connected</h4>
