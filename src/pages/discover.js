@@ -203,7 +203,7 @@ export const Discover = {
                 </div>
                 
                 <div class="wiki-attrs">
-                  <p style="color: var(--color-text-muted); font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem; font-weight: 300;">${wood.description}</p>
+                  <p style="color: var(--color-text-muted); font-size: 1.05rem; line-height: 1.8; margin-bottom: 3.5rem; font-weight: 300;">${wood.description}</p>
                   
                   <div class="wiki-attr-row">
                     <span class="wiki-attr-label">Natural Hue</span>

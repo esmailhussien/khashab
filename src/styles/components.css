@@ -24,7 +24,7 @@
 .btn-primary:hover {
   background-color: var(--color-accent);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(184, 134, 11, 0.2);
+  box-shadow: 0 5px 15px rgba(176, 125, 70, 0.3);
 }
 
 .btn-secondary {
@@ -47,7 +47,7 @@
 .btn-accent:hover {
   background-color: var(--color-accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(184, 134, 11, 0.2);
+  box-shadow: 0 5px 15px rgba(176, 125, 70, 0.3);
 }
 
 .btn-text {

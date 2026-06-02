@@ -31,6 +31,9 @@ export const Story = {
                 <p>
                   Thirty years of working with raw lumber has taught us one fundamental truth: no two trees are identical. We have spent half a lifetime studying moisture behavior, fiber structural orientation, and the natural resilience of hardwoods. This deep-rooted professional experience is poured into every single board, plate, and block we craft today.
                 </p>
+                <div style="margin-top: 3rem; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                  <img src="/assets/workshop.png" alt="Our Woodcraft Workshop Interior" style="width: 100%; height: auto; display: block; object-fit: cover;">
+                </div>
               </div>
             </div>
           </div>

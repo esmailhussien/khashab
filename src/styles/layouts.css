@@ -25,12 +25,12 @@ main {
 }
 
 .navbar.scrolled {
-  background-color: rgba(250, 250, 248, 0.95);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background-color: rgba(252, 251, 249, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-color: var(--color-border);
   padding: 1rem 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 .navbar .container {
@@ -46,14 +46,14 @@ main {
 }
 
 .logo img {
-  height: 44px;
+  height: 52px;
   width: auto;
   display: block;
   transition: height var(--transition-normal);
 }
 
 .navbar.scrolled .logo img {
-  height: 36px;
+  height: 42px;
 }
 
 
@@ -399,7 +399,8 @@ main {
 
 /* Page Transition Wrapper */
 .page-container {
-  padding-top: 7rem; /* To clear navbar */
+  padding-top: 7rem;
+  /* To clear navbar */
   min-height: 80vh;
   opacity: 0;
   transform: translateY(15px);
@@ -431,9 +432,11 @@ main {
   .navbar {
     padding: 1rem 0;
   }
+
   .nav-links {
     display: none;
   }
+
   .mobile-nav-toggle {
     display: block;
     font-size: 1.5rem;
@@ -441,10 +444,12 @@ main {
     border: none;
     cursor: pointer;
   }
+
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
+
   .footer-bottom {
     flex-direction: column;
     gap: 1.5rem;
