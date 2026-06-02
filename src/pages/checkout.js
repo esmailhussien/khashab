@@ -98,6 +98,25 @@ export const Checkout = {
             <div class="checkout-step-pane" id="pane-payment" style="display: none;">
               <h3 class="step-title">Payment Method</h3>
               
+              <!-- Payment Type Selection (Egypt) -->
+              <div style="margin-bottom: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                <label class="payment-method-label" style="border: 2px solid var(--color-accent); padding: 1rem; border-radius: var(--radius-md); cursor: pointer; text-align: center; background: var(--color-surface);">
+                  <input type="radio" name="payment-type" value="card" checked style="margin-bottom: 0.5rem;">
+                  <span style="font-weight: 500; display: block; color: var(--color-text);">Credit / Debit Card</span>
+                  <span style="font-size: 0.75rem; color: var(--color-text-muted);">Powered by Paymob</span>
+                </label>
+                <label class="payment-method-label" style="border: 1px solid var(--color-border); padding: 1rem; border-radius: var(--radius-md); cursor: pointer; text-align: center; background: var(--color-surface);">
+                  <input type="radio" name="payment-type" value="wallet" style="margin-bottom: 0.5rem;">
+                  <span style="font-weight: 500; display: block; color: var(--color-text);">Mobile Wallets</span>
+                  <span style="font-size: 0.75rem; color: var(--color-text-muted);">Vodafone Cash / Fawry</span>
+                </label>
+                <label class="payment-method-label" style="border: 1px solid var(--color-border); padding: 1rem; border-radius: var(--radius-md); cursor: pointer; text-align: center; background: var(--color-surface);">
+                  <input type="radio" name="payment-type" value="cod" style="margin-bottom: 0.5rem;">
+                  <span style="font-weight: 500; display: block; color: var(--color-text);">Cash on Delivery</span>
+                  <span style="font-size: 0.75rem; color: var(--color-text-muted);">Pay at your doorstep</span>
+                </label>
+              </div>
+              
               <!-- Card visual preview -->
               <div class="card-preview-wrapper">
                 <div class="credit-card-mockup">

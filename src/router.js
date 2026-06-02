@@ -9,6 +9,7 @@ import { Discover } from './pages/discover.js';
 import { Story } from './pages/story.js';
 import { Contact } from './pages/contact.js';
 import { Configurator } from './pages/configurator.js';
+import { Returns } from './pages/returns.js';
 import { PageTransition } from './components/transitions.js';
 import { products } from './data/products.js';
 import { initScrollAnimations } from './utils/animations.js';
@@ -23,7 +24,8 @@ const routes = {
   '/contact': Contact,
   '/checkout': Checkout,
   '/wishlist': Wishlist,
-  '/configurator': Configurator
+  '/configurator': Configurator,
+  '/return-policy': Returns
 };
 
 const routeTitles = {
@@ -34,7 +36,8 @@ const routeTitles = {
   '/contact': 'Contact Us | Khashab Custom Orders & Support',
   '/checkout': 'Checkout | Complete Your Khashab Order',
   '/wishlist': 'My Wishlist | Khashab Saved Items',
-  '/configurator': 'Custom Board Configurator | Design Your Own Wood Board'
+  '/configurator': 'Custom Board Configurator | Design Your Own Wood Board',
+  '/return-policy': 'Return Policy | Khashab'
 };
 
 const placeholderPage = {
