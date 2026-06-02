@@ -3,7 +3,7 @@
 export const Returns = {
   render() {
     return `
-      <div class="page-container container" style="max-width: 800px; padding: 4rem 1rem;">
+      <div class="page-container container" style="max-width: 800px; padding: 9rem 1.5rem 8rem 1.5rem;">
         <h1 style="font-family: var(--font-headings); font-size: 3rem; margin-bottom: 2rem; color: var(--color-text);">Return Policy</h1>
         
         <div style="color: var(--color-text-muted); font-size: 1.05rem; line-height: 1.8; font-weight: 300;">
