@@ -30,6 +30,8 @@ export const Navbar = {
                   <li><a href="#/store?category=kitchen-accessories" class="dropdown-link">Kitchen Accessories</a></li>
                   <li><a href="#/store?category=decorative" class="dropdown-link">Decorative Items</a></li>
                   <li><a href="#/store?category=care-maintenance" class="dropdown-link">Care & Maintenance</a></li>
+                  <li class="dropdown-divider" style="border-top: 1px solid var(--color-border); margin: 6px 0;"></li>
+                  <li><a href="#/configurator" class="dropdown-link" style="font-weight: 600; color: var(--color-accent);">Build Your Board 🎨</a></li>
                 </ul>
               </li>
               <li class="nav-item-dropdown">
@@ -94,6 +96,7 @@ export const Navbar = {
               <li><a href="#/store?category=kitchen-accessories" class="mobile-sub-link">Accessories</a></li>
               <li><a href="#/store?category=decorative" class="mobile-sub-link">Decorative</a></li>
               <li><a href="#/store?category=care-maintenance" class="mobile-sub-link">Care & Oil</a></li>
+              <li style="border-top: 1px dashed var(--color-border); margin: 4px 0; padding-top: 4px;"><a href="#/configurator" class="mobile-sub-link" style="font-weight: 600; color: var(--color-accent);">Build Your Board 🎨</a></li>
             </ul>
           </li>
           <li>

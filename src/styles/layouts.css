@@ -401,6 +401,12 @@ main {
   opacity: 0;
   transform: translateY(15px);
   animation: pageFadeIn var(--transition-slow) forwards;
+  transition: opacity 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.page-container.page-leaving {
+  opacity: 0 !important;
+  transform: translateY(-15px) !important;
 }
 
 @keyframes pageFadeIn {
@@ -441,4 +447,51 @@ main {
     gap: 1.5rem;
     text-align: center;
   }
+}
+
+/* 🌀 Scroll Reveal Animations (Scandinavian Minimalist Feel) */
+.reveal-on-scroll {
+  opacity: 0;
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+  will-change: opacity, transform;
+}
+
+/* Slide Up (Default reveal) */
+.reveal-slide-up {
+  transform: translateY(40px);
+}
+
+.reveal-slide-up.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Slide in from Left */
+.reveal-slide-right {
+  transform: translateX(-40px);
+}
+
+.reveal-slide-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Slide in from Right */
+.reveal-slide-left {
+  transform: translateX(40px);
+}
+
+.reveal-slide-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Pure Fade In */
+.reveal-fade {
+  transform: scale(0.98);
+}
+
+.reveal-fade.revealed {
+  opacity: 1;
+  transform: scale(1);
 }

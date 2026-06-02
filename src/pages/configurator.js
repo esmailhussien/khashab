@@ -52,7 +52,7 @@ export const Configurator = {
               <div class="config-wood-options" id="controls-wood">
                 <!-- Walnut -->
                 <div class="config-wood-card active" data-wood="walnut" data-color="#4E3629">
-                  <div class="config-wood-preview" style="background-color: #4E3629;"></div>
+                  <div class="config-wood-preview" style="background-image: url('/assets/woods/walnut.png'); background-size: cover; background-position: center;"></div>
                   <div class="config-wood-info">
                     <span class="config-wood-name">North American Walnut (+$20)</span>
                     <span class="config-wood-desc">Rich chocolate hues, elegant wavy patterns, heavy durability.</span>
@@ -60,7 +60,7 @@ export const Configurator = {
                 </div>
                 <!-- Oak -->
                 <div class="config-wood-card" data-wood="oak" data-color="#C0A37E">
-                  <div class="config-wood-preview" style="background-color: #C0A37E;"></div>
+                  <div class="config-wood-preview" style="background-image: url('/assets/woods/oak.png'); background-size: cover; background-position: center;"></div>
                   <div class="config-wood-info">
                     <span class="config-wood-name">European White Oak (+$10)</span>
                     <span class="config-wood-desc">Golden wheat tones, highly pronounced coarse grains.</span>
@@ -68,7 +68,7 @@ export const Configurator = {
                 </div>
                 <!-- Maple -->
                 <div class="config-wood-card" data-wood="maple" data-color="#E6D2B8">
-                  <div class="config-wood-preview" style="background-color: #E6D2B8;"></div>
+                  <div class="config-wood-preview" style="background-image: url('/assets/woods/maple.png'); background-size: cover; background-position: center;"></div>
                   <div class="config-wood-info">
                     <span class="config-wood-name">Hard Rock Maple (+0)</span>
                     <span class="config-wood-desc">Light creamy beige, tight grains, sanitarily chef-approved.</span>
@@ -211,6 +211,12 @@ export const Configurator = {
         boardMockup.className = 'board-mockup';
         boardMockup.classList.add(`shape-${selectedShape}`);
         boardMockup.style.backgroundColor = selectedColor;
+        boardMockup.style.backgroundImage = `url('/assets/woods/${selectedWood}.png')`;
+        
+        const handle = document.getElementById('config-board-handle');
+        if (handle) {
+          handle.style.backgroundImage = `url('/assets/woods/${selectedWood}.png')`;
+        }
       }
 
       if (engravingPreview) {

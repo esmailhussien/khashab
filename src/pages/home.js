@@ -39,14 +39,14 @@ export const Home = {
         <!-- Category Grid Showcase -->
         <section class="section category-section">
           <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal-on-scroll reveal-slide-up">
               <h2>Elegance in Every Detail</h2>
               <p>Explore our thoughtfully curated collections of functional kitchen art and tablewares.</p>
             </div>
             
             <div class="grid grid-cols-3">
               ${featuredCats.map(cat => `
-                <div class="category-card" onclick="window.location.hash='#/store?category=${cat.id}'">
+                <div class="category-card reveal-on-scroll reveal-slide-up stagger-item" onclick="window.location.hash='#/store?category=${cat.id}'">
                   <div class="image-placeholder" style="height: 100%; border-radius: var(--radius-lg);">
                     <svg class="icon" viewBox="0 0 24 24" style="width: 48px; height: 48px; stroke-width: 1.2;"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
                     <span style="font-size: 0.9rem; font-weight: 500; margin-top: 1rem; color: var(--color-text);">${cat.name}</span>
@@ -59,7 +59,7 @@ export const Home = {
               `).join('')}
             </div>
             
-            <div style="text-align: center; margin-top: 3rem;">
+            <div style="text-align: center; margin-top: 3rem;" class="reveal-on-scroll reveal-fade">
               <a href="#/store" class="btn btn-text">View All 6 Categories</a>
             </div>
           </div>
@@ -68,12 +68,12 @@ export const Home = {
         <!-- Featured Bestsellers Carousel -->
         <section class="section featured-section">
           <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal-on-scroll reveal-slide-up">
               <h2>The Bestsellers</h2>
               <p>Hand-selected pieces loved by professional chefs and home cooks alike.</p>
             </div>
             
-            <div class="featured-carousel-wrapper">
+            <div class="featured-carousel-wrapper reveal-on-scroll reveal-fade">
               <div class="featured-carousel" id="featured-carousel">
                 ${featuredProducts.map(product => ProductCard.render(product)).join('')}
               </div>

@@ -47,6 +47,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* Shapes configurations */
@@ -73,7 +76,8 @@
 .board-mockup-handle {
   display: none;
   position: absolute;
-  background-color: inherit;
+  background-size: cover;
+  background-position: center;
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   border: 1px solid rgba(0,0,0,0.08);
 }
