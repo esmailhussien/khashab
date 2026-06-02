@@ -115,44 +115,54 @@ export const CartPanel = {
     }
 
     // Render items list
-    body.innerHTML = items.map(item => `
-      <div class="cart-item" data-id="${item.cartItemId}" style="display: flex; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-border-light); padding-bottom: 1.5rem;">
-        <div style="width: 80px; height: 80px; flex-shrink: 0; background-color: var(--color-bg-alt); border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-border-light); position: relative;">
-          <!-- Using placeholder styling -->
-          <div class="image-placeholder" style="padding: 0.5rem;">
-            <svg class="icon" viewBox="0 0 24 24" style="width: 20px; height: 20px; margin-bottom: 0.25rem;"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-            <span style="font-size: 0.5rem;">Wood</span>
-          </div>
-        </div>
-        
-        <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
-          <div>
-            <h4 style="font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; margin-bottom: 0.25rem;">${item.name}</h4>
-            <p style="font-size: 0.75rem; color: var(--color-text-muted); font-weight: 300;">
-              ${item.woodType} / ${item.size}
-            </p>
+    body.innerHTML = items.map(item => {
+      const currency = item.currency || 'USD';
+      const itemPriceStr = currency === 'EGP' ? `${(item.price * item.quantity).toLocaleString()} EGP` : `$${(item.price * item.quantity).toFixed(2)}`;
+      
+      return `
+        <div class="cart-item" data-id="${item.cartItemId}" style="display: flex; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-border-light); padding-bottom: 1.5rem;">
+          <div style="width: 80px; height: 80px; flex-shrink: 0; background-color: var(--color-bg-alt); border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-border-light); position: relative;">
+            ${item.image && !item.image.includes('hero.png') ? `
+              <img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;">
+            ` : `
+              <div class="image-placeholder" style="padding: 0.5rem;">
+                <svg class="icon" viewBox="0 0 24 24" style="width: 20px; height: 20px; margin-bottom: 0.25rem;"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                <span style="font-size: 0.5rem;">Wood</span>
+              </div>
+            `}
           </div>
           
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
-            <!-- Quantity Control -->
-            <div style="display: flex; align-items: center; border: 1px solid var(--color-border); border-radius: var(--radius-sm); overflow: hidden;">
-              <button class="cart-qty-btn decrease-qty" data-id="${item.cartItemId}" style="background: none; border: none; padding: 0.25rem 0.6rem; cursor: pointer; font-weight: 600;">-</button>
-              <span style="padding: 0 0.5rem; font-size: 0.85rem; font-weight: 500;">${item.quantity}</span>
-              <button class="cart-qty-btn increase-qty" data-id="${item.cartItemId}" style="background: none; border: none; padding: 0.25rem 0.6rem; cursor: pointer; font-weight: 600;">+</button>
+          <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <h4 style="font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; margin-bottom: 0.25rem;">${item.name}</h4>
+              <p style="font-size: 0.75rem; color: var(--color-text-muted); font-weight: 300;">
+                ${item.woodType} / ${item.size}
+              </p>
             </div>
             
-            <div style="text-align: right;">
-              <span style="font-weight: 500; font-size: 0.95rem; color: var(--color-accent);">$${(item.price * item.quantity).toFixed(2)}</span>
-              <button class="remove-cart-item" data-id="${item.cartItemId}" style="background: none; border: none; color: var(--color-text-light); cursor: pointer; font-size: 0.75rem; display: block; margin-left: auto; margin-top: 0.25rem; font-weight: 300; text-decoration: underline;">
-                Remove
-              </button>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+              <!-- Quantity Control -->
+              <div style="display: flex; align-items: center; border: 1px solid var(--color-border); border-radius: var(--radius-sm); overflow: hidden;">
+                <button class="cart-qty-btn decrease-qty" data-id="${item.cartItemId}" style="background: none; border: none; padding: 0.25rem 0.6rem; cursor: pointer; font-weight: 600;">-</button>
+                <span style="padding: 0 0.5rem; font-size: 0.85rem; font-weight: 500;">${item.quantity}</span>
+                <button class="cart-qty-btn increase-qty" data-id="${item.cartItemId}" style="background: none; border: none; padding: 0.25rem 0.6rem; cursor: pointer; font-weight: 600;">+</button>
+              </div>
+              
+              <div style="text-align: right;">
+                <span style="font-weight: 500; font-size: 0.95rem; color: var(--color-accent);">${itemPriceStr}</span>
+                <button class="remove-cart-item" data-id="${item.cartItemId}" style="background: none; border: none; color: var(--color-text-light); cursor: pointer; font-size: 0.75rem; display: block; margin-left: auto; margin-top: 0.25rem; font-weight: 300; text-decoration: underline;">
+                  Remove
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
 
-    subtotalText.innerText = `$${cart.getTotal().toFixed(2)}`;
+    const hasEGP = items.some(item => item.currency === 'EGP');
+    const total = cart.getTotal();
+    subtotalText.innerText = hasEGP ? `${total.toLocaleString()} EGP` : `$${total.toFixed(2)}`;
 
     // Set up item event listeners (quantity +/- and remove)
     body.querySelectorAll('.decrease-qty').forEach(btn => {

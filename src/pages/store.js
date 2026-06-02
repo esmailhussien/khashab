@@ -126,6 +126,30 @@ export const Store = {
                     Teak
                   </label>
                 </li>
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" value="Sapele" class="filter-checkbox filter-wood">
+                    Sapele
+                  </label>
+                </li>
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" value="Wenge" class="filter-checkbox filter-wood">
+                    Wenge
+                  </label>
+                </li>
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" value="Padauk" class="filter-checkbox filter-wood">
+                    Padauk
+                  </label>
+                </li>
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" value="Zebrawood" class="filter-checkbox filter-wood">
+                    Zebrawood
+                  </label>
+                </li>
               </ul>
             </div>
 
@@ -269,7 +293,12 @@ export const Store = {
       // 3. Wood Type Filter
       if (selectedWoods.length > 0) {
         filtered = filtered.filter(p => 
-          selectedWoods.some(wood => p.woodType.toLowerCase().includes(wood.toLowerCase()))
+          selectedWoods.some(wood => {
+            const wLower = wood.toLowerCase();
+            const mainMatches = p.woodType.toLowerCase().includes(wLower);
+            const listMatches = p.woods && p.woods.some(w => w.toLowerCase().includes(wLower));
+            return mainMatches || listMatches;
+          })
         );
       }
 

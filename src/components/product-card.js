@@ -7,6 +7,8 @@ export const ProductCard = {
   render(product) {
     const isFav = wishlist.has(product.id);
     const hasDiscount = product.originalPrice !== null;
+    const currency = product.currency || 'USD';
+    const formatPrice = (val) => currency === 'EGP' ? `${val.toLocaleString()} EGP` : `$${val.toFixed(2)}`;
     
     return `
       <div class="product-card" data-id="${product.id}">
@@ -18,12 +20,16 @@ export const ProductCard = {
           <svg class="icon icon-sm ${isFav ? 'icon-filled' : ''}" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
         </button>
 
-        <!-- Product Image Placeholder Frame -->
+        <!-- Product Image Frame -->
         <a href="#/product/${product.id}" class="product-card-img-wrapper">
-          <div class="image-placeholder">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-            <span>[ ${product.woodType} Wood ]</span>
-          </div>
+          ${product.image && !product.image.includes('hero.png') ? `
+            <img src="${product.image}" alt="${product.name}" loading="lazy">
+          ` : `
+            <div class="image-placeholder">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+              <span>[ ${product.woodType} Wood ]</span>
+            </div>
+          `}
         </a>
 
         <!-- Product Info -->
@@ -35,8 +41,8 @@ export const ProductCard = {
           
           <div class="product-card-price-row">
             <span class="product-card-price">
-              $${product.price.toFixed(2)}
-              ${hasDiscount ? `<span class="product-card-price-original">$${product.originalPrice.toFixed(2)}</span>` : ''}
+              ${formatPrice(product.price)}
+              ${hasDiscount ? `<span class="product-card-price-original">${formatPrice(product.originalPrice)}</span>` : ''}
             </span>
             
             <button class="btn-card-add" data-id="${product.id}" aria-label="Add to Cart">

@@ -275,11 +275,14 @@ main {
   justify-content: center;
   align-items: center;
   transform: translateY(-100%);
-  transition: transform var(--transition-slow);
+  transition: transform var(--transition-slow), visibility var(--transition-slow);
+  visibility: hidden;
+  overflow: hidden;
 }
 
 .mobile-drawer.open {
   transform: translateY(0);
+  visibility: visible;
 }
 
 .mobile-drawer .nav-links {

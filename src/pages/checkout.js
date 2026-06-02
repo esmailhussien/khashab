@@ -20,8 +20,13 @@ export const Checkout = {
       `;
     }
 
+    const hasEGP = items.some(item => item.currency === 'EGP');
+    const format = (val) => hasEGP ? `${val.toLocaleString()} EGP` : `$${val.toFixed(2)}`;
+
     const subtotal = cart.getTotal();
-    const shipping = subtotal > 150 ? 0 : 15;
+    const freeShippingLimit = hasEGP ? 1500 : 150;
+    const shippingFee = hasEGP ? 150 : 15;
+    const shipping = subtotal > freeShippingLimit ? 0 : shippingFee;
     const tax = subtotal * 0.08;
     const total = subtotal + shipping + tax;
 
@@ -190,18 +195,26 @@ export const Checkout = {
             
             <!-- Items list -->
             <div class="summary-items">
-              ${items.map(item => `
-                <div class="summary-item-card">
-                  <div class="summary-item-img">
-                    <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg>
+              ${items.map(item => {
+                const currency = item.currency || 'USD';
+                const itemPriceStr = currency === 'EGP' ? `${(item.price * item.quantity).toLocaleString()} EGP` : `$${(item.price * item.quantity).toFixed(2)}`;
+                return `
+                  <div class="summary-item-card">
+                    <div class="summary-item-img" style="width: 50px; height: 50px; border-radius: var(--radius-sm); overflow: hidden; position: relative;">
+                      ${item.image && !item.image.includes('hero.png') ? `
+                        <img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                      ` : `
+                        <svg class="icon icon-sm" viewBox="0 0 24 24" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg>
+                      `}
+                    </div>
+                    <div class="summary-item-info">
+                      <h4 class="summary-item-name">${item.name}</h4>
+                      <span class="summary-item-meta">${item.woodType} / ${item.size} × ${item.quantity}</span>
+                    </div>
+                    <span class="summary-item-price">${itemPriceStr}</span>
                   </div>
-                  <div class="summary-item-info">
-                    <h4 class="summary-item-name">${item.name}</h4>
-                    <span class="summary-item-meta">${item.woodType} / ${item.size} × ${item.quantity}</span>
-                  </div>
-                  <span class="summary-item-price">$${(item.price * item.quantity).toFixed(2)}</span>
-                </div>
-              `).join('')}
+                `;
+              }).join('')}
             </div>
 
             <!-- Discount/Promo Input -->
@@ -216,23 +229,23 @@ export const Checkout = {
             <div>
               <div class="calc-row">
                 <span>Subtotal</span>
-                <span>$${subtotal.toFixed(2)}</span>
+                <span>${format(subtotal)}</span>
               </div>
               <div class="calc-row" id="summary-discount-row" style="display: none; color: var(--color-success);">
                 <span>Discount (10% Off)</span>
-                <span id="summary-discount-val">-$0.00</span>
+                <span id="summary-discount-val">-${format(0)}</span>
               </div>
               <div class="calc-row">
                 <span>Shipping</span>
-                <span id="summary-shipping-val">${shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
+                <span id="summary-shipping-val">${shipping === 0 ? 'Free' : format(shipping)}</span>
               </div>
               <div class="calc-row">
                 <span>Estimated Tax (8%)</span>
-                <span id="summary-tax-val">$${tax.toFixed(2)}</span>
+                <span id="summary-tax-val">${format(tax)}</span>
               </div>
               <div class="calc-row calc-row-total">
                 <span>Total</span>
-                <span id="summary-total-val">$${total.toFixed(2)}</span>
+                <span id="summary-total-val">${format(total)}</span>
               </div>
             </div>
           </aside>
@@ -426,12 +439,18 @@ export const Checkout = {
     // Step 3: Place Order (Final submit)
     if (btnPlaceOrder) {
       btnPlaceOrder.addEventListener('click', () => {
+        const hasEGP = items.some(item => item.currency === 'EGP');
+        const format = (val) => hasEGP ? `${val.toLocaleString()} EGP` : `$${val.toFixed(2)}`;
+
         // Generate mock order details
         const orderNum = 'KH-' + Math.floor(100000 + Math.random() * 900000);
         const subtotal = cart.getTotal();
         const discountVal = subtotal * (1 - discountMultiplier);
         const finalSubtotal = subtotal - discountVal;
-        const shipping = finalSubtotal > 150 ? 0 : 15;
+        
+        const freeShippingLimit = hasEGP ? 1500 : 150;
+        const shippingFee = hasEGP ? 150 : 15;
+        const shipping = finalSubtotal > freeShippingLimit ? 0 : shippingFee;
         const tax = finalSubtotal * 0.08;
         const total = finalSubtotal + shipping + tax;
 
@@ -457,7 +476,7 @@ export const Checkout = {
                 </div>
                 <div class="success-detail-row">
                   <span>Total Amount Paid</span>
-                  <strong style="color: var(--color-accent);">$${total.toFixed(2)}</strong>
+                  <strong style="color: var(--color-accent);">${format(total)}</strong>
                 </div>
               </div>
 
@@ -474,11 +493,17 @@ export const Checkout = {
   },
 
   recalculatePrices(multiplier) {
+    const items = cart.get();
+    const hasEGP = items.some(item => item.currency === 'EGP');
+    const format = (val) => hasEGP ? `${val.toLocaleString()} EGP` : `$${val.toFixed(2)}`;
+
     const subtotal = cart.getTotal();
     const discountVal = subtotal * (1 - multiplier);
     const finalSubtotal = subtotal - discountVal;
     
-    const shipping = finalSubtotal > 150 ? 0 : 15;
+    const freeShippingLimit = hasEGP ? 1500 : 150;
+    const shippingFee = hasEGP ? 150 : 15;
+    const shipping = finalSubtotal > freeShippingLimit ? 0 : shippingFee;
     const tax = finalSubtotal * 0.08;
     const total = finalSubtotal + shipping + tax;
 
@@ -490,20 +515,20 @@ export const Checkout = {
     const totalValText = document.getElementById('summary-total-val');
 
     if (discountRow && discountValText) {
-      discountValText.innerText = `-$${discountVal.toFixed(2)}`;
+      discountValText.innerText = `-${format(discountVal)}`;
       discountRow.style.display = discountVal > 0 ? 'flex' : 'none';
     }
 
     if (shippingValText) {
-      shippingValText.innerText = shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`;
+      shippingValText.innerText = shipping === 0 ? 'Free' : format(shipping);
     }
 
     if (taxValText) {
-      taxValText.innerText = `$${tax.toFixed(2)}`;
+      taxValText.innerText = format(tax);
     }
 
     if (totalValText) {
-      totalValText.innerText = `$${total.toFixed(2)}`;
+      totalValText.innerText = format(total);
     }
   }
 };

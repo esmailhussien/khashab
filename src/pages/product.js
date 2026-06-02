@@ -47,9 +47,34 @@ export const Product = {
     };
 
     // Bundle recommendation items (e.g. Care items if product is a board, or vice versa)
+    const currency = product.currency || 'USD';
+    const formatPrice = (val) => currency === 'EGP' ? `${val.toLocaleString()} EGP` : `$${val.toFixed(2)}`;
+    
+    // Determine initial active wood and its images/price
+    const initialWood = product.woods ? product.woods[0] : product.woodType;
+    let initialImages = [];
+    let initialPrice = product.price;
+    if (product.variants && product.variants[initialWood]) {
+      initialImages = product.variants[initialWood].images;
+      initialPrice = product.variants[initialWood].price;
+    } else if (product.images) {
+      initialImages = product.images;
+    } else if (product.image) {
+      initialImages = [product.image];
+    }
+    
+    const hasImages = initialImages.length > 0 && !initialImages[0].includes('hero.png');
+
+    const getConvertedPrice = (item) => {
+      if (currency === 'EGP' && (!item.currency || item.currency === 'USD')) {
+        return item.price * 50.0; // Mock rate: 1 USD = 50 EGP
+      }
+      return item.price;
+    };
+
     const careItems = products.filter(p => p.category === 'care-maintenance').slice(0, 2);
-    const bundleTotalOriginal = (product.price + careItems.reduce((s, i) => s + i.price, 0)).toFixed(2);
-    const bundleDiscountPrice = (parseFloat(bundleTotalOriginal) * 0.9).toFixed(2); // 10% off
+    const bundleTotalOriginal = (initialPrice + careItems.reduce((s, i) => s + getConvertedPrice(i), 0));
+    const bundleDiscountPrice = (bundleTotalOriginal * 0.9); // 10% off
 
     return `
       <div class="page-container container">
@@ -62,32 +87,45 @@ export const Product = {
         <div class="product-detail-grid">
           <!-- Gallery Column -->
           <div class="product-gallery">
-            <div class="gallery-main" id="gallery-main-frame">
-              <div class="image-placeholder" style="height: 100%; border-radius: var(--radius-lg);">
-                <svg class="icon" viewBox="0 0 24 24" style="width: 64px; height: 64px; stroke-width: 1.2;"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-                <span id="main-gallery-wood-text">[ ${product.woodType} Wood ]</span>
-              </div>
+            <div class="gallery-main" id="gallery-main-frame" style="cursor: pointer; border-radius: var(--radius-lg); overflow: hidden; position: relative;">
+              ${hasImages ? `
+                <img id="gallery-main-img" src="${initialImages[0]}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                <span id="main-gallery-wood-text" style="position: absolute; bottom: 1rem; left: 1rem; background: rgba(0,0,0,0.6); color: #fff; padding: 0.25rem 0.75rem; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 300;">[ ${initialWood} Wood ]</span>
+              ` : `
+                <div class="image-placeholder" style="height: 100%; border-radius: var(--radius-lg);">
+                  <svg class="icon" viewBox="0 0 24 24" style="width: 64px; height: 64px; stroke-width: 1.2;"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                  <span id="main-gallery-wood-text">[ ${product.woodType} Wood ]</span>
+                </div>
+              `}
             </div>
             
-            <div class="gallery-thumbnails">
-              <div class="gallery-thumb active" data-index="0">
-                <div class="image-placeholder" style="height: 100%; padding: 0.25rem;">
-                  <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg>
-                  <span style="font-size: 0.4rem;">Main View</span>
+            <div class="gallery-thumbnails" id="gallery-thumbs-container">
+              ${hasImages ? 
+                initialImages.map((img, idx) => `
+                  <div class="gallery-thumb ${idx === 0 ? 'active' : ''}" data-index="${idx}">
+                    <img src="${img}" alt="View ${idx + 1}" style="width: 100%; height: 100%; object-fit: cover;">
+                  </div>
+                `).join('')
+              : `
+                <div class="gallery-thumb active" data-index="0">
+                  <div class="image-placeholder" style="height: 100%; padding: 0.25rem;">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg>
+                    <span style="font-size: 0.4rem;">Main View</span>
+                  </div>
                 </div>
-              </div>
-              <div class="gallery-thumb" data-index="1">
-                <div class="image-placeholder" style="height: 100%; padding: 0.25rem;">
-                  <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg>
-                  <span style="font-size: 0.4rem;">Angle 45°</span>
+                <div class="gallery-thumb" data-index="1">
+                  <div class="image-placeholder" style="height: 100%; padding: 0.25rem;">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg>
+                    <span style="font-size: 0.4rem;">Angle 45°</span>
+                  </div>
                 </div>
-              </div>
-              <div class="gallery-thumb" data-index="2">
-                <div class="image-placeholder" style="height: 100%; padding: 0.25rem;">
-                  <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg>
-                  <span style="font-size: 0.4rem;">Detail Grain</span>
+                <div class="gallery-thumb" data-index="2">
+                  <div class="image-placeholder" style="height: 100%; padding: 0.25rem;">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg>
+                    <span style="font-size: 0.4rem;">Detail Grain</span>
+                  </div>
                 </div>
-              </div>
+              `}
             </div>
           </div>
 
@@ -107,8 +145,8 @@ export const Product = {
 
             <!-- Price -->
             <div class="product-detail-price">
-              <span>$${product.price.toFixed(2)}</span>
-              ${hasDiscount ? `<span class="product-detail-price-original">$${product.originalPrice.toFixed(2)}</span>` : ''}
+              <span>${formatPrice(initialPrice)}</span>
+              ${hasDiscount ? `<span class="product-detail-price-original">${formatPrice(product.originalPrice)}</span>` : ''}
             </div>
 
             <!-- Description -->
@@ -214,34 +252,41 @@ export const Product = {
               <div class="bundle-item">
                 <input type="checkbox" class="bundle-checkbox" checked disabled id="bundle-main-checkbox">
                 <div class="bundle-item-img">
-                  <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg>
+                  ${product.image && !product.image.includes('hero.png') ? `
+                    <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);">
+                  ` : `
+                    <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg>
+                  `}
                 </div>
                 <div class="bundle-item-info">
                   <span class="bundle-item-name">${product.name} (This item)</span>
-                  <span class="bundle-item-price">$${product.price.toFixed(2)}</span>
+                  <span class="bundle-item-price">${formatPrice(initialPrice)}</span>
                 </div>
               </div>
 
               <!-- Care Items -->
-              ${careItems.map(item => `
-                <div class="bundle-item">
-                  <input type="checkbox" class="bundle-checkbox bundle-care-toggle" data-id="${item.id}" data-price="${item.price}" checked>
-                  <div class="bundle-item-img">
-                    <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg>
+              ${careItems.map(item => {
+                const itemPrice = getConvertedPrice(item);
+                return `
+                  <div class="bundle-item">
+                    <input type="checkbox" class="bundle-checkbox bundle-care-toggle" data-id="${item.id}" data-price="${itemPrice}" checked>
+                    <div class="bundle-item-img">
+                      <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg>
+                    </div>
+                    <div class="bundle-item-info">
+                      <span class="bundle-item-name">${item.name}</span>
+                      <span class="bundle-item-price">${formatPrice(itemPrice)}</span>
+                    </div>
                   </div>
-                  <div class="bundle-item-info">
-                    <span class="bundle-item-name">${item.name}</span>
-                    <span class="bundle-item-price">$${item.price.toFixed(2)}</span>
-                  </div>
-                </div>
-              `).join('')}
+                `;
+              }).join('')}
             </div>
 
             <div class="bundle-summary-row">
               <div>
                 <span class="bundle-total-price">
-                  Bundle Total: <strong id="bundle-total-sum" style="color: var(--color-accent);">$${bundleDiscountPrice}</strong>
-                  <span style="font-size: 0.85rem; text-decoration: line-through; color: var(--color-text-light); margin-left: 0.5rem;" id="bundle-total-original">$${bundleTotalOriginal}</span>
+                  Bundle Total: <strong id="bundle-total-sum" style="color: var(--color-accent);">${formatPrice(bundleDiscountPrice)}</strong>
+                  <span style="font-size: 0.85rem; text-decoration: line-through; color: var(--color-text-light); margin-left: 0.5rem;" id="bundle-total-original">${formatPrice(bundleTotalOriginal)}</span>
                 </span>
               </div>
               <button class="btn btn-accent" id="btn-add-bundle-cart">Add Bundle to Cart</button>
@@ -335,32 +380,52 @@ export const Product = {
     const product = products.find(p => p.id === productId);
     if (!product) return;
 
+    const currency = product.currency || 'USD';
+    const formatPrice = (val) => currency === 'EGP' ? `${val.toLocaleString()} EGP` : `$${val.toFixed(2)}`;
+
     // Gallery Main Lightbox Zoom Trigger
     const mainFrame = document.getElementById('gallery-main-frame');
     if (mainFrame) {
       mainFrame.addEventListener('click', () => {
-        // Since we are using placeholders, show zoom description or mock image zoom
-        Lightbox.show('/assets/hero.png', `${product.name} zoomed detail`);
+        const mainImg = document.getElementById('gallery-main-img');
+        const zoomSrc = mainImg ? mainImg.src : '/assets/hero.png';
+        Lightbox.show(zoomSrc, `${product.name} zoomed detail`);
       });
     }
 
-    // Thumbnail Switching
-    const thumbs = document.querySelectorAll('.gallery-thumb');
-    const woodText = document.getElementById('main-gallery-wood-text');
-    thumbs.forEach(thumb => {
-      thumb.addEventListener('click', () => {
-        thumbs.forEach(t => t.classList.remove('active'));
-        thumb.classList.add('active');
-        
-        // Update wood text or image source depending on selected index
-        const idx = thumb.dataset.index;
-        if (woodText) {
-          if (idx === '0') woodText.innerText = `[ ${product.woodType} Wood ]`;
-          if (idx === '1') woodText.innerText = `[ ${product.woodType} Wood - 45° Angle ]`;
-          if (idx === '2') woodText.innerText = `[ ${product.woodType} Wood - Grain Close-up ]`;
-        }
+    // Thumbnail Switching and event binding
+    const bindThumbnailEvents = () => {
+      const thumbs = document.querySelectorAll('.gallery-thumb');
+      const mainImg = document.getElementById('gallery-main-img');
+      const woodText = document.getElementById('main-gallery-wood-text');
+      
+      thumbs.forEach(thumb => {
+        thumb.addEventListener('click', () => {
+          thumbs.forEach(t => t.classList.remove('active'));
+          thumb.classList.add('active');
+          
+          const idx = parseInt(thumb.dataset.index);
+          const activeWood = document.querySelector('.wood-option.active')?.dataset.wood || product.woodType;
+          
+          let currentImages = [];
+          if (product.variants && product.variants[activeWood]) {
+            currentImages = product.variants[activeWood].images;
+          } else if (product.images) {
+            currentImages = product.images;
+          } else if (product.image) {
+            currentImages = [product.image];
+          }
+          
+          if (mainImg && currentImages[idx]) {
+            mainImg.src = currentImages[idx];
+          }
+          if (woodText) {
+            woodText.innerText = `[ ${activeWood} Wood - View ${idx + 1} ]`;
+          }
+        });
       });
-    });
+    };
+    bindThumbnailEvents();
 
     // Variant Options Selectors
     const sizes = document.querySelectorAll('.size-option');
@@ -375,13 +440,62 @@ export const Product = {
 
     const woods = document.querySelectorAll('.wood-option');
     let selectedWood = product.woods ? product.woods[0] : product.woodType;
+    const careToggles = document.querySelectorAll('.bundle-care-toggle');
+    const bundleSumText = document.getElementById('bundle-total-sum');
+    const bundleOriginalText = document.getElementById('bundle-total-original');
+
+    const updateBundlePrices = (currentWoodPrice) => {
+      let total = currentWoodPrice;
+      careToggles.forEach(chk => {
+        if (chk.checked) {
+          total += parseFloat(chk.dataset.price);
+        }
+      });
+      if (bundleOriginalText) bundleOriginalText.innerText = formatPrice(total);
+      if (bundleSumText) bundleSumText.innerText = formatPrice(total * 0.9);
+    };
+
     woods.forEach(opt => {
       opt.addEventListener('click', () => {
         woods.forEach(w => w.classList.remove('active'));
         opt.classList.add('active');
         selectedWood = opt.dataset.wood;
+        
+        const woodText = document.getElementById('main-gallery-wood-text');
         if (woodText) {
           woodText.innerText = `[ ${selectedWood} Wood ]`;
+        }
+
+        if (product.variants && product.variants[selectedWood]) {
+          const variant = product.variants[selectedWood];
+          
+          // Update Price display
+          const priceSpan = document.querySelector('.product-detail-price span');
+          if (priceSpan) {
+            priceSpan.innerText = formatPrice(variant.price);
+          }
+          
+          // Update Bundle Prices
+          updateBundlePrices(variant.price);
+          
+          // Update Main Image
+          const mainImg = document.getElementById('gallery-main-img');
+          if (mainImg && variant.images.length > 0) {
+            mainImg.src = variant.images[0];
+          }
+          
+          // Update Thumbnails container HTML
+          const thumbsContainer = document.getElementById('gallery-thumbs-container');
+          if (thumbsContainer) {
+            thumbsContainer.innerHTML = variant.images.map((img, idx) => `
+              <div class="gallery-thumb ${idx === 0 ? 'active' : ''}" data-index="${idx}">
+                <img src="${img}" alt="View ${idx + 1}" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+            `).join('');
+            
+            // Rebind click events to new thumbnails
+            bindThumbnailEvents();
+          }
         }
       });
     });
@@ -461,25 +575,19 @@ export const Product = {
     });
 
     // Complete the Set Bundle Price Calculator and Action
-    const careItems = products.filter(p => p.category === 'care-maintenance').slice(0, 2);
-    const careToggles = document.querySelectorAll('.bundle-care-toggle');
-    const bundleSumText = document.getElementById('bundle-total-sum');
-    const bundleOriginalText = document.getElementById('bundle-total-original');
     const addBundleBtn = document.getElementById('btn-add-bundle-cart');
+    const careItems = products.filter(p => p.category === 'care-maintenance').slice(0, 2);
 
-    const updateBundlePrices = () => {
-      let total = product.price;
-      careToggles.forEach(chk => {
-        if (chk.checked) {
-          total += parseFloat(chk.dataset.price);
-        }
-      });
-      if (bundleOriginalText) bundleOriginalText.innerText = `$${total.toFixed(2)}`;
-      if (bundleSumText) bundleSumText.innerText = `$${(total * 0.9).toFixed(2)}`;
+    const handleCareToggleChange = () => {
+      let currentWoodPrice = product.price;
+      if (product.variants && product.variants[selectedWood]) {
+        currentWoodPrice = product.variants[selectedWood].price;
+      }
+      updateBundlePrices(currentWoodPrice);
     };
 
     careToggles.forEach(chk => {
-      chk.addEventListener('change', updateBundlePrices);
+      chk.addEventListener('change', handleCareToggleChange);
     });
 
     if (addBundleBtn) {
@@ -491,14 +599,12 @@ export const Product = {
         });
 
         // Add checked care items
-        let addedCount = 1;
         careToggles.forEach(chk => {
           if (chk.checked) {
             const id = chk.dataset.id;
             const careItem = careItems.find(c => c.id === id);
             if (careItem) {
               cart.add(careItem, 1, { size: 'Standard', wood: 'N/A' });
-              addedCount++;
             }
           }
         });

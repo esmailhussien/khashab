@@ -2,6 +2,63 @@
 
 export const products = [
   {
+    id: "decorative-wooden-plate",
+    name: "Decorative Wooden Plate",
+    category: "plates",
+    price: 900.00,
+    originalPrice: null,
+    description: "A gorgeous, round decorative plate handcrafted from premium wood. Perfect for serving or as a striking decor tray.",
+    woodType: "Sapele",
+    dimensions: "24 cm Diameter (Average)",
+    image: "/assets/products/decorative-wooden-plate/decorwoodenplate - Sapele wood photo 1.jpeg",
+    rating: 4.9,
+    reviewsCount: 15,
+    sizes: ["Medium"],
+    woods: ["Sapele", "Walnut", "Wenge & Padauk", "Zebrawood"],
+    inStock: true,
+    featured: true,
+    currency: "EGP",
+    careTips: "Clean with a damp cloth and dry immediately. Apply food-safe mineral oil occasionally to preserve its rich grain and natural luster.",
+    reviews: [
+      { author: "Youssef A.", rating: 5, date: "May 28, 2026", comment: "Beautiful finish and perfect size for my coffee table. The wood grain is stunning!" },
+      { author: "Farida M.", rating: 5, date: "May 14, 2026", comment: "I bought the Zebrawood one, it is a piece of art. Highly recommended!" }
+    ],
+    variants: {
+      "Sapele": {
+        price: 900.00,
+        images: [
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - Sapele wood photo 1.jpeg",
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - Sapele wood photo 2.jpeg",
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - Sapele wood photo 3.jpeg"
+        ]
+      },
+      "Walnut": {
+        price: 1300.00,
+        images: [
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - walunt wood photo 1.jpeg",
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - walunt wood photo 2.jpeg",
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - walunt wood photo 3.jpeg"
+        ]
+      },
+      "Wenge & Padauk": {
+        price: 1600.00,
+        images: [
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - wenge and padduck wood photo 1.jpeg",
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - wenge and padduck wood photo 2.jpeg",
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - wenge and padduck wood photo 3.jpeg"
+        ]
+      },
+      "Zebrawood": {
+        price: 1700.00,
+        images: [
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - zeberano wood photo 1.jpeg",
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - zeberano wood photo 2.jpeg",
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - zeberano wood photo 3.jpeg"
+        ]
+      }
+    }
+  },
+  {
     id: "artisan-serving-paddle",
     name: "The Artisan Serving Paddle",
     category: "cutting-serving",

@@ -18,6 +18,14 @@ export const cart = {
     const wood = options.wood || product.woodType;
     const cartItemId = `${product.id}-${size.replace(/\s+/g, '-')}-${wood}`;
 
+    // Resolve variant price and image
+    let finalPrice = product.price;
+    let finalImage = product.image;
+    if (product.variants && product.variants[wood]) {
+      finalPrice = product.variants[wood].price;
+      finalImage = product.variants[wood].images[0];
+    }
+
     const existingIndex = items.findIndex(item => item.cartItemId === cartItemId);
     
     if (existingIndex > -1) {
@@ -27,11 +35,12 @@ export const cart = {
         cartItemId,
         id: product.id,
         name: product.name,
-        price: product.price,
-        image: product.image,
+        price: finalPrice,
+        image: finalImage,
         woodType: wood,
         size: size,
-        quantity: quantity
+        quantity: quantity,
+        currency: product.currency || 'USD'
       });
     }
 
