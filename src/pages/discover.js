@@ -59,7 +59,7 @@ export const Discover = {
             </header>
 
             <div class="article-hero-frame">
-              <img src="/assets/hero.png" alt="${article.title}" style="width: 100%; height: 100%; object-fit: cover;">
+              <img src="${article.image || '/assets/hero.png'}" alt="${article.title}" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
 
             <div class="article-body-content">
@@ -102,11 +102,14 @@ export const Discover = {
           <div class="grid grid-cols-3" style="margin-bottom: 5rem;">
             ${articles.map(art => `
               <div class="product-card" onclick="window.location.hash='#/discover?article=${art.id}'" style="cursor: pointer;">
-                <div class="product-card-img-wrapper" style="padding-bottom: 60%;">
-                  <div class="image-placeholder">
-                    <svg class="icon" viewBox="0 0 24 24" style="width: 32px; height: 32px; margin-bottom: 0.5rem;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                    <span>Read Article</span>
-                  </div>
+                <div class="product-card-img-wrapper" style="padding-bottom: 45%;">
+                  ${art.image 
+                    ? `<img src="${art.image}" alt="${art.title}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">`
+                    : `<div class="image-placeholder">
+                        <svg class="icon" viewBox="0 0 24 24" style="width: 32px; height: 32px; margin-bottom: 0.5rem;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                        <span>Read Article</span>
+                      </div>`
+                  }
                 </div>
                 <div class="product-card-info">
                   <span class="product-card-meta">${art.date} &bull; By ${art.author}</span>

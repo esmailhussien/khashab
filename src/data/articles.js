@@ -6,9 +6,9 @@ export const blogArticles = [
     title: "How to Oil Your Board: A Step-by-Step Guide",
     category: "care",
     date: "May 25, 2026",
-    author: "Craftsman Esmail",
+    author: "Care Team",
     summary: "Keep your boards looking vibrant and crack-free. Learn the proper oiling and buffing techniques to extend the lifespan of your natural hardwood kitchenware.",
-    image: "/assets/hero.png",
+    image: "/assets/board_oiling.png",
     content: `
       <p>A high-quality wooden cutting or serving board is a lifetime investment, but only if it receives proper care. Hardwood is a living material, and without moisture, it will dry out, warp, and eventually crack. Regular conditioning seals the fibers against water and food odors, keeping it hygienic and beautiful.</p>
       
@@ -40,9 +40,9 @@ export const blogArticles = [
     title: "End Grain vs. Edge Grain: Which is Better?",
     category: "blog",
     date: "May 18, 2026",
-    author: "Esmail Hussien",
+    author: "Care Team",
     summary: "Uncover the construction secrets behind different cutting boards and discover why end-grain boards are preferred by professional chefs around the world.",
-    image: "/assets/hero.png",
+    image: "/assets/end_grain_vs_edge_grain.png",
     content: `
       <p>When selecting a premium cutting board, you'll encounter two primary construction techniques: **Edge Grain** and **End Grain**. While both offer a gorgeous natural aesthetic, they differ significantly in durability, price, and how they treat your chef knives.</p>
       
@@ -64,7 +64,7 @@ export const blogArticles = [
     date: "April 29, 2026",
     author: "Care Team",
     summary: "The extreme heat, water pressure, and harsh detergents of dishwashers are the absolute enemy of natural wood. Learn the science behind why boards warp and split.",
-    image: "/assets/hero.png",
+    image: "/assets/no_dishwasher.png",
     content: `
       <p>It is one of the most common kitchen mistakes: tossing a wooden chopping board into the dishwasher. While it may seem like a quick way to sanitize, doing so will ruin your handcrafted board in a single cycle. Here is the science behind why dishwashers and wood do not mix.</p>
       
