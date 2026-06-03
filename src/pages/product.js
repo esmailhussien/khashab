@@ -103,7 +103,7 @@ export const Product = {
               ${hasImages ? 
                 initialImages.map((img, idx) => `
                   <div class="gallery-thumb ${idx === 0 ? 'active' : ''}" data-index="${idx}">
-                    <img src="${img}" alt="View ${idx + 1}" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="${img}" alt="View ${idx + 1}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                   </div>
                 `).join('')
               : `
@@ -253,7 +253,7 @@ export const Product = {
                 <input type="checkbox" class="bundle-checkbox" checked disabled id="bundle-main-checkbox">
                 <div class="bundle-item-img">
                   ${product.image && !product.image.includes('hero.png') ? `
-                    <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);">
+                    <img src="${product.image}" alt="${product.name}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);">
                   ` : `
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg>
                   `}
@@ -489,7 +489,7 @@ export const Product = {
           if (thumbsContainer) {
             thumbsContainer.innerHTML = variant.images.map((img, idx) => `
               <div class="gallery-thumb ${idx === 0 ? 'active' : ''}" data-index="${idx}">
-                <img src="${img}" alt="View ${idx + 1}" style="width: 100%; height: 100%; object-fit: cover;">
+                <img src="${img}" alt="View ${idx + 1}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
               </div>
             `).join('');
             

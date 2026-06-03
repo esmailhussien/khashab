@@ -91,17 +91,39 @@ export const router = {
 
     const page = routes[routePath] || placeholderPage;
     
-    // Set dynamic page title
+    // Default Meta info
+    let title = routeTitles[routePath] || 'Khashab | Premium Artisanal Woodcraft';
+    let description = "Discover premium handcrafted wooden serving boards, butcher blocks, decorative items, and care products. 100% natural hardwood, designed for modern living.";
+    let image = "/assets/hero.png";
+
+    // Set dynamic page title and meta
     if (routePath === '/product' && params) {
       const product = products.find(p => p.id === params);
       if (product) {
-        document.title = `${product.name} | Khashab`;
+        title = `${product.name} | Khashab`;
+        description = product.description.substring(0, 150) + '...';
+        image = product.image;
       } else {
-        document.title = 'Product Not Found | Khashab';
+        title = 'Product Not Found | Khashab';
       }
-    } else {
-      document.title = routeTitles[routePath] || 'Khashab | Premium Artisanal Woodcraft';
+    } else if (routePath === '/store') {
+      description = "Browse our full collection of sustainable, handcrafted wooden products. Filter by wood type and price.";
+    } else if (routePath === '/configurator') {
+      description = "Design your custom wooden board. Choose your wood, size, and personalization options.";
     }
+
+    // Update DOM Meta Tags
+    document.title = title;
+    
+    const metaDesc = document.getElementById('meta-description');
+    const metaOgTitle = document.getElementById('meta-og-title');
+    const metaOgDesc = document.getElementById('meta-og-description');
+    const metaOgImage = document.getElementById('meta-og-image');
+    
+    if (metaDesc) metaDesc.setAttribute('content', description);
+    if (metaOgTitle) metaOgTitle.setAttribute('content', title);
+    if (metaOgDesc) metaOgDesc.setAttribute('content', description);
+    if (metaOgImage) metaOgImage.setAttribute('content', image);
 
     // Render with page container wrapper for transition animation
     const mainContent = document.querySelector('main');

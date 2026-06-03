@@ -277,7 +277,8 @@ main {
   transform: translateY(-100%);
   transition: transform var(--transition-slow), visibility var(--transition-slow);
   visibility: hidden;
-  overflow: hidden;
+  overflow-y: auto;
+  padding: 5rem 1rem 2rem 1rem;
 }
 
 .mobile-drawer.open {
@@ -440,6 +441,10 @@ main {
     display: none;
   }
 
+  .nav-actions {
+    gap: 0.5rem;
+  }
+
   .mobile-nav-toggle {
     display: block;
     font-size: 1.5rem;
@@ -457,6 +462,12 @@ main {
     flex-direction: column;
     gap: 1.5rem;
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-container.active .search-input-wrapper {
+    width: 150px;
   }
 }
 

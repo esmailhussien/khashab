@@ -68,6 +68,7 @@ export const Store = {
 
           <!-- Sorting Selector -->
           <div class="sort-container">
+            <button class="btn btn-secondary mobile-filter-toggle" id="btn-mobile-filter" style="display: none; padding: 0.5rem 1rem;">Filters</button>
             <label for="store-sort" class="sort-label">Sort by:</label>
             <select id="store-sort" class="sort-select">
               <option value="featured">Featured</option>
@@ -400,6 +401,15 @@ export const Store = {
       sortSelect.addEventListener('change', (e) => {
         currentSort = e.target.value;
         filterAndRender();
+      });
+    }
+
+    // Mobile Filter Toggle
+    const mobileFilterBtn = document.getElementById('btn-mobile-filter');
+    const sidebar = document.querySelector('.store-sidebar');
+    if (mobileFilterBtn && sidebar) {
+      mobileFilterBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
       });
     }
 
