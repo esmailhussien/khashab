@@ -388,3 +388,22 @@
     grid-column: span 1;
   }
 }
+
+@media (max-width: 480px) {
+  .checkout-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .checkout-actions .btn {
+    width: 100%;
+  }
+  .promo-code-row {
+    flex-wrap: wrap;
+  }
+  .checkout-step-content {
+    padding: 1rem;
+  }
+  .step-label {
+    font-size: 0.65rem;
+  }
+}

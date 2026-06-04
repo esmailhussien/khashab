@@ -97,7 +97,7 @@ export const Configurator = {
                 <input type="text" id="config-engrave-text" class="form-input" placeholder="Type initials, date, or family name" maxlength="30">
               </div>
               
-              <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-grid engraving-form-grid">
                 <div class="form-group">
                   <label class="form-label" for="config-engrave-font">Font Style</label>
                   <select id="config-engrave-font" class="form-input" style="cursor: pointer; appearance: none; background-color: var(--color-bg);">

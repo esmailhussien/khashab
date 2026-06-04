@@ -275,3 +275,25 @@
   transform: translateX(-50%) translateY(-2px);
 }
 
+@media (max-width: 480px) {
+  .contact-form-box {
+    padding: 1.5rem 1rem;
+  }
+  .contact-form-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .contact-details-list {
+    gap: 1.75rem;
+  }
+  .contact-detail-item {
+    gap: 1rem;
+  }
+  .contact-social-links {
+    flex-wrap: wrap;
+  }
+  .contact-info-header h3 {
+    font-size: 1.6rem;
+  }
+}
+
