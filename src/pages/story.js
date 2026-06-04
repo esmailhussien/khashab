@@ -19,7 +19,7 @@ export const Story = {
         <section class="container" style="margin-bottom: 8rem;">
           <div class="story-heritage-section reveal-on-scroll reveal-slide-up">
             <div class="heritage-grid">
-              <div class="heritage-stat-box" style="position: sticky; top: 120px;">
+              <div class="heritage-stat-box">
                 <span class="heritage-stat-number" style="font-size: 3.5rem; color: var(--color-accent); line-height: 1;">1920</span>
                 <span class="heritage-stat-label" style="font-size: 0.85rem;">The Journey Begins</span>
               </div>
@@ -29,7 +29,7 @@ export const Story = {
                 <div class="story-chapter" style="margin-bottom: 4rem;">
                   <h3 style="font-size: 2rem; margin-bottom: 1rem; font-family: var(--font-headings);">Chapter I: The Royal Roots</h3>
                   <p style="margin-bottom: 1.5rem; color: var(--color-text-muted); line-height: 1.8; font-size: 1.1rem; font-weight: 300;">
-                    Our roots trace back to the sun-baked landscapes of Upper Egypt in the late 1920s. It was there that our visionary founder, <strong>Ali Elsayad Elkhashap</strong>, first recognized the soul hidden within raw timber. Driven by a deep ambition, he journeyed north to the cosmopolitan coastal city of Alexandria. 
+                    Our roots trace back to the sun-baked landscapes of Upper Egypt in the late 1920s. It was there that our visionary founder, <strong>Ali Elsayad Elkhashab</strong>, first recognized the soul hidden within raw timber. Driven by a deep ambition, he journeyed north to the cosmopolitan coastal city of Alexandria. 
                   </p>
                   <p style="margin-bottom: 1.5rem; color: var(--color-text-muted); line-height: 1.8; font-size: 1.1rem; font-weight: 300;">
                     Ali didn't just sell wood; he traded in history. He curated breathtaking antiques and became a trusted purveyor of rare, majestic wooden masterpieces—pieces so exquisite they were sought after to decorate the halls of the Egyptian royal family. He established a name that became synonymous with uncompromising rarity and trust.

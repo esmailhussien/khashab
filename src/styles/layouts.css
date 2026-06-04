@@ -278,7 +278,7 @@ main {
   transition: transform var(--transition-slow), visibility var(--transition-slow);
   visibility: hidden;
   overflow-y: auto;
-  padding: 5rem 1rem 2rem 1rem;
+  padding: 8.5rem 1rem 3rem 1rem;
 }
 
 .mobile-drawer.open {

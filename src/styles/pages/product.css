@@ -192,6 +192,7 @@
 .size-options {
   display: flex;
   gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .size-option {
@@ -262,6 +263,7 @@
   display: flex;
   gap: 1rem;
   margin-bottom: 2.5rem;
+  flex-wrap: wrap;
 }
 
 .qty-input-wrapper {
@@ -563,5 +565,40 @@
   .reviews-summary {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Purchase row: stack qty and cart button vertically */
+  .purchase-row {
+    flex-direction: column;
+  }
+  .purchase-row .btn {
+    width: 100%;
+  }
+  .qty-input-wrapper {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Rating bar label doesn't collide */
+  .rating-bar-row {
+    font-size: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  /* Bundle summary stacks nicely */
+  .bundle-summary-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .bundle-summary-row .btn {
+    width: 100%;
+  }
+
+  /* Wishlist button full width on mobile */
+  #btn-detail-wishlist {
+    width: 100% !important;
+    height: 48px !important;
   }
 }
