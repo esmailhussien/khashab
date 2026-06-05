@@ -1,6 +1,7 @@
 /* 🪵 Khashab Product Detail Page View */
 
 import { products } from '../data/products.js';
+import { woodsWiki } from '../data/woods.js';
 import { cart } from '../utils/cart.js';
 import { wishlist } from '../utils/wishlist.js';
 import { Lightbox } from '../components/lightbox.js';
@@ -39,11 +40,57 @@ export const Product = {
       if (name.includes('walnut')) return '#4E3629';
       if (name.includes('oak')) return '#C0A37E';
       if (name.includes('maple')) return '#E6D2B8';
-      if (name.includes('olive')) return '#A67F52';
       if (name.includes('teak')) return '#9E7446';
       if (name.includes('cherry')) return '#8c3515';
       if (name.includes('beech')) return '#EAD2B2';
+      if (name.includes('sapele')) return '#8D3C1B';
+      if (name.includes('wenge')) return '#23160F';
+      if (name.includes('padauk')) return '#B94A24';
+      if (name.includes('zebra')) return '#A28259';
+      if (name.includes('lati')) return '#E5C483';
       return '#B8860B'; // fallback wood gold
+    };
+
+    const getWoodSwatchStyle = (wood) => {
+      const nameLower = wood.toLowerCase().trim();
+      
+      const findWikiWood = (str) => {
+        return woodsWiki.find(w => {
+          const wikiName = w.name.toLowerCase();
+          const wikiId = w.id.toLowerCase();
+          return wikiName.includes(str) || str.includes(wikiName) || wikiId.includes(str) || str.includes(wikiId);
+        });
+      };
+
+      const separators = ['&', 'and', '+', '/'];
+      let parts = [nameLower];
+      for (const sep of separators) {
+        if (nameLower.includes(sep)) {
+          parts = nameLower.split(sep).map(p => p.trim());
+          break;
+        }
+      }
+
+      const matchedWoods = parts.map(p => findWikiWood(p)).filter(Boolean);
+
+      if (matchedWoods.length === 0) {
+        return `background-color: ${getWoodColor(wood)};`;
+      }
+
+      if (matchedWoods.length === 1) {
+        return `background: ${matchedWoods[0].swatch};`;
+      }
+
+      const urls = matchedWoods.map(w => {
+        const m = w.swatch.match(/url\(['"]?([^'"]+)['"]?\)/);
+        return m ? m[1] : null;
+      }).filter(Boolean);
+
+      if (urls.length >= 2) {
+        return `background: url('${urls[0]}') left center / 50% 100% no-repeat, url('${urls[1]}') right center / 50% 100% no-repeat;`;
+      }
+
+      return `background: ${matchedWoods[0].swatch};`;
     };
 
     // Bundle recommendation items (e.g. Care items if product is a board, or vice versa)
@@ -169,7 +216,7 @@ export const Product = {
                 ${product.woods.map((wood, idx) => `
                   <div class="wood-option ${idx === 0 ? 'active' : ''}" data-wood="${wood}">
                     <div class="wood-swatch">
-                      <div class="wood-swatch-inner" style="background-color: ${getWoodColor(wood)};"></div>
+                      <div class="wood-swatch-inner" style="${getWoodSwatchStyle(wood)}"></div>
                     </div>
                     <span class="wood-name">${wood}</span>
                   </div>

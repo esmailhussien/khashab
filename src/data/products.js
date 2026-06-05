@@ -166,27 +166,6 @@ export const products = [
     ]
   },
   {
-    id: "handcrafted-olive-wood-plate",
-    name: "Handcrafted Olive Wood Plate",
-    category: "plates",
-    price: 45.00,
-    originalPrice: 50.00,
-    description: "Each plate is carved from a single piece of olive wood, boasting dramatic high-contrast dark and light swirls. Ideal for serving side dishes, appetizers, or as a striking decor tray.",
-    woodType: "Olive Wood",
-    dimensions: "10\" diameter x 0.8\"",
-    image: "/assets/hero.png",
-    rating: 4.9,
-    reviewsCount: 28,
-    sizes: ["Small (8\")", "Medium (10\")", "Large (12\")"],
-    woods: ["Olive Wood"],
-    inStock: true,
-    featured: true,
-    careTips: "Never soak. Clean with damp cloth and dry immediately. Olive wood is particularly rich in natural oils, but still benefits from occasional oiling.",
-    reviews: [
-      { author: "Elena P.", rating: 5, date: "May 24, 2026", comment: "No two are alike! I bought a set of 4 and they look like custom art pieces. The olive grain patterns are breathtaking." }
-    ]
-  },
-  {
     id: "teak-dinner-plates-set",
     name: "Set of 4 Teak Dinner Plates",
     category: "plates",

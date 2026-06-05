@@ -47,21 +47,6 @@ export const woodsWiki = [
     swatch: "url('/assets/woods/maple.png') center/cover no-repeat"
   },
   {
-    id: "olive-wood",
-    name: "Tunisian Olive Wood",
-    scientific: "Olea europaea",
-    origin: "African (Tunisian)",
-    type: "Hardwood",
-    price: "$$$$ (Premium)",
-    color: "Dynamic, swirling high-contrast gold, honey-yellow, and dark brown lines.",
-    durability: "High. Dense, heavy, and naturally oily.",
-    grain: "Highly irregular, interlocked, and swirling grain.",
-    bestFor: "Cheese boards, olive bowls, small plates, luxury decorative items.",
-    careTip: "Olive wood is rich in natural oils, but it is sensitive to temperature shifts. Keep away from direct sunlight or dry heat sources to avoid hairline cracks.",
-    description: "Olive wood is a rare and striking material carved from ancient, non-fruit-bearing olive trees. Famous for its dramatic grain patterns, it is naturally anti-bacterial and highly water-resistant, making it a luxurious choice for tableware.",
-    swatch: "url('/assets/woods/olivewood.png') center/cover no-repeat"
-  },
-  {
     id: "teak",
     name: "Burmese Teak",
     scientific: "Tectona grandis",
@@ -119,7 +104,7 @@ export const woodsWiki = [
     bestFor: "Luxury inlay work, custom knife scales, high-end woodcarvings, premium musical instruments.",
     careTip: "Requires careful wax buffing rather than heavy oiling due to its near-zero porosity. Keep away from extreme dry heat.",
     description: "One of the hardest and densest woods on Earth, African Blackwood is legendary for its metallic, glass-like finish when polished and its extreme resistance to warping.",
-    swatch: "url('/assets/woods/ebony.png') center/cover no-repeat; transform: scaleX(-1); filter: brightness(0.4) contrast(1.25)"
+    swatch: "url('/assets/woods/African Blackwood.png') center/cover no-repeat"
   },
   {
     id: "african-walnut",
@@ -194,7 +179,7 @@ export const woodsWiki = [
     bestFor: "Cabinetry, dining tables, premium kitchen boards, boat trim.",
     careTip: "Apply mineral oil regularly to enhance its rich, mahogany-like red tones and highlight its ribbon shimmer.",
     description: "A close relative of Mahogany, Sapele is harder, heavier, and features a beautiful cedar-like scent. It is widely prized for its shimmering, quartersawn grain pattern.",
-    swatch: "url('/assets/woods/rosewood.png') center/cover no-repeat; transform: scaleY(-1); filter: sepia(0.15) hue-rotate(345deg) brightness(0.9) saturate(1.1) contrast(1.05)"
+    swatch: "url('/assets/woods/sapele.png') center/cover no-repeat"
   },
   {
     id: "panga-panga",
@@ -284,7 +269,7 @@ export const woodsWiki = [
     bestFor: "Construction, flooring, utility items.",
     careTip: "Seal well due to its coarse grain. Clean with dry cloth or lightly damp sponge.",
     description: "Lati is a dense, yellow-hued African wood that provides stable utility and clean, bright aesthetic tones.",
-    swatch: "url('/assets/woods/obeche.png') center/cover no-repeat; transform: scaleY(-1); filter: sepia(0.25) brightness(1.05) saturate(0.85) contrast(0.95)"
+    swatch: "url('/assets/woods/lati africanwood.png') center/cover no-repeat"
   },
   {
     id: "iroko",

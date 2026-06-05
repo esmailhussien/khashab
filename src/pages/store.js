@@ -33,8 +33,8 @@ export const Store = {
         <section class="store-promo-banner">
           <div class="promo-content">
             <span class="promo-badge">Limited Edition</span>
-            <h3>The Olive Wood Collection</h3>
-            <p>Carved from centuries-old, sustainably sourced Tunisian olive trees. Extremely rich grains, highly limited stock.</p>
+            <h3>The Premium Sapele Collection</h3>
+            <p>Carved from exotic West African Sapele trees. Famous for its shimmering ribbon grain, warm mahogany tones, and rich cedar scent.</p>
           </div>
           
           <div class="promo-countdown" id="promo-countdown">
@@ -115,12 +115,7 @@ export const Store = {
                     Maple
                   </label>
                 </li>
-                <li>
-                  <label class="filter-checkbox-label">
-                    <input type="checkbox" value="Olive Wood" class="filter-checkbox filter-wood">
-                    Olive Wood
-                  </label>
-                </li>
+
                 <li>
                   <label class="filter-checkbox-label">
                     <input type="checkbox" value="Teak" class="filter-checkbox filter-wood">

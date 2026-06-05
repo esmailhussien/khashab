@@ -180,57 +180,38 @@ export const Discover = {
             </div>
           </div>
 
-          <div class="wiki-grid">
-            ${woodsWiki.map(wood => `
-              <div class="wiki-card">
-                <div class="wiki-card-left">
-                  <div class="wiki-color-swatch" style="background: ${wood.swatch}"></div>
-                  <div>
-                    <h3 class="wiki-card-title">${wood.name}</h3>
-                    <span class="wiki-scientific">${wood.scientific}</span>
-                  </div>
-                  <div class="wiki-specs-badge-group">
-                    <div class="wiki-spec-badge">
-                      <span class="badge-label">Origin</span>
-                      <span class="badge-value">${wood.origin}</span>
-                    </div>
-                    <div class="wiki-spec-badge">
-                      <span class="badge-label">Classification</span>
-                      <span class="badge-value">${wood.type}</span>
-                    </div>
-                    <div class="wiki-spec-badge">
-                      <span class="badge-label">Price Range</span>
-                      <span class="badge-value price-tier">${wood.price}</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="wiki-attrs">
-                  <p style="color: var(--color-text-muted); font-size: 1.05rem; line-height: 1.8; margin-bottom: 3.5rem; font-weight: 300;">${wood.description}</p>
-                  
-                  <div class="wiki-attr-row">
-                    <span class="wiki-attr-label">Natural Hue</span>
-                    <span class="wiki-attr-val">${wood.color}</span>
-                  </div>
-                  <div class="wiki-attr-row">
-                    <span class="wiki-attr-label">Durability & Hardness</span>
-                    <span class="wiki-attr-val">${wood.durability}</span>
-                  </div>
-                  <div class="wiki-attr-row">
-                    <span class="wiki-attr-label">Grain Structure</span>
-                    <span class="wiki-attr-val">${wood.grain}</span>
-                  </div>
-                  <div class="wiki-attr-row">
-                    <span class="wiki-attr-label">Best Applications</span>
-                    <span class="wiki-attr-val">${wood.bestFor}</span>
-                  </div>
-                  <div class="wiki-attr-row">
-                    <span class="wiki-attr-label">Care Recommendation</span>
-                    <span class="wiki-attr-val">${wood.careTip}</span>
-                  </div>
-                </div>
-              </div>
-            `).join('')}
+          <!-- Search & Filter Controls -->
+          <div class="wiki-controls" style="display: flex; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap; align-items: center; justify-content: space-between; background: var(--color-bg-alt); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+            <!-- Search Input -->
+            <div style="position: relative; flex: 1; min-width: 280px;">
+              <svg class="icon" viewBox="0 0 24 24" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 1.1rem; height: 1.1rem; color: var(--color-text-muted); pointer-events: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="wiki-search" placeholder="Search wood by name, origin, traits..." class="form-input" style="padding-left: 2.8rem; width: 100%; border-radius: var(--radius-md); background: var(--color-surface); height: 42px; border: 1px solid var(--color-border);">
+            </div>
+            
+            <!-- Filter Dropdowns -->
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; flex: 0 0 auto;">
+              <!-- Filter by Origin Group -->
+              <select id="wiki-filter-region" class="form-input" style="background-color: var(--color-surface); height: 42px; padding: 0.5rem 2.5rem 0.5rem 1rem; cursor: pointer; border-radius: var(--radius-md); border: 1px solid var(--color-border); appearance: none; background-image: url(&quot;data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E&quot;); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1rem; width: 180px;">
+                <option value="all">All Regions</option>
+                <option value="african">African Woods</option>
+                <option value="north american">North American</option>
+                <option value="european">European</option>
+                <option value="asian">Asian</option>
+              </select>
+              
+              <!-- Filter by Price Tier -->
+              <select id="wiki-filter-price" class="form-input" style="background-color: var(--color-surface); height: 42px; padding: 0.5rem 2.5rem 0.5rem 1rem; cursor: pointer; border-radius: var(--radius-md); border: 1px solid var(--color-border); appearance: none; background-image: url(&quot;data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E&quot;); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1rem; width: 180px;">
+                <option value="all">All Prices</option>
+                <option value="budget">Budget ($)</option>
+                <option value="moderate">Moderate ($$ - $$$)</option>
+                <option value="premium">Premium ($$$$)</option>
+                <option value="exotic">Exotic & Rare ($$$$$)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wiki-grid" id="wiki-cards-container">
+            <!-- Rendered dynamically via JS -->
           </div>
         </div>
       `;
@@ -440,6 +421,134 @@ export const Discover = {
       wood1Select.addEventListener('change', updateComparison);
       wood2Select.addEventListener('change', updateComparison);
       updateComparison();
+    }
+
+    // Wood Wiki Search and Filter logic
+    const wikiSearch = document.getElementById('wiki-search');
+    const wikiFilterRegion = document.getElementById('wiki-filter-region');
+    const wikiFilterPrice = document.getElementById('wiki-filter-price');
+    const wikiCardsContainer = document.getElementById('wiki-cards-container');
+
+    if (wikiCardsContainer) {
+      const renderWikiCards = (filtered) => {
+        if (filtered.length === 0) {
+          return `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; background: var(--color-bg-alt); border-radius: var(--radius-lg); border: 1px dashed var(--color-border);">
+              <svg class="icon" viewBox="0 0 24 24" style="width: 48px; height: 48px; stroke-width: 1.2; color: var(--color-text-muted); margin-bottom: 1rem; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round;"><circle cx="12" cy="12" r="10"></circle><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+              <h3 style="font-family: var(--font-headings); font-size: 1.25rem; font-weight: 500; margin-bottom: 0.5rem;">No materials match your search or filters</h3>
+              <p style="color: var(--color-text-muted); font-size: 0.9rem; font-weight: 300;">Try typing a different keyword or changing the region/price selectors.</p>
+            </div>
+          `;
+        }
+
+        return filtered.map(wood => `
+          <div class="wiki-card">
+            <div class="wiki-card-left">
+              <div class="wiki-color-swatch" style="background: ${wood.swatch}"></div>
+              <div>
+                <h3 class="wiki-card-title">${wood.name}</h3>
+                <span class="wiki-scientific">${wood.scientific}</span>
+              </div>
+              <div class="wiki-specs-badge-group">
+                <div class="wiki-spec-badge">
+                  <span class="badge-label">Origin</span>
+                  <span class="badge-value">${wood.origin}</span>
+                </div>
+                <div class="wiki-spec-badge">
+                  <span class="badge-label">Classification</span>
+                  <span class="badge-value">${wood.type}</span>
+                </div>
+                <div class="wiki-spec-badge">
+                  <span class="badge-label">Price Range</span>
+                  <span class="badge-value price-tier">${wood.price}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="wiki-attrs">
+              <p style="color: var(--color-text-muted); font-size: 1.05rem; line-height: 1.8; margin-bottom: 3.5rem; font-weight: 300;">${wood.description}</p>
+              
+              <div class="wiki-attr-row">
+                <span class="wiki-attr-label">Natural Hue</span>
+                <span class="wiki-attr-val">${wood.color}</span>
+              </div>
+              <div class="wiki-attr-row">
+                <span class="wiki-attr-label">Durability & Hardness</span>
+                <span class="wiki-attr-val">${wood.durability}</span>
+              </div>
+              <div class="wiki-attr-row">
+                <span class="wiki-attr-label">Grain Structure</span>
+                <span class="wiki-attr-val">${wood.grain}</span>
+              </div>
+              <div class="wiki-attr-row">
+                <span class="wiki-attr-label">Best Applications</span>
+                <span class="wiki-attr-val">${wood.bestFor}</span>
+              </div>
+              <div class="wiki-attr-row">
+                <span class="wiki-attr-label">Care Recommendation</span>
+                <span class="wiki-attr-val">${wood.careTip}</span>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      };
+
+      const updateWikiGrid = () => {
+        const query = wikiSearch ? wikiSearch.value.toLowerCase().trim() : '';
+        const region = wikiFilterRegion ? wikiFilterRegion.value : 'all';
+        const price = wikiFilterPrice ? wikiFilterPrice.value : 'all';
+
+        const filtered = woodsWiki.filter(wood => {
+          // Search query match
+          const matchesSearch = !query || 
+            wood.name.toLowerCase().includes(query) ||
+            wood.scientific.toLowerCase().includes(query) ||
+            wood.origin.toLowerCase().includes(query) ||
+            wood.bestFor.toLowerCase().includes(query) ||
+            wood.description.toLowerCase().includes(query);
+
+          // Region filter match
+          let matchesRegion = true;
+          if (region !== 'all') {
+            const originLower = wood.origin.toLowerCase();
+            if (region === 'african') {
+              matchesRegion = originLower.includes('african') || originLower.includes('madagascar') || originLower.includes('tunisian');
+            } else if (region === 'north american') {
+              matchesRegion = originLower.includes('north american') || originLower.includes('american');
+            } else if (region === 'european') {
+              matchesRegion = originLower.includes('european');
+            } else if (region === 'asian') {
+              matchesRegion = originLower.includes('asian') || originLower.includes('burmese');
+            }
+          }
+
+          // Price filter match
+          let matchesPrice = true;
+          if (price !== 'all') {
+            const priceText = wood.price.toLowerCase();
+            if (price === 'budget') {
+              matchesPrice = priceText.startsWith('$ ') && !priceText.includes('$$');
+            } else if (price === 'moderate') {
+              matchesPrice = priceText.includes('$$') && !priceText.includes('$$$$');
+            } else if (price === 'premium') {
+              matchesPrice = priceText.includes('$$$$') && !priceText.includes('$$$$$');
+            } else if (price === 'exotic') {
+              matchesPrice = priceText.includes('$$$$$');
+            }
+          }
+
+          return matchesSearch && matchesRegion && matchesPrice;
+        });
+
+        wikiCardsContainer.innerHTML = renderWikiCards(filtered);
+      };
+
+      if (wikiSearch) wikiSearch.addEventListener('input', updateWikiGrid);
+      if (wikiFilterRegion) wikiFilterRegion.addEventListener('change', updateWikiGrid);
+      if (wikiFilterPrice) wikiFilterPrice.addEventListener('change', updateWikiGrid);
+
+      // Perform initial render
+      updateWikiGrid();
     }
 
     // Collapsible Accordion logic (for FAQ tab)
