@@ -3,7 +3,7 @@
 export const woodsWiki = [
   {
     id: "walnut",
-    name: "North American Walnut",
+    name: "American Walnut",
     scientific: "Juglans nigra",
     origin: "North American",
     type: "Hardwood",
@@ -33,7 +33,7 @@ export const woodsWiki = [
   },
   {
     id: "maple",
-    name: "Hard Rock Maple",
+    name: "Maple",
     scientific: "Acer saccharum",
     origin: "North American",
     type: "Hardwood",
@@ -74,7 +74,7 @@ export const woodsWiki = [
     bestFor: "Premium serving boards, specialty cabinetry, luxury knife handles, heavy utility blocks.",
     careTip: "Condition with food-grade mineral oil and beeswax mixture to highlight its deep red luster and protect its dense grain.",
     description: "Bubinga is a stunning African hardwood prized for its immense strength and beautiful grain. It is highly valued for high-end wood projects due to its rich colors and exceptional durability.",
-    swatch: "url('/assets/woods/rosewood.png') center/cover no-repeat; transform: scaleX(-1); filter: hue-rotate(15deg) saturate(1.4) brightness(0.9)"
+    swatch: "url('/assets/woods/Bubinga.png') center/cover no-repeat"
   },
   {
     id: "afrormosia",
@@ -153,7 +153,7 @@ export const woodsWiki = [
   },
   {
     id: "madagascar-rosewood",
-    name: "Madagascar Rosewood",
+    name: "Rosewood",
     scientific: "Dalbergia baronii",
     origin: "African (Madagascar)",
     type: "Hardwood",
@@ -254,7 +254,7 @@ export const woodsWiki = [
     bestFor: "Furniture, paneling, boat building, elegant charcuterie boards.",
     careTip: "Use a high-quality oil to enrich its natural mahogany color and protect it from dry conditions.",
     description: "African Mahogany is a versatile, beautiful hardwood that finishes to a high natural luster, making it a staple for fine cabinetry and furniture.",
-    swatch: "url('/assets/woods/rosewood.png') center/cover no-repeat; transform: scale(-1); filter: sepia(0.2) hue-rotate(-10deg) brightness(0.85)"
+    swatch: "url('/assets/woods/African Mahogany.png') center/cover no-repeat"
   },
   {
     id: "lati",
@@ -299,7 +299,7 @@ export const woodsWiki = [
     bestFor: "Heavy construction, bridge timbers, heavy-duty industrial blocks.",
     careTip: "Extremely difficult to work due to its hardness; requires heavy oiling and is best kept in stable humidity.",
     description: "Also known as Red Ironwood, Ekki is one of the densest and heaviest woods available, making it virtually indestructible.",
-    swatch: "url('/assets/woods/rosewood.png') center/cover no-repeat; filter: brightness(0.55) contrast(1.4) saturate(0.6) sepia(0.1)"
+    swatch: "url('/assets/woods/ekki.png') center/cover no-repeat"
   },
   {
     id: "gaboon-ebony",
@@ -330,5 +330,36 @@ export const woodsWiki = [
     careTip: "Requires thorough seasoning and sealing to control its tendency to warp.",
     description: "Dahoma is a sturdy and coarse-textured African wood that offers high structural strength, similar in appearance to honey-toned Oak.",
     swatch: "url('/assets/woods/dahoma.png') center/cover no-repeat"
+  },
+  {
+    id: "european-beech",
+    name: "European Beech",
+    scientific: "Fagus sylvatica",
+    origin: "European",
+    type: "Hardwood",
+    price: "$$ (Moderate)",
+    color: "Pale cream or light pinkish-brown, darkening slightly to golden hues when oiled.",
+    durability: "Moderate. High density and excellent shock resistance, though susceptible to moisture fluctuations if not properly sealed.",
+    grain: "Straight with a fine, uniform texture, occasionally showing inconspicuous silver grain on quartersawn surfaces.",
+    bestFor: "Kitchen utensils, pastry boards, heavy-duty countertops, indoor furniture.",
+    careTip: "Keep well-oiled with food-grade mineral oil to protect against moisture changes, and never let it sit in standing water.",
+    description: "European Beech is a dense, strong, and highly shock-resistant hardwood. Widely used for culinary accessories and furniture, its uniform texture and closed grain make it highly sanitary and reliable for food-contact surfaces.",
+    swatch: "url('/assets/woods/European Beech.png') center/cover no-repeat"
+  },
+  {
+    id: "pitch-pine",
+    name: "Pitch Pine",
+    scientific: "Pinus rigida",
+    origin: "North American",
+    type: "Softwood",
+    price: "$$ (Moderate)",
+    color: "Pale yellow to reddish-brown, with high-contrast, prominent darker growth rings.",
+    durability: "Moderate. Naturally high resin content offers better decay resistance than typical softwoods.",
+    grain: "Straight with a distinct coarse pattern and prominent growth rings.",
+    bestFor: "Rustic furniture, utility shelving, decorative paneling, heavy construction.",
+    careTip: "Keep away from high heat sources to prevent resin bleeding. Clean with a damp cloth and seal with a light finish.",
+    description: "Pitch Pine is a resilient North American softwood known for its rich resin content and outstanding durability. With its bold growth-ring grain and warm, rustic appearance, it is highly favored for character-rich furniture and paneling.",
+    swatch: "url('/assets/woods/pitch pine.png') center/cover no-repeat"
   }
 ];
+

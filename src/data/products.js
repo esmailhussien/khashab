@@ -64,7 +64,7 @@ export const products = [
     category: "cutting-serving",
     price: 89.00,
     originalPrice: 105.00,
-    description: "Designed for elegant presentations, this serving paddle features an ergonomic handle and a beautiful natural grain pattern. Individually handmade from choice North American Walnut.",
+    description: "Designed for elegant presentations, this serving paddle features an ergonomic handle and a beautiful natural grain pattern. Individually handmade from choice American Walnut.",
     woodType: "Walnut",
     dimensions: "18\" x 8\" x 0.75\"",
     image: "/assets/hero.png",

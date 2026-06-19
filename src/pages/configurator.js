@@ -54,7 +54,7 @@ export const Configurator = {
                 <div class="config-wood-card active" data-wood="walnut" data-color="#4E3629">
                   <div class="config-wood-preview" style="background-image: url('/assets/woods/walnut.png'); background-size: cover; background-position: center;"></div>
                   <div class="config-wood-info">
-                    <span class="config-wood-name">North American Walnut (+$20)</span>
+                    <span class="config-wood-name">American Walnut (+$20)</span>
                     <span class="config-wood-desc">Rich chocolate hues, elegant wavy patterns, heavy durability.</span>
                   </div>
                 </div>
@@ -70,7 +70,7 @@ export const Configurator = {
                 <div class="config-wood-card" data-wood="maple" data-color="#E6D2B8">
                   <div class="config-wood-preview" style="background-image: url('/assets/woods/maple.png'); background-size: cover; background-position: center;"></div>
                   <div class="config-wood-info">
-                    <span class="config-wood-name">Hard Rock Maple (+0)</span>
+                    <span class="config-wood-name">Maple (+0)</span>
                     <span class="config-wood-desc">Light creamy beige, tight grains, sanitarily chef-approved.</span>
                   </div>
                 </div>

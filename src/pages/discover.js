@@ -169,8 +169,8 @@ export const Discover = {
                 <thead>
                   <tr style="border-bottom: 1px solid var(--color-border); background-color: var(--color-bg-alt);">
                     <th style="padding: 1.25rem 1.5rem; font-weight: 600; width: 25%; color: var(--color-text);">Trait</th>
-                    <th style="padding: 1.25rem 1.5rem; font-weight: 600; width: 37.5%; color: var(--color-accent);" id="compare-name-1">Hard Rock Maple</th>
-                    <th style="padding: 1.25rem 1.5rem; font-weight: 600; width: 37.5%; color: var(--color-accent);" id="compare-name-2">North American Walnut</th>
+                    <th style="padding: 1.25rem 1.5rem; font-weight: 600; width: 37.5%; color: var(--color-accent);" id="compare-name-1">Maple</th>
+                    <th style="padding: 1.25rem 1.5rem; font-weight: 600; width: 37.5%; color: var(--color-accent);" id="compare-name-2">American Walnut</th>
                   </tr>
                 </thead>
                 <tbody id="compare-table-body">
