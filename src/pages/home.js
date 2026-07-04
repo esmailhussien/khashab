@@ -45,18 +45,19 @@ export const Home = {
             </div>
             
             <div class="grid grid-cols-3">
-              ${featuredCats.map(cat => `
+              ${featuredCats.map(cat => {
+                // Find the first product in this category and use its image
+                const catProduct = products.find(p => p.category === cat.id);
+                const catImage = catProduct ? catProduct.image : cat.image;
+                return `
                 <div class="category-card reveal-on-scroll reveal-slide-up stagger-item" onclick="window.location.hash='#/store?category=${cat.id}'">
-                  <div class="image-placeholder" style="height: 100%; border-radius: var(--radius-lg);">
-                    <svg class="icon" viewBox="0 0 24 24" style="width: 48px; height: 48px; stroke-width: 1.2;"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-                    <span style="font-size: 0.9rem; font-weight: 500; margin-top: 1rem; color: var(--color-text);">${cat.name}</span>
-                  </div>
+                  <img class="category-card-img" src="${catImage}" alt="${cat.name}" loading="lazy" />
                   <div class="category-card-overlay">
                     <h3 class="category-title">${cat.name}</h3>
                     <span class="category-link">Shop Collection →</span>
                   </div>
                 </div>
-              `).join('')}
+              `}).join('')}
             </div>
             
             <div style="text-align: center; margin-top: 3rem;" class="reveal-on-scroll reveal-fade">

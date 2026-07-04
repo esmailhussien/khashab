@@ -76,7 +76,7 @@ export const products = [
   },
   {
     id: "3d-wooden-plate",
-    name: "3D Wooden Plate",
+    name: "Organic Shaped 3D Carved Wooden Plate",
     category: "plates",
     price: 1200.00,
     originalPrice: null,
@@ -148,6 +148,111 @@ export const products = [
           "/assets/products/3d-wooden-plate/3d wooden plate  - multicolor wood  oak - sapele - african teak - wenege - paduak1.jpeg",
           "/assets/products/3d-wooden-plate/3d wooden plate  - multicolor wood  oak - sapele - african teak - wenege - paduak2.jpeg",
           "/assets/products/3d-wooden-plate/3d wooden plate  - multicolor wood  oak - sapele - african teak - wenege - paduak3.jpeg"
+        ]
+      }
+    }
+  },
+  {
+    id: "3d-oval-wooden-plate",
+    name: "Artisanal 3D Carved Oval Dish in Natural Beech Wood",
+    category: "plates",
+    price: 1500.00,
+    originalPrice: null,
+    description: "Introduce a touch of natural artistry to your table setting with this stunning 3D Sculpted Oval Serve Dish. Perfect for serving nuts, dried fruits, dates, and other treats, this piece is crafted from a single piece of premium-grade beech wood. Known for its beautiful, subtle grain and exceptional durability, it is more than just a plate — it's a statement. The striking feature is its captivating 3D sculpted interior: a series of elegant, multi-tiered concentric oval rings meticulously carved into the wood, creating a mesmerizing visual depth and sophisticated, organic shape.",
+    woodType: "Beech",
+    dimensions: "38 cm × 24 cm (Oval) | Weight: 1200 g",
+    image: "/assets/products/3d-oval-wooden-plate/3d oval wooden plate  - beech 1.jpeg",
+    rating: 5.0,
+    reviewsCount: 6,
+    sizes: ["Standard (38×24 cm)"],
+    woods: ["Beech"],
+    inStock: true,
+    featured: true,
+    currency: "EGP",
+    careTips: "Hand wash only with mild soap. Do not soak in water or place in a dishwasher. Dry immediately after washing. Re-apply a food-safe wood oil periodically to maintain its lustre and protect the carved surfaces.",
+    reviews: [
+      { author: "Layla H.", rating: 5, date: "June 20, 2026", comment: "The 3D concentric rings are absolutely mesmerizing. It's the centerpiece of our dining table now!" },
+      { author: "Omar T.", rating: 5, date: "June 10, 2026", comment: "Bought this as a housewarming gift. The craftsmanship is unreal — you can feel the quality in every carved ring." }
+    ],
+    uses: [
+      "Nuts & mixed nuts serving dish",
+      "Dried fruits & dates display tray",
+      "Olives & appetizer presentation",
+      "Cheese & charcuterie platter",
+      "Chocolate, sweets & candy tray",
+      "Decorative table centerpiece",
+      "Housewarming & wedding gift"
+    ],
+    features: [
+      "Hand-carved 3D concentric oval rings for stunning visual depth",
+      "100% natural beech wood with subtle grain patterns",
+      "Dense, durable hardwood built to last for years",
+      "Elegant oval shape fits modern and traditional décor",
+      "Food-safe oil finish for hygienic, natural beauty"
+    ],
+    variants: {
+      "Beech": {
+        price: 1500.00,
+        images: [
+          "/assets/products/3d-oval-wooden-plate/3d oval wooden plate  - beech 1.jpeg",
+          "/assets/products/3d-oval-wooden-plate/3d oval wooden plate  - beech 2.jpeg",
+          "/assets/products/3d-oval-wooden-plate/3d oval wooden plate  - beech 3.jpeg"
+        ]
+      }
+    }
+  },
+  {
+    id: "octagonal-serving-tray",
+    name: "Artisanal Geometric Octagonal Serving Tray",
+    category: "plates",
+    price: 1400.00,
+    originalPrice: null,
+    description: "A striking geometric octagonal tray handcrafted from a combination of premium hardwoods. The sharp, symmetrical octagonal shape brings a bold, modern edge to your table while the natural wood tones add warmth and character. Perfect for serving nuts, dried fruits, dates, chocolates, appetizers, or as a stunning decorative centerpiece.",
+    woodType: "Oak, Wenge & Padauk",
+    dimensions: "30 cm × 30 cm (Octagonal) | Weight: 700 g",
+    image: "/assets/products/octagonal-serving-tray/octagon wooden plate oak - wenge - paduck 1 .jpeg",
+    rating: 4.9,
+    reviewsCount: 10,
+    sizes: ["Medium (30×30 cm)"],
+    woods: ["Oak, Wenge & Padauk", "Oak & Sapele"],
+    inStock: true,
+    featured: true,
+    currency: "EGP",
+    careTips: "Hand wash only with mild soap and warm water. Dry immediately with a soft cloth. Apply food-safe mineral oil periodically to maintain the wood's luster and preserve the contrast between the different wood tones.",
+    reviews: [
+      { author: "Tarek M.", rating: 5, date: "June 25, 2026", comment: "The octagonal shape is so unique! The contrast between the oak and wenge is gorgeous. Gets compliments every time we have guests." },
+      { author: "Salma R.", rating: 5, date: "June 12, 2026", comment: "Perfect for our Ramadan dates & nuts table. The craftsmanship is flawless and it looks incredibly premium." }
+    ],
+    uses: [
+      "Nuts & mixed nuts serving tray",
+      "Dried fruits & dates display",
+      "Chocolate & sweets presentation",
+      "Cheese & appetizer platter",
+      "Decorative table centerpiece",
+      "Housewarming & special occasion gift"
+    ],
+    features: [
+      "Bold geometric octagonal design",
+      "Multi-wood combination for striking contrast",
+      "Handcrafted from premium hardwoods",
+      "Food-safe finish for hygienic serving",
+      "Versatile — functional tray and decorative art piece"
+    ],
+    variants: {
+      "Oak, Wenge & Padauk": {
+        price: 1400.00,
+        images: [
+          "/assets/products/octagonal-serving-tray/octagon wooden plate oak - wenge - paduck 1 .jpeg",
+          "/assets/products/octagonal-serving-tray/octagon wooden plate oak - wenge - paduck 2 .jpeg",
+          "/assets/products/octagonal-serving-tray/octagon wooden plate oak - wenge - paduck 3 .jpeg"
+        ]
+      },
+      "Oak & Sapele": {
+        price: 1300.00,
+        images: [
+          "/assets/products/octagonal-serving-tray/octagon wooden plate oak - sapele 1.jpeg",
+          "/assets/products/octagonal-serving-tray/octagon wooden plate oak - sapele 2.jpeg",
+          "/assets/products/octagonal-serving-tray/octagon wooden plate oak - sapele 3.jpeg"
         ]
       }
     }
@@ -257,27 +362,6 @@ export const products = [
     careTips: "Wash immediately after cutting raw meat. Sanitize using vinegar or mild bleach solution, then rinse and dry thoroughly. Oil frequently.",
     reviews: [
       { author: "Mark R.", rating: 4, date: "March 10, 2026", comment: "Excellent block. Solid maple, nice thickness. Make sure to buy the conditioner too!" }
-    ]
-  },
-  {
-    id: "teak-dinner-plates-set",
-    name: "Set of 4 Teak Dinner Plates",
-    category: "plates",
-    price: 120.00,
-    originalPrice: null,
-    description: "Bring organic warmth to your dining room. Teakwood's high natural oil content makes these plates highly water-resistant and food-safe, perfect for daily family meals.",
-    woodType: "Teak",
-    dimensions: "11\" diameter",
-    image: "/assets/hero.png",
-    rating: 4.8,
-    reviewsCount: 12,
-    sizes: ["Set of 4"],
-    woods: ["Teak"],
-    inStock: true,
-    featured: false,
-    careTips: "Wash with warm water and soap. Dry standing up so both sides dry evenly.",
-    reviews: [
-      { author: "James G.", rating: 5, date: "April 20, 2026", comment: "Very durable, light, and look great on a modern table layout." }
     ]
   },
   {
