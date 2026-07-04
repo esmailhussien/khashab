@@ -53,6 +53,11 @@ export const Product = {
 
     const getWoodSwatchStyle = (wood) => {
       const nameLower = wood.toLowerCase().trim();
+
+      // Special multicolor swatch with 5-stripe gradient
+      if (nameLower.includes('multicolor')) {
+        return `background: linear-gradient(135deg, #d2b48c 0%, #d2b48c 20%, #c4965a 20%, #c4965a 40%, #a0522d 40%, #a0522d 60%, #3e2723 60%, #3e2723 80%, #8b2500 80%, #8b2500 100%);`;
+      }
       
       const findWikiWood = (str) => {
         return woodsWiki.find(w => {
@@ -213,14 +218,18 @@ export const Product = {
             <div class="variant-selector">
               <span class="variant-label">Select Wood Type</span>
               <div class="wood-options">
-                ${product.woods.map((wood, idx) => `
+                ${product.woods.map((wood, idx) => {
+                  const variant = product.variants ? product.variants[wood] : null;
+                  const subtitle = variant && variant.subtitle ? variant.subtitle : '';
+                  return `
                   <div class="wood-option ${idx === 0 ? 'active' : ''}" data-wood="${wood}">
                     <div class="wood-swatch">
                       <div class="wood-swatch-inner" style="${getWoodSwatchStyle(wood)}"></div>
                     </div>
                     <span class="wood-name">${wood}</span>
+                    ${subtitle ? `<span class="wood-subtitle" style="font-size: 0.6rem; color: var(--color-text-muted); max-width: 80px; text-align: center; line-height: 1.2; margin-top: 2px;">${subtitle}</span>` : ''}
                   </div>
-                `).join('')}
+                `}).join('')}
               </div>
             </div>
 

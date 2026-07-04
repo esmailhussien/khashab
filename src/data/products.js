@@ -14,7 +14,7 @@ export const products = [
     rating: 4.9,
     reviewsCount: 15,
     sizes: ["Medium"],
-    woods: ["Sapele", "Walnut", "Wenge & Padauk", "Zebrawood"],
+    woods: ["Sapele", "Walnut", "Wenge", "Wenge & Padauk", "Zebrawood", "Rosewood"],
     inStock: true,
     featured: true,
     currency: "EGP",
@@ -40,6 +40,14 @@ export const products = [
           "/assets/products/decorative-wooden-plate/decorwoodenplate - walunt wood photo 3.jpeg"
         ]
       },
+      "Wenge": {
+        price: 1400.00,
+        images: [
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - wenge wood photo 1.jpeg",
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - wenge wood photo 2.jpeg",
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - wenge wood photo 3.jpeg"
+        ]
+      },
       "Wenge & Padauk": {
         price: 1600.00,
         images: [
@@ -48,12 +56,98 @@ export const products = [
           "/assets/products/decorative-wooden-plate/decorwoodenplate - wenge and padduck wood photo 3.jpeg"
         ]
       },
+      "Rosewood": {
+        price: 1500.00,
+        images: [
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - rosewood photo 1.jpg",
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - rosewood photo 2.jpeg",
+          "/assets/products/decorative-wooden-plate/decorwoodenplate - rosewood photo 3.jpeg"
+        ]
+      },
       "Zebrawood": {
         price: 1700.00,
         images: [
           "/assets/products/decorative-wooden-plate/decorwoodenplate - zeberano wood photo 1.jpeg",
           "/assets/products/decorative-wooden-plate/decorwoodenplate - zeberano wood photo 2.jpeg",
           "/assets/products/decorative-wooden-plate/decorwoodenplate - zeberano wood photo 3.jpeg"
+        ]
+      }
+    }
+  },
+  {
+    id: "3d-wooden-plate",
+    name: "3D Wooden Plate",
+    category: "plates",
+    price: 1200.00,
+    originalPrice: null,
+    description: "A stunning 3D carved wooden plate that brings depth and dimension to your table. Each plate features intricate three-dimensional patterns handcrafted from premium hardwood. Perfect for serving nuts, dried fruits, chocolates, cheese platters, charcuterie, or as a striking decorative centerpiece and housewarming gift.",
+    woodType: "Oak",
+    dimensions: "35 cm × 25 cm | Weight: 700 g (Large)",
+    image: "/assets/products/3d-wooden-plate/3d wooden plate  - oak 1.jpeg",
+    rating: 4.9,
+    reviewsCount: 8,
+    sizes: ["Large (35×25 cm)", "X-Large (50×30 cm)"],
+    woods: ["Oak", "African Teak", "Sapele", "Multicolor Mix"],
+    inStock: true,
+    featured: true,
+    currency: "EGP",
+    careTips: "Hand wash only with mild soap and warm water. Dry immediately with a soft cloth. Apply food-safe mineral oil monthly to maintain the wood's luster and protect the 3D carvings.",
+    reviews: [
+      { author: "Ahmed K.", rating: 5, date: "June 15, 2026", comment: "The 3D carving is incredible! It looks even better in person. A real work of art." },
+      { author: "Nour S.", rating: 5, date: "June 02, 2026", comment: "Bought the X-Large for our dining table centerpiece. Everyone asks where we got it!" }
+    ],
+    uses: [
+      "Nuts & seeds serving plate",
+      "Dried fruits & dates display",
+      "Chocolate & candy presentation",
+      "Cheese & charcuterie board",
+      "Decorative table centerpiece",
+      "Housewarming & wedding gift",
+      "Spice & condiment tray",
+      "Appetizer & mezze platter"
+    ],
+    sizeDetails: {
+      "Large (35×25 cm)": {
+        dimensions: "35 cm × 25 cm",
+        weight: "700 g"
+      },
+      "X-Large (50×30 cm)": {
+        dimensions: "50 cm × 30 cm",
+        weight: "1200 g"
+      }
+    },
+    variants: {
+      "Oak": {
+        price: 1200.00,
+        images: [
+          "/assets/products/3d-wooden-plate/3d wooden plate  - oak 1.jpeg",
+          "/assets/products/3d-wooden-plate/3d wooden plate  - oak 2.jpeg",
+          "/assets/products/3d-wooden-plate/3d wooden plate  - oak 3.png"
+        ]
+      },
+      "African Teak": {
+        price: 1400.00,
+        images: [
+          "/assets/products/3d-wooden-plate/3d wooden plate  - African teak 1.jpeg",
+          "/assets/products/3d-wooden-plate/3d wooden plate  - African teak 2.jpeg",
+          "/assets/products/3d-wooden-plate/3d wooden plate  - African teak 3.jpeg"
+        ]
+      },
+      "Sapele": {
+        price: 1300.00,
+        images: [
+          "/assets/products/3d-wooden-plate/3d wooden plate  - sapele .jpeg",
+          "/assets/products/3d-wooden-plate/3d wooden plate  - sapele 2.jpeg",
+          "/assets/products/3d-wooden-plate/3d wooden plate  - sapele 3.jpeg"
+        ]
+      },
+      "Multicolor Mix": {
+        price: 1800.00,
+        subtitle: "Oak, Sapele, African Teak, Wenge & Padauk",
+        images: [
+          "/assets/products/3d-wooden-plate/3d wooden plate  - multicolor wood  oak - sapele - african teak - wenege - paduak1.jpeg",
+          "/assets/products/3d-wooden-plate/3d wooden plate  - multicolor wood  oak - sapele - african teak - wenege - paduak2.jpeg",
+          "/assets/products/3d-wooden-plate/3d wooden plate  - multicolor wood  oak - sapele - african teak - wenege - paduak3.jpeg"
         ]
       }
     }
