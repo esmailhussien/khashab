@@ -4,25 +4,13 @@ import { products } from '../data/products.js';
 import { categories } from '../data/categories.js';
 import { ProductCard } from '../components/product-card.js';
 
-// Parse query params from the hash URL
-function getHashParams() {
-  const hash = window.location.hash;
-  const qIndex = hash.indexOf('?');
-  if (qIndex === -1) return {};
-  
-  const queryStr = hash.slice(qIndex + 1);
-  const pairs = queryStr.split('&');
-  const params = {};
-  pairs.forEach(pair => {
-    const [key, val] = pair.split('=');
-    params[key] = decodeURIComponent(val || '');
-  });
-  return params;
+function getRouteParams() {
+  return Object.fromEntries(new URLSearchParams(window.location.search));
 }
 
 export const Store = {
   render() {
-    const params = getHashParams();
+    const params = getRouteParams();
     const activeCategory = params.category || 'all';
     const searchQuery = params.search || '';
 
@@ -259,7 +247,7 @@ export const Store = {
     const activeFiltersBar = document.getElementById('active-filter-tags');
 
     // Parse state from URL
-    const params = getHashParams();
+    const params = getRouteParams();
     let currentCategory = params.category || 'all';
     let searchQuery = params.search || '';
     
@@ -361,12 +349,11 @@ export const Store = {
         pill.classList.add('active');
         currentCategory = pill.dataset.cat;
         
-        // Update URL hash parameter silently without page reload triggers
-        const newHash = currentCategory === 'all' 
-          ? `#/store` 
-          : `#/store?category=${currentCategory}`;
+        const newPath = currentCategory === 'all'
+          ? '/store'
+          : `/store?category=${currentCategory}`;
         
-        window.history.pushState(null, '', newHash);
+        window.history.pushState(null, '', newPath);
         
         filterAndRender();
       });
@@ -419,7 +406,7 @@ export const Store = {
         searchQuery = '';
         
         pills.forEach(p => p.classList.toggle('active', p.dataset.cat === 'all'));
-        window.history.pushState(null, '', `#/store`);
+        window.history.pushState(null, '', '/store');
         
         filterAndRender();
       });

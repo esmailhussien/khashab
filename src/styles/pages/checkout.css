@@ -1,5 +1,39 @@
 /* 🪵 Khashab Checkout Page CSS */
 
+.checkout-prelaunch-note {
+  background: #f6f0e5;
+  border: 1px solid #e5d7bf;
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.15rem;
+}
+
+.checkout-field-help,
+.checkout-summary-note,
+.checkout-save-message {
+  color: var(--color-text-muted);
+  display: block;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  margin-top: 0.5rem;
+}
+
+.checkout-save-message {
+  color: var(--color-success);
+  font-size: 0.9rem;
+  min-height: 1.4rem;
+  text-align: right;
+}
+
+.checkout-summary-note {
+  border-top: 1px solid var(--color-border-light);
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+}
+
 .checkout-grid {
   display: grid;
   grid-template-columns: 1.5fr 1fr;

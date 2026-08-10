@@ -2,12 +2,13 @@
 
 import { wishlist } from '../utils/wishlist.js';
 import { cart } from '../utils/cart.js';
+import { analytics } from '../utils/analytics.js';
 
 export const ProductCard = {
   render(product) {
     const isFav = wishlist.has(product.id);
     const hasDiscount = product.originalPrice !== null;
-    const currency = product.currency || 'USD';
+    const currency = product.currency || 'EGP';
     const formatPrice = (val) => currency === 'EGP' ? `${val.toLocaleString()} EGP` : `$${val.toFixed(2)}`;
     
     return `
@@ -21,7 +22,7 @@ export const ProductCard = {
         </button>
 
         <!-- Product Image Frame -->
-        <a href="#/product/${product.id}" class="product-card-img-wrapper">
+        <a href="/product/${product.id}" class="product-card-img-wrapper">
           ${product.image && !product.image.includes('hero.png') ? `
             <img src="${product.image}" alt="${product.name}" loading="lazy">
           ` : `
@@ -36,7 +37,7 @@ export const ProductCard = {
         <div class="product-card-info">
           <span class="product-card-meta">${product.woodType} / ${product.dimensions}</span>
           <h3 class="product-card-title">
-            <a href="#/product/${product.id}">${product.name}</a>
+            <a href="/product/${product.id}">${product.name}</a>
           </h3>
           
           <div class="product-card-price-row">
@@ -83,6 +84,11 @@ export const ProductCard = {
           cart.add(product, 1, {
             size: product.sizes ? product.sizes[0] : 'Standard',
             wood: product.woods ? product.woods[0] : product.woodType
+          });
+          analytics.track('add_to_cart', {
+            currency: product.currency || 'EGP',
+            value: product.price,
+            items: [{ item_id: product.id, item_name: product.name, price: product.price, quantity: 1 }]
           });
           
           // Animate button success state

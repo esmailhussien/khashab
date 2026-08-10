@@ -6,6 +6,7 @@ import { cart } from '../utils/cart.js';
 import { wishlist } from '../utils/wishlist.js';
 import { Lightbox } from '../components/lightbox.js';
 import { ProductCard } from '../components/product-card.js';
+import { analytics } from '../utils/analytics.js';
 
 export const Product = {
   render(productId) {
@@ -16,7 +17,7 @@ export const Product = {
           <div style="text-align: center; padding: 6rem 0;">
             <h2 style="font-family: var(--font-headings); font-size: 3rem; margin-bottom: 1.5rem;">Product Not Found</h2>
             <p style="color: var(--color-text-muted); font-size: 1.1rem; margin-bottom: 2rem;">The product you are looking for does not exist or has been removed.</p>
-            <a href="#/store" class="btn btn-primary">Return to Store</a>
+            <a href="/store" class="btn btn-primary">Return to Store</a>
           </div>
         </div>
       `;
@@ -99,7 +100,7 @@ export const Product = {
     };
 
     // Bundle recommendation items (e.g. Care items if product is a board, or vice versa)
-    const currency = product.currency || 'USD';
+    const currency = product.currency || 'EGP';
     const formatPrice = (val) => currency === 'EGP' ? `${val.toLocaleString()} EGP` : `$${val.toFixed(2)}`;
     
     // Determine initial active wood and its images/price
@@ -133,7 +134,7 @@ export const Product = {
         
         <!-- Breadcrumbs -->
         <div class="product-breadcrumbs">
-          <a href="#/">Home</a> / <a href="#/store">Store</a> / <a href="#/store?category=${product.category}">${product.category.replace('-', ' & ')}</a> / <span>${product.name}</span>
+          <a href="/">Home</a> / <a href="/store">Store</a> / <a href="/store?category=${product.category}">${product.category.replace('-', ' & ')}</a> / <span>${product.name}</span>
         </div>
 
         <div class="product-detail-grid">
@@ -183,7 +184,7 @@ export const Product = {
 
           <!-- Product Details & Buy Column -->
           <div class="product-info-col">
-            <h2 class="product-detail-title">${product.name}</h2>
+            <h1 class="product-detail-title">${product.name}</h1>
             
             <!-- Rating -->
             <div class="product-rating-row">
@@ -436,7 +437,7 @@ export const Product = {
     const product = products.find(p => p.id === productId);
     if (!product) return;
 
-    const currency = product.currency || 'USD';
+    const currency = product.currency || 'EGP';
     const formatPrice = (val) => currency === 'EGP' ? `${val.toLocaleString()} EGP` : `$${val.toFixed(2)}`;
 
     // Gallery Main Lightbox Zoom Trigger
@@ -579,9 +580,15 @@ export const Product = {
     const addToCartBtn = document.getElementById('btn-add-to-cart');
     if (addToCartBtn) {
       addToCartBtn.addEventListener('click', () => {
+        const selectedVariantPrice = product.variants?.[selectedWood]?.price ?? product.price;
         cart.add(product, quantity, {
           size: selectedSize,
           wood: selectedWood
+        });
+        analytics.track('add_to_cart', {
+          currency: product.currency || 'EGP',
+          value: selectedVariantPrice,
+          items: [{ item_id: product.id, item_name: product.name, price: selectedVariantPrice, quantity }]
         });
 
         // Button feedback

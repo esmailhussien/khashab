@@ -1,6 +1,6 @@
 /* 🪵 Khashab Products Data */
 
-export const products = [
+export const seedProducts = [
   {
     id: "decorative-wooden-plate",
     name: "Decorative Wooden Plate",
@@ -492,3 +492,171 @@ export const products = [
     ]
   }
 ];
+
+/*
+ * Catalog state
+ *
+ * The storefront only receives published products.  The full catalog is kept
+ * separately so unfinished products can be prepared in the Catalog Studio
+ * without being exposed to customers during the pre-launch phase.
+ *
+ * This is intentionally a browser-local workflow for now.  It is useful for
+ * preparing the launch catalog, but it is not an authenticated production CMS.
+ */
+const CATALOG_STORAGE_KEY = 'khashab_catalog_v1';
+const CATALOG_STATUS = new Set(['draft', 'published']);
+
+const clone = (value) => JSON.parse(JSON.stringify(value));
+const asText = (value, fallback = '') => typeof value === 'string' ? value.trim() : fallback;
+const asList = (value) => Array.isArray(value)
+  ? value.map(item => asText(item)).filter(Boolean)
+  : [];
+const asMoney = (value, fallback = 0) => {
+  const number = Number(value);
+  return Number.isFinite(number) && number >= 0 ? number : fallback;
+};
+
+const slugify = (value, fallback) => {
+  const slug = asText(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  return slug || fallback;
+};
+
+const normalizeVariants = (variants) => Object.fromEntries(
+  Object.entries(variants && typeof variants === 'object' ? variants : {})
+    .map(([wood, variant]) => {
+      const name = asText(wood);
+      if (!name) return null;
+
+      return [name, {
+        ...(variant && typeof variant === 'object' ? variant : {}),
+        price: asMoney(variant?.price),
+        images: asList(variant?.images)
+      }];
+    })
+    .filter(Boolean)
+);
+
+const hasRealImage = (image) => {
+  const source = asText(image);
+  return Boolean(source) && !source.includes('hero.png');
+};
+
+const normalizeProduct = (input, index = 0) => {
+  const source = input && typeof input === 'object' ? input : {};
+  const variants = normalizeVariants(source.variants);
+  const variantImages = Object.values(variants).flatMap(variant => variant.images || []);
+  const images = asList(source.images);
+  const allImages = [...images, ...variantImages];
+  const suppliedImage = asText(source.image);
+  const primaryImage = hasRealImage(suppliedImage)
+    ? suppliedImage
+    : allImages.find(hasRealImage) || suppliedImage;
+  const requestedStatus = CATALOG_STATUS.has(source.status) ? source.status : null;
+  const isReadyToPublish = hasRealImage(primaryImage);
+  const woods = asList(source.woods);
+  const variantWoods = Object.keys(variants);
+
+  return {
+    ...source,
+    id: slugify(source.id || source.name, `product-${index + 1}`),
+    name: asText(source.name, 'Untitled product'),
+    category: asText(source.category, 'decorative'),
+    price: asMoney(source.price),
+    originalPrice: source.originalPrice === null || source.originalPrice === '' || source.originalPrice === undefined
+      ? null
+      : asMoney(source.originalPrice),
+    // Egypt is the launch market. Keep the customer-facing catalog in one currency.
+    currency: 'EGP',
+    description: asText(source.description),
+    woodType: asText(source.woodType, woods[0] || variantWoods[0] || 'Natural wood'),
+    dimensions: asText(source.dimensions, 'Made to order'),
+    image: primaryImage,
+    images: allImages,
+    variants,
+    sizes: asList(source.sizes).length ? asList(source.sizes) : ['Standard'],
+    woods: woods.length ? woods : (variantWoods.length ? variantWoods : [asText(source.woodType, 'Natural wood')]),
+    inStock: source.inStock !== false,
+    featured: source.featured === true,
+    status: isReadyToPublish ? (requestedStatus || 'published') : 'draft',
+    rating: Number.isFinite(Number(source.rating)) ? Number(source.rating) : 0,
+    reviewsCount: Number.isFinite(Number(source.reviewsCount)) ? Number(source.reviewsCount) : 0,
+    reviews: Array.isArray(source.reviews) ? source.reviews : [],
+    careTips: asText(source.careTips, 'Hand wash only. Dry immediately and apply food-safe oil regularly.')
+  };
+};
+
+const getInitialCatalog = () => clone(seedProducts).map(normalizeProduct);
+
+const readCatalog = () => {
+  if (typeof window === 'undefined') return getInitialCatalog();
+
+  try {
+    const savedCatalog = JSON.parse(window.localStorage.getItem(CATALOG_STORAGE_KEY));
+    return Array.isArray(savedCatalog) ? savedCatalog.map(normalizeProduct) : getInitialCatalog();
+  } catch {
+    return getInitialCatalog();
+  }
+};
+
+let catalog = readCatalog();
+
+export let allProducts = catalog;
+export let products = catalog.filter(product => product.status === 'published');
+
+const refreshCatalog = (nextCatalog, { persist = true } = {}) => {
+  catalog = nextCatalog.map(normalizeProduct);
+  allProducts = catalog;
+  products = catalog.filter(product => product.status === 'published');
+
+  if (persist && typeof window !== 'undefined') {
+    window.localStorage.setItem(CATALOG_STORAGE_KEY, JSON.stringify(catalog));
+    window.dispatchEvent(new CustomEvent('catalog-updated'));
+  }
+
+  return allProducts;
+};
+
+export const productCatalog = {
+  getAll() {
+    return clone(allProducts);
+  },
+
+  upsert(product) {
+    const normalized = normalizeProduct(product, allProducts.length);
+    const existingIndex = allProducts.findIndex(item => item.id === normalized.id);
+    const nextCatalog = [...allProducts];
+
+    if (existingIndex === -1) {
+      nextCatalog.push(normalized);
+    } else {
+      nextCatalog[existingIndex] = normalized;
+    }
+
+    refreshCatalog(nextCatalog);
+    return normalized;
+  },
+
+  remove(target) {
+    const ids = target instanceof Set 
+      ? target 
+      : (Array.isArray(target) ? new Set(target) : new Set([target]));
+
+    refreshCatalog(allProducts.filter(product => !ids.has(product.id)));
+  },
+
+  replace(nextCatalog) {
+    if (!Array.isArray(nextCatalog)) {
+      throw new Error('The imported catalog must be a JSON array.');
+    }
+
+    refreshCatalog(nextCatalog);
+  },
+
+  reset() {
+    refreshCatalog(getInitialCatalog());
+  }
+};

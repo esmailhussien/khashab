@@ -157,7 +157,7 @@ export const Navbar = {
         if (e.key === 'Enter') {
           const query = searchInput.value.trim();
           if (query) {
-            window.location.hash = `#/store?search=${encodeURIComponent(query)}`;
+            window.KhashabNavigate(`/store?search=${encodeURIComponent(query)}`);
             searchInput.value = '';
             searchContainer.classList.remove('active');
           }

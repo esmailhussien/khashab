@@ -1,0 +1,46 @@
+.consent-banner {
+  align-items: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  bottom: 1rem;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  left: 1rem;
+  max-width: 580px;
+  padding: 1rem 1.15rem;
+  position: fixed;
+  z-index: 500;
+}
+
+.consent-banner p {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.consent-banner div {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.5rem;
+}
+
+.consent-banner .btn {
+  font-size: 0.75rem;
+  padding: 0.55rem 0.8rem;
+}
+
+@media (max-width: 600px) {
+  .consent-banner {
+    align-items: stretch;
+    flex-direction: column;
+    right: 1rem;
+  }
+
+  .consent-banner div {
+    justify-content: flex-end;
+  }
+}

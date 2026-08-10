@@ -27,7 +27,7 @@ export const CartPanel = {
           <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 1.5rem; font-weight: 300;">
             Shipping and taxes calculated at checkout.
           </p>
-          <a href="#/checkout" class="btn btn-primary" style="width: 100%; text-align: center;" id="btn-cart-checkout">
+          <a href="/checkout" class="btn btn-primary" style="width: 100%; text-align: center;" id="btn-cart-checkout">
             Proceed to Checkout
           </a>
           <button class="btn btn-text" style="width: 100%; margin-top: 1rem; justify-content: center;" id="btn-cart-continue">
@@ -87,7 +87,7 @@ export const CartPanel = {
             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
           </svg>
           <p style="font-weight: 300;">Your cart is currently empty.</p>
-          <a href="#/store" class="btn btn-secondary" style="margin-top: 1.5rem; font-size: 0.8rem; padding: 0.6rem 1.5rem;" id="btn-empty-shop">Start Shopping</a>
+          <a href="/store" class="btn btn-secondary" style="margin-top: 1.5rem; font-size: 0.8rem; padding: 0.6rem 1.5rem;" id="btn-empty-shop">Start Shopping</a>
         </div>
       `;
       subtotalText.innerText = `$0.00`;

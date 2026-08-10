@@ -3,25 +3,13 @@
 import { blogArticles } from '../data/articles.js';
 import { woodsWiki } from '../data/woods.js';
 
-// Parse query params from the hash URL
-function getHashParams() {
-  const hash = window.location.hash;
-  const qIndex = hash.indexOf('?');
-  if (qIndex === -1) return {};
-  
-  const queryStr = hash.slice(qIndex + 1);
-  const pairs = queryStr.split('&');
-  const params = {};
-  pairs.forEach(pair => {
-    const [key, val] = pair.split('=');
-    params[key] = decodeURIComponent(val || '');
-  });
-  return params;
+function getRouteParams() {
+  return Object.fromEntries(new URLSearchParams(window.location.search));
 }
 
 export const Discover = {
   render() {
-    const params = getHashParams();
+    const params = getRouteParams();
     const activeTab = params.tab || '';
     const activeArticleId = params.article || '';
 
@@ -101,7 +89,7 @@ export const Discover = {
           <!-- Articles list grid -->
           <div class="grid grid-cols-3" style="margin-bottom: 5rem;">
             ${articles.map(art => `
-              <div class="product-card" onclick="window.location.hash='#/discover?article=${art.id}'" style="cursor: pointer;">
+              <div class="product-card" onclick="window.KhashabNavigate('/discover?article=${art.id}')" style="cursor: pointer;">
                 <div class="product-card-img-wrapper" style="padding-bottom: 45%;">
                   ${art.image 
                     ? `<img src="${art.image}" alt="${art.title}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">`
@@ -319,7 +307,7 @@ export const Discover = {
 
         <div class="discover-dashboard-grid">
           <!-- Card 1: Care & Maintenance -->
-          <div class="discover-hero-card" onclick="window.location.hash='#/discover?tab=care'">
+          <div class="discover-hero-card" onclick="window.KhashabNavigate('/discover?tab=care')">
             <div class="image-placeholder" style="height: 100%; border-radius: var(--radius-lg);">
               <svg class="icon" viewBox="0 0 24 24" style="width: 48px; height: 48px;"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg>
             </div>
@@ -332,7 +320,7 @@ export const Discover = {
           </div>
 
           <!-- Card 2: Wood Wiki -->
-          <div class="discover-hero-card" onclick="window.location.hash='#/discover?tab=wiki'">
+          <div class="discover-hero-card" onclick="window.KhashabNavigate('/discover?tab=wiki')">
             <div class="image-placeholder" style="height: 100%; border-radius: var(--radius-lg);">
               <svg class="icon" viewBox="0 0 24 24" style="width: 48px; height: 48px;"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg>
             </div>
@@ -345,7 +333,7 @@ export const Discover = {
           </div>
 
           <!-- Card 3: Blog & News -->
-          <div class="discover-hero-card" onclick="window.location.hash='#/discover?tab=blog'">
+          <div class="discover-hero-card" onclick="window.KhashabNavigate('/discover?tab=blog')">
             <div class="image-placeholder" style="height: 100%; border-radius: var(--radius-lg);">
               <svg class="icon" viewBox="0 0 24 24" style="width: 48px; height: 48px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
             </div>
@@ -358,7 +346,7 @@ export const Discover = {
           </div>
 
           <!-- Card 4: Videos & FAQ (Combined or Videos) -->
-          <div class="discover-hero-card" onclick="window.location.hash='#/discover?tab=videos'">
+          <div class="discover-hero-card" onclick="window.KhashabNavigate('/discover?tab=videos')">
             <div class="image-placeholder" style="height: 100%; border-radius: var(--radius-lg);">
               <svg class="icon" viewBox="0 0 24 24" style="width: 48px; height: 48px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
             </div>

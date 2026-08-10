@@ -62,9 +62,6 @@ export const Footer = {
           <div class="footer-bottom">
             <p>&copy; 2026 Khashab. All rights reserved. Made from 100% natural wood.</p>
             <div class="footer-socials">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
-              <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">Pinterest</a>
               <a href="mailto:sales@khashab.store" aria-label="Email">sales@khashab.store</a>
             </div>
           </div>

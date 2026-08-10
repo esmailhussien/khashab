@@ -19,19 +19,21 @@ export const Home = {
           <div class="container hero-grid">
             <div class="hero-content">
               <span class="hero-badge">Artisanal Woodcraft</span>
-              <h2>Crafted by nature.<br>Refined by hand.</h2>
+              <h1>Crafted by nature.<br>Refined by hand.</h1>
               <p class="hero-desc">
                 100% natural, hand-finished wooden boards and home accessories designed to bring organic warmth and lifetime durability to your modern kitchen.
               </p>
               <div class="hero-actions">
-                <a href="#/store" class="btn btn-primary">Explore The Store</a>
-                <a href="#/our-story" class="btn btn-secondary">Our Story</a>
+                <a href="/store" class="btn btn-primary">Explore The Store</a>
+                <a href="/our-story" class="btn btn-secondary">Our Story</a>
               </div>
             </div>
             
             <div class="hero-image-frame">
-              <!-- Using the premium restored image -->
-              <img src="/assets/hero.png" alt="Khashab Premium Wooden Boards" class="hero-img">
+              <picture>
+                <source srcset="/assets/hero.webp" type="image/webp">
+                <img src="/assets/hero.png" alt="Khashab premium handcrafted wooden serving board" class="hero-img" width="1024" height="1024" fetchpriority="high" decoding="async">
+              </picture>
             </div>
           </div>
         </section>
@@ -50,7 +52,7 @@ export const Home = {
                 const catProduct = products.find(p => p.category === cat.id);
                 const catImage = catProduct ? catProduct.image : cat.image;
                 return `
-                <div class="category-card reveal-on-scroll reveal-slide-up stagger-item" onclick="window.location.hash='#/store?category=${cat.id}'">
+                <div class="category-card reveal-on-scroll reveal-slide-up stagger-item" onclick="window.KhashabNavigate('/store?category=${cat.id}')">
                   <img class="category-card-img" src="${catImage}" alt="${cat.name}" loading="lazy" />
                   <div class="category-card-overlay">
                     <h3 class="category-title">${cat.name}</h3>
@@ -61,7 +63,7 @@ export const Home = {
             </div>
             
             <div style="text-align: center; margin-top: 3rem;" class="reveal-on-scroll reveal-fade">
-              <a href="#/store" class="btn btn-text">View All 6 Categories</a>
+              <a href="/store" class="btn btn-text">View All 6 Categories</a>
             </div>
           </div>
         </section>

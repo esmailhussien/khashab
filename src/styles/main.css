@@ -3,6 +3,7 @@
 @import './base.css';
 @import './layouts.css';
 @import './components.css';
+@import './components/consent.css';
 @import './pages/home.css';
 @import './pages/store.css';
 @import './pages/product.css';
@@ -13,3 +14,4 @@
 @import './pages/contact.css';
 @import './pages/configurator.css';
 @import './pages/returns.css';
+@import './pages/admin.css';
