@@ -7,10 +7,14 @@ export const Configurator = {
     return `
       <div class="page-container container">
         
-        <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
-          <h2 style="font-family: var(--font-headings); font-size: 2.5rem; font-weight: 500;">Build Your Board</h2>
-          <p>Design a custom board tailored precisely to your kitchen shape, dimensions, and personal branding.</p>
-        </div>
+        <header class="page-header">
+          <div class="page-header-body">
+            <span class="eyebrow"><span class="eyebrow-line"></span> Make it your own</span>
+            <h1>Build Your Board</h1>
+            <p>Design a custom board tailored precisely to your kitchen shape, dimensions, and personal branding.</p>
+          </div>
+          <a href="/contact" class="editorial-link">Ask about a custom piece <span aria-hidden="true">↗</span></a>
+        </header>
 
         <div class="configurator-grid">
           <!-- Left Column: Visual Mockup Canvas -->
@@ -18,7 +22,7 @@ export const Configurator = {
             <div class="board-canvas-frame">
               
               <!-- Board mockup element -->
-              <div class="board-mockup shape-rectangular" id="config-board-mockup" style="background-color: #4E3629;">
+              <div class="board-mockup shape-rectangular" id="config-board-mockup">
                 <!-- Paddle handle -->
                 <div class="board-mockup-handle" id="config-board-handle"></div>
                 
@@ -28,7 +32,7 @@ export const Configurator = {
               
             </div>
             
-            <p style="font-size: 0.8rem; color: var(--color-text-light); margin-top: 2rem; text-align: center; text-transform: uppercase; letter-spacing: 0.05em;">
+            <p class="config-disclaimer">
               *3D render mockup is illustrative. Natural wood colors and grains will vary.
             </p>
           </div>
@@ -52,7 +56,7 @@ export const Configurator = {
               <div class="config-wood-options" id="controls-wood">
                 <!-- Walnut -->
                 <div class="config-wood-card active" data-wood="walnut" data-color="#4E3629">
-                  <div class="config-wood-preview" style="background-image: url('/assets/woods/walnut.png'); background-size: cover; background-position: center;"></div>
+                  <div class="config-wood-preview" data-wood="walnut"></div>
                   <div class="config-wood-info">
                     <span class="config-wood-name">American Walnut (+$20)</span>
                     <span class="config-wood-desc">Rich chocolate hues, elegant wavy patterns, heavy durability.</span>
@@ -60,7 +64,7 @@ export const Configurator = {
                 </div>
                 <!-- Oak -->
                 <div class="config-wood-card" data-wood="oak" data-color="#C0A37E">
-                  <div class="config-wood-preview" style="background-image: url('/assets/woods/oak.png'); background-size: cover; background-position: center;"></div>
+                  <div class="config-wood-preview" data-wood="oak"></div>
                   <div class="config-wood-info">
                     <span class="config-wood-name">European White Oak (+$10)</span>
                     <span class="config-wood-desc">Golden wheat tones, highly pronounced coarse grains.</span>
@@ -68,7 +72,7 @@ export const Configurator = {
                 </div>
                 <!-- Maple -->
                 <div class="config-wood-card" data-wood="maple" data-color="#E6D2B8">
-                  <div class="config-wood-preview" style="background-image: url('/assets/woods/maple.png'); background-size: cover; background-position: center;"></div>
+                  <div class="config-wood-preview" data-wood="maple"></div>
                   <div class="config-wood-info">
                     <span class="config-wood-name">Maple (+0)</span>
                     <span class="config-wood-desc">Light creamy beige, tight grains, sanitarily chef-approved.</span>
@@ -92,7 +96,7 @@ export const Configurator = {
             <div class="configurator-option-group">
               <span class="variant-label">4. Personal Engraving (+$15)</span>
               
-              <div class="form-group" style="margin-bottom: 1.25rem;">
+              <div class="form-group config-field">
                 <label class="form-label" for="config-engrave-text">Type Custom Text</label>
                 <input type="text" id="config-engrave-text" class="form-input" placeholder="Type initials, date, or family name" maxlength="30">
               </div>
@@ -100,7 +104,7 @@ export const Configurator = {
               <div class="form-grid engraving-form-grid">
                 <div class="form-group">
                   <label class="form-label" for="config-engrave-font">Font Style</label>
-                  <select id="config-engrave-font" class="form-input" style="cursor: pointer; appearance: none; background-color: var(--color-bg);">
+                  <select id="config-engrave-font" class="form-input select-input">
                     <option value="serif" class="font-serif">Elegant Serif</option>
                     <option value="sans" class="font-sans">Modern Sans</option>
                     <option value="mono" class="font-mono">Clean Monospace</option>
@@ -109,7 +113,7 @@ export const Configurator = {
                 
                 <div class="form-group">
                   <label class="form-label" for="config-engrave-pos">Placement</label>
-                  <select id="config-engrave-pos" class="form-input" style="cursor: pointer; appearance: none; background-color: var(--color-bg);">
+                  <select id="config-engrave-pos" class="form-input select-input">
                     <option value="center">Center</option>
                     <option value="bottom-center">Bottom Center</option>
                     <option value="bottom-right">Bottom Right</option>

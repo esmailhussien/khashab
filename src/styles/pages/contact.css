@@ -297,3 +297,19 @@
   }
 }
 
+/* --- Swept from inline styles --- */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.contact-select-wrap { display: block; }
+
+.contact-submit-row { margin-top: 2rem; }
+.contact-submit-row .btn { width: 100%; }
+
+.contact-detail p { color: var(--color-text-muted); }

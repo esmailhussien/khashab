@@ -16,7 +16,7 @@ export const Wishlist = {
             <svg class="icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
             <h3>Your Wishlist is Empty</h3>
             <p>You haven't saved any handcrafted pieces yet. Explore our store to find your perfect match.</p>
-            <a href="#/store" class="btn btn-primary">Discover the Collections</a>
+            <a href="/store" class="btn btn-primary">Discover the collection</a>
           </div>
         </div>
       `;
@@ -24,10 +24,14 @@ export const Wishlist = {
 
     return `
       <div class="page-container container">
-        <div class="section-header" style="text-align: left; margin-bottom: 3rem;">
-          <h2 style="font-family: var(--font-headings); font-size: 2.5rem; font-weight: 500;">Your Wishlist</h2>
-          <p>You have saved ${favProducts.length} unique piece${favProducts.length === 1 ? '' : 's'}.</p>
-        </div>
+        <header class="page-header">
+          <div class="page-header-body">
+            <span class="eyebrow"><span class="eyebrow-line"></span> Saved for later</span>
+            <h1>Your Wishlist</h1>
+            <p>You have saved ${favProducts.length} unique piece${favProducts.length === 1 ? '' : 's'}.</p>
+          </div>
+          <a href="/store" class="editorial-link">Back to the collection <span aria-hidden="true">↗</span></a>
+        </header>
         
         <div class="grid grid-cols-4" id="wishlist-products-grid">
           ${favProducts.map(p => ProductCard.render(p)).join('')}

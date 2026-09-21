@@ -1,61 +1,6 @@
 /* 🪵 Khashab Our Story Page CSS — Premium Editorial Layout */
 
 /* ── Hero ── */
-.story-hero {
-  background-color: var(--color-bg-alt);
-  padding: 10rem 0 6rem 0;
-  text-align: center;
-  margin-bottom: 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.story-hero::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(176, 125, 70, 0.06) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.story-hero-content {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-}
-
-.story-hero-eyebrow {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
-  color: var(--color-accent);
-  margin-bottom: 1.5rem;
-  padding: 0.4rem 1.2rem;
-  border: 1px solid rgba(176, 125, 70, 0.3);
-  border-radius: var(--radius-round);
-}
-
-.story-hero h1 {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  margin-bottom: 1rem;
-  line-height: 1.1;
-}
-
-.story-hero-subtitle {
-  font-family: var(--font-headings);
-  font-style: italic;
-  font-size: 1.3rem;
-  color: var(--color-accent);
-  margin-bottom: 2rem;
-}
 
 /* ── Stats Ribbon ── */
 .story-stats-ribbon {
@@ -368,19 +313,6 @@
 }
 
 @media (max-width: 480px) {
-  .story-hero {
-    padding: 7rem 0 3rem 0;
-  }
-  .story-hero h1 {
-    font-size: 2rem;
-  }
-  .story-hero-subtitle {
-    font-size: 1rem;
-  }
-  .story-hero-eyebrow {
-    font-size: 0.65rem;
-    padding: 0.3rem 0.8rem;
-  }
 
   .story-stats-ribbon {
     padding: 2.5rem 0;
@@ -437,4 +369,34 @@
     font-size: 0.8rem;
     padding: 1rem;
   }
+}
+
+/* --- Swept from inline styles --- */
+.story-section { margin-bottom: 6rem; }
+
+.story-sustain-note {
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+.story-cta { text-align: center; }
+
+.story-cta h2 {
+  letter-spacing: -.03em;
+  margin-bottom: 1.5rem;
+}
+
+.story-cta p {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  max-width: 550px;
+  margin: 0 auto 2.5rem;
+}
+
+.story-cta-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }

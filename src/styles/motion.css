@@ -1,0 +1,472 @@
+/* 🪵 Khashab Motion, Depth & Spatial Layer
+   Additive polish: new primitives (reveal, tilt, grain, sheen) plus refined
+   hover states for existing components. Loaded last so nothing fights it. */
+
+:root {
+  /* Warm shadows — tinted with the brand's timber brown, never neutral black */
+  --shadow-warm-sm: 0 1px 2px rgba(48, 42, 35, .04), 0 2px 8px rgba(48, 42, 35, .04);
+  --shadow-warm-md: 0 2px 4px rgba(48, 42, 35, .04), 0 10px 28px rgba(48, 42, 35, .07);
+  --shadow-warm-lg: 0 4px 10px rgba(48, 42, 35, .05), 0 20px 48px rgba(48, 42, 35, .10), 0 48px 88px rgba(48, 42, 35, .06);
+  --shadow-contact: 0 18px 34px -22px rgba(48, 42, 35, .55);
+
+  --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
+  --ease-spring: cubic-bezier(.34, 1.4, .64, 1);
+
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------------------------------------------------------------- Grain --
+   A physical paper/timber tooth over flat fills. Never interactive. */
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--grain);
+  background-size: 180px 180px;
+  opacity: .32;
+  mix-blend-mode: multiply;
+  z-index: 2;
+}
+
+.grain-light {
+  opacity: .16;
+  mix-blend-mode: overlay;
+}
+
+/* --------------------------------------------------------------- Reveal --
+   Opt-in scroll choreography. Elements start settled (opacity 1) and are only
+   hidden once JS confirms IntersectionObserver support, so content is never
+   trapped invisible if the script fails. */
+.motion-ready [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-y, 24px), 0);
+  filter: blur(var(--reveal-blur, 0px));
+  transition:
+    opacity .85s var(--ease-out-expo) var(--reveal-delay, 0s),
+    transform .85s var(--ease-out-expo) var(--reveal-delay, 0s),
+    filter .85s var(--ease-out-expo) var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+
+.motion-ready [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  will-change: auto;
+}
+
+/* Stagger index assigned by motion.js for children of [data-reveal-group] */
+.motion-ready [data-reveal] {
+  --reveal-delay: calc(var(--i, 0) * 85ms);
+}
+
+/* ----------------------------------------------------------------- Tilt --
+   Pointer-driven parallax. The wrapper owns perspective, the inner plane
+   rotates, and floating children lift on their own Z. */
+[data-tilt] {
+  perspective: 1100px;
+}
+
+[data-tilt] .tilt-plane {
+  transform: rotateX(calc(var(--ty, 0) * var(--tilt-max, 5deg)))
+             rotateY(calc(var(--tx, 0) * var(--tilt-max, 5deg) * -1));
+  transform-style: preserve-3d;
+  transition: transform .9s var(--ease-out-expo);
+}
+
+[data-tilt].is-pointing .tilt-plane {
+  transition: transform .18s ease-out;
+}
+
+/* Sheen — a raking highlight that tracks the pointer across a surface */
+.sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity .5s var(--ease-out-expo);
+  background: radial-gradient(
+    38% 48% at calc(var(--mx, .5) * 100%) calc(var(--my, .5) * 100%),
+    rgba(255, 252, 245, .42) 0%,
+    rgba(255, 252, 245, .12) 42%,
+    transparent 72%
+  );
+}
+
+[data-tilt].is-pointing .sheen { opacity: 1; }
+
+/* -------------------------------------------------------------- Buttons --
+   The arrow leaves before the label does. */
+.btn .icon,
+.btn > [aria-hidden] {
+  transition: transform .45s var(--ease-out-expo);
+}
+
+.btn-primary,
+.btn-light,
+.btn-accent {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* A warm wash rises from the bottom instead of a flat colour swap */
+.btn-primary::after,
+.btn-light::after,
+.btn-accent::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-accent);
+  transform: translate3d(0, 101%, 0);
+  transition: transform .5s var(--ease-out-expo);
+}
+
+.btn-light::after { background: #e5d5bc; }
+
+.btn-primary:hover::after,
+.btn-light:hover::after,
+.btn-accent:hover::after {
+  transform: translate3d(0, 0, 0);
+}
+
+.btn-primary:hover,
+.btn-accent:hover {
+  background-color: var(--color-text);
+  box-shadow: var(--shadow-contact);
+}
+
+.btn-light:hover { background: #f5efe5; }
+
+.btn:hover .icon,
+.btn:hover > [aria-hidden] {
+  transform: translate3d(5px, 0, 0);
+}
+
+.btn:active { transform: translate3d(0, 1px, 0); }
+
+/* ------------------------------------------------------- Editorial links */
+.editorial-link {
+  position: relative;
+  border-bottom-color: transparent;
+}
+
+.editorial-link::before,
+.editorial-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+}
+
+.editorial-link::before { background: var(--color-border); }
+
+.editorial-link::after {
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .55s var(--ease-out-expo);
+}
+
+.editorial-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.editorial-link .icon,
+.editorial-link > [aria-hidden] {
+  transition: transform .45s var(--ease-out-expo);
+}
+
+.editorial-link:hover .icon,
+.editorial-link:hover > [aria-hidden] {
+  transform: translate3d(4px, -2px, 0);
+}
+
+/* --------------------------------------------------------- Round arrows */
+.round-arrow {
+  position: relative;
+  overflow: hidden;
+  transition: border-color .4s var(--ease-out-expo), color .35s var(--ease-out-expo);
+}
+
+.round-arrow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--color-text);
+  transform: scale(0);
+  transition: transform .5s var(--ease-out-expo);
+  z-index: -1;
+}
+
+.hero-product-label:hover .round-arrow::before,
+.occasion-card:hover .round-arrow::before {
+  transform: scale(1);
+}
+
+.hero-product-label:hover .round-arrow,
+.occasion-card:hover .round-arrow {
+  border-color: var(--color-text);
+}
+
+/* -------------------------------------------------------- Product cards */
+.product-card-img-wrapper {
+  border-radius: 2px;
+  box-shadow: var(--shadow-warm-sm);
+  transition: box-shadow .6s var(--ease-out-expo), transform .6s var(--ease-out-expo);
+}
+
+.product-card:hover .product-card-img-wrapper {
+  box-shadow: var(--shadow-warm-lg);
+  transform: translate3d(0, -6px, 0);
+}
+
+.product-card .product-card-img-wrapper img {
+  transition: transform 1.1s var(--ease-out-expo);
+}
+
+.product-card:hover .product-card-img-wrapper img {
+  transform: scale(1.045);
+}
+
+/* Badge now sits inside the image frame, bottom-left, clear of the wishlist
+   button and on a single line. */
+.product-card-badge {
+  top: auto;
+  bottom: .75rem;
+  left: .75rem;
+  max-width: calc(100% - 1.5rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: rgba(48, 42, 35, .92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #f7f2e9;
+  font-weight: 500;
+  letter-spacing: .04em;
+  border-radius: 2px;
+  transform: translate3d(0, 4px, 0);
+  opacity: 0;
+  transition: opacity .5s var(--ease-out-expo), transform .5s var(--ease-out-expo);
+}
+
+.product-card .product-card-badge { opacity: 1; transform: none; }
+
+.product-card-wishlist {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform .4s var(--ease-spring), color .3s ease, box-shadow .4s var(--ease-out-expo);
+}
+
+.product-card-wishlist:hover {
+  transform: scale(1.08);
+  box-shadow: var(--shadow-warm-md);
+}
+
+.product-card-wishlist .icon { transition: transform .35s var(--ease-spring); }
+.product-card-wishlist.is-popping .icon { animation: heart-pop .5s var(--ease-spring); }
+
+@keyframes heart-pop {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.35); }
+  60%  { transform: scale(.92); }
+  100% { transform: scale(1); }
+}
+
+/* Card CTA: the rule sweeps to accent, the glyph steps out */
+.card-action {
+  position: relative;
+  border-bottom-color: var(--color-border) !important;
+}
+
+.card-action::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .55s var(--ease-out-expo);
+}
+
+.card-action:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.card-action span {
+  transition: transform .45s var(--ease-out-expo);
+}
+
+.card-action:hover span {
+  transform: translate3d(4px, -3px, 0);
+}
+
+.btn-card-add.card-action:hover span {
+  transform: rotate(90deg);
+}
+
+/* ------------------------------------------------------------- Navbar --- */
+.navbar {
+  transition: box-shadow .5s var(--ease-out-expo), background-color .4s ease;
+}
+
+.navbar.is-lifted {
+  box-shadow: 0 1px 0 var(--color-border), 0 12px 30px -24px rgba(48, 42, 35, .5);
+}
+
+.nav-btn .icon { transition: transform .4s var(--ease-spring); }
+.nav-btn:hover .icon { transform: scale(1.12); }
+
+.badge-count { transition: transform .4s var(--ease-spring); }
+.badge-count.is-bumping { animation: heart-pop .5s var(--ease-spring); }
+
+/* Announcement ticker */
+.announcement-bar { position: relative; overflow: hidden; }
+
+.announcement-ticker {
+  display: grid;
+  grid-template-areas: 'slot';
+  align-items: center;
+}
+
+.announcement-ticker > span {
+  grid-area: slot;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  opacity: 0;
+  transform: translate3d(0, 90%, 0);
+  transition: opacity .6s var(--ease-out-expo), transform .6s var(--ease-out-expo);
+}
+
+.announcement-ticker > span[data-active] {
+  opacity: 1;
+  transform: none;
+}
+
+.announcement-ticker .icon {
+  width: 15px;
+  height: 15px;
+  stroke-width: 1.4;
+  color: #d9b98f;
+  flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------- Wood chips --
+   The material cards read as physical samples you can tip toward the light. */
+.material-card {
+  display: block;
+  position: relative;
+}
+
+.material-card .material-chip {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: var(--shadow-warm-sm);
+  transition: box-shadow .7s var(--ease-out-expo);
+  transform-style: preserve-3d;
+}
+
+.material-card:hover .material-chip { box-shadow: var(--shadow-warm-lg); }
+
+.material-card img { transition: transform 1.2s var(--ease-out-expo); }
+.material-card:hover img { transform: scale(1.06); }
+
+.material-card h3 span {
+  display: inline-block;
+  transition: transform .45s var(--ease-out-expo), color .3s ease;
+}
+
+.material-card:hover h3 span {
+  transform: translate3d(4px, -3px, 0);
+  color: var(--color-accent);
+}
+
+/* -------------------------------------------------------- Occasion cards */
+.occasion-card { display: block; }
+
+.occasion-image {
+  box-shadow: var(--shadow-warm-sm);
+  transition: box-shadow .7s var(--ease-out-expo);
+}
+
+.occasion-card:hover .occasion-image { box-shadow: var(--shadow-warm-lg); }
+
+.occasion-index {
+  transition: transform .5s var(--ease-out-expo), background-color .4s ease;
+  transform: translateZ(var(--depth, 24px));
+}
+
+.occasion-card:hover .occasion-index {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.occasion-copy h3 {
+  transition: transform .5s var(--ease-out-expo);
+}
+
+.occasion-card:hover .occasion-copy h3 {
+  transform: translate3d(4px, 0, 0);
+}
+
+/* --------------------------------------------------------- Craft strip -- */
+.craft-strip-inner > * .icon {
+  transition: transform .5s var(--ease-spring);
+}
+
+.craft-strip-inner > *:hover .icon {
+  transform: rotate(-8deg) scale(1.15);
+}
+
+/* ------------------------------------------------------------- Rings ----
+   Annual-ring motif, drawn on reveal. Decorative only. */
+.rings {
+  position: absolute;
+  pointer-events: none;
+  color: var(--color-accent);
+  opacity: .28;
+}
+
+.rings circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-dasharray: var(--len, 900);
+  stroke-dashoffset: var(--len, 900);
+  transition: stroke-dashoffset 1.8s var(--ease-out-expo) var(--ring-delay, 0s);
+}
+
+.is-revealed .rings circle,
+.rings.is-revealed circle {
+  stroke-dashoffset: 0;
+}
+
+/* --------------------------------------------------------- Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  [data-tilt] .tilt-plane { transform: none !important; }
+  .sheen { display: none; }
+  .rings circle { stroke-dashoffset: 0 !important; }
+
+  .announcement-ticker > span {
+    transition: none;
+  }
+}

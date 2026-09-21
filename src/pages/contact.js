@@ -4,7 +4,16 @@ export const Contact = {
   render() {
     return `
       <div class="page-container container">
-        
+
+        <header class="page-header">
+          <div class="page-header-body">
+            <span class="eyebrow"><span class="eyebrow-line"></span> Here to help</span>
+            <h1>Get in touch</h1>
+            <p>A gift, a custom piece, or simply a question about wood — tell us what you have in mind and we'll come back to you.</p>
+          </div>
+          <a href="/discover?tab=faq" class="editorial-link">Read the FAQs <span aria-hidden="true">↗</span></a>
+        </header>
+
         <div class="contact-grid">
           <!-- Contact Form Box (Left) -->
           <div class="contact-form-box" id="contact-form-container">
@@ -12,7 +21,7 @@ export const Contact = {
             
             <form id="form-contact-page" action="https://formsubmit.co/sales@khashab.store" method="POST" novalidate>
               <!-- Honeypot -->
-              <input type="text" name="_honey" style="display:none">
+              <input type="text" name="_honey" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
               <input type="hidden" name="_captcha" value="false">
               <input type="hidden" name="_subject" value="New Contact Form Inquiry - Khashab">
 
@@ -30,14 +39,14 @@ export const Contact = {
                 
                 <div class="form-group form-group-full">
                   <label class="form-label" for="contact-subject">Inquiry Subject</label>
-                  <div style="position: relative; display: flex; align-items: center;">
-                    <select id="contact-subject" name="subject" class="form-input" style="cursor: pointer; appearance: none; background-color: var(--color-bg); padding-right: 2.5rem;">
+                  <div class="contact-select-wrap">
+                    <select id="contact-subject" name="subject" class="form-input select-input">
                       <option value="General Inquiry">General Product Inquiry</option>
                       <option value="Custom Order">Custom Size / Engraving Request</option>
                       <option value="Wholesale">Wholesale & Corporate Gifting</option>
                       <option value="Order Issue">Existing Order Status / Issue</option>
                     </select>
-                    <span style="position: absolute; right: 1.25rem; pointer-events: none; color: var(--color-text-muted); font-size: 0.75rem;">▼</span>
+                    
                   </div>
                 </div>
                 
@@ -48,8 +57,8 @@ export const Contact = {
                 </div>
               </div>
 
-              <div style="margin-top: 2rem;">
-                <button type="submit" class="btn btn-primary" id="btn-contact-submit" style="width: 100%;">Send Inquiry</button>
+              <div class="contact-submit-row">
+                <button type="submit" class="btn btn-primary" id="btn-contact-submit">Send Inquiry</button>
               </div>
             </form>
           </div>
@@ -79,17 +88,6 @@ export const Contact = {
                 </div>
               </div>
 
-              <!-- Phone -->
-              <div class="contact-detail-item">
-                <div class="contact-detail-icon">
-                  <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                </div>
-                <div class="contact-detail-content">
-                  <h4>Call Workshop</h4>
-                  <p style="color: var(--color-text-muted);">+1 (555) 987-6543</p>
-                </div>
-              </div>
-
               <!-- Workshop Hours -->
               <div class="contact-detail-item">
                 <div class="contact-detail-icon">
@@ -97,7 +95,7 @@ export const Contact = {
                 </div>
                 <div class="contact-detail-content">
                   <h4>Workshop Hours</h4>
-                  <p style="color: var(--color-text-muted);">Monday – Friday: 9:00 AM – 6:00 PM EST</p>
+                  <p>Monday – Friday: 9:00 AM – 6:00 PM EST</p>
                 </div>
               </div>
             </div>

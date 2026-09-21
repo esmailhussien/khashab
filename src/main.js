@@ -14,11 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Render the static page shell
   appContainer.innerHTML = `
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <!-- Navbar Container -->
     <div id="navbar-container"></div>
     
     <!-- Main Dynamically Routed Content -->
-    <main id="main-content"></main>
+    <main id="main-content" tabindex="-1"></main>
     
     <!-- Cart Slide-out Panel Container -->
     <div id="cart-panel-container"></div>

@@ -5,16 +5,14 @@ export const Story = {
     return `
       <div class="page-container">
         <!-- Hero Section -->
-        <section class="story-hero">
-          <div class="story-hero-content container">
-            <span class="story-hero-eyebrow">EST. 1920s · ALEXANDRIA, EGYPT</span>
-            <h1 style="font-family: var(--font-headings); font-weight: 500;">A Century in the Grain</h1>
-            <p class="story-hero-subtitle">Four generations. One undying craft.</p>
-            <p style="font-size: 1.15rem; color: var(--color-text-muted); font-weight: 300; line-height: 1.9; max-width: 700px; margin: 0 auto;">
-              This isn't just the story of a business. It's about a family that fell in love with wood over a hundred years ago — and never stopped. From fixing up old furniture in a small Egyptian town to building things that end up in homes all around the world, we've been at it for four generations now. Here's how it all started.
-            </p>
+        <header class="page-header container">
+          <div class="page-header-body">
+            <span class="eyebrow"><span class="eyebrow-line"></span> Alexandria, Egypt</span>
+            <h1>A Century in the Grain</h1>
+            <p>This isn't just the story of a business. It's about a family that fell in love with wood over a hundred years ago — and never stopped. From fixing up old furniture in a small Egyptian town to building things that end up in homes all around the world, we've been at it for four generations now. Here's how it all started.</p>
           </div>
-        </section>
+          <a href="/store" class="editorial-link">See what we make <span aria-hidden="true">↗</span></a>
+        </header>
 
         <!-- Stats Ribbon -->
         <section class="story-stats-ribbon reveal-on-scroll reveal-slide-up">
@@ -136,7 +134,7 @@ export const Story = {
         </section>
 
         <!-- Workshop Image -->
-        <section class="container" style="margin-bottom: 6rem;">
+        <section class="container story-section">
           <div class="story-workshop-image reveal-on-scroll reveal-fade">
             <img src="/assets/workshop.png" alt="Our Historic Woodcraft Workshop Interior" loading="lazy">
             <div class="story-workshop-caption">
@@ -146,11 +144,11 @@ export const Story = {
         </section>
 
         <!-- Our Promise / Sustainability -->
-        <section class="container" style="margin-bottom: 6rem;">
+        <section class="container story-section">
           <div class="sustainability-banner reveal-on-scroll reveal-slide-up">
             <div class="sustainability-header">
               <h3>Our Promise to Nature</h3>
-              <p style="color: var(--color-text-muted); font-weight: 300;">The forest has given our family everything for a hundred years. The least we can do is take care of it in return.</p>
+              <p class="story-sustain-note">The forest has given our family everything for a hundred years. The least we can do is take care of it in return.</p>
             </div>
             <div class="sustainability-grid">
               <div class="sustainability-card">
@@ -180,14 +178,12 @@ export const Story = {
 
         <!-- CTA Section -->
         <section class="story-cta-section reveal-on-scroll reveal-fade">
-          <div class="container" style="text-align: center;">
-            <h2 style="font-family: var(--font-headings); margin-bottom: 1.5rem;">Ready to Own a Piece of This Story?</h2>
-            <p style="color: var(--color-text-muted); font-weight: 300; font-size: 1.1rem; max-width: 550px; margin: 0 auto 2.5rem auto;">
-              Browse our handcrafted collection, or get in touch if you have something specific in mind — we love a good custom project.
-            </p>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-              <a href="#/store" class="btn btn-primary">Explore The Store</a>
-              <a href="#/contact" class="btn btn-secondary">Custom Orders</a>
+          <div class="container story-cta">
+            <h2>Ready to own a piece of this story?</h2>
+            <p>Browse our handcrafted collection, or get in touch if you have something specific in mind — we love a good custom project.</p>
+            <div class="story-cta-actions">
+              <a href="/store" class="btn btn-primary">Explore the store</a>
+              <a href="/contact" class="btn btn-secondary">Custom orders</a>
             </div>
           </div>
         </section>

@@ -6,18 +6,21 @@ export const Returns = {
       <div class="page-container">
 
         <!-- Hero Section -->
-        <section class="returns-hero">
-          <div class="container returns-hero-content">
-            <div class="returns-breadcrumbs">
-              <a href="/#/">Home</a>
-              <span class="separator">/</span>
-              <span>Return Policy</span>
-            </div>
-            <span class="returns-hero-eyebrow">Customer Care</span>
-            <h1>Return Policy</h1>
-            <p class="returns-hero-subtitle">We take immense pride in the craftsmanship and quality of our wooden products. If you are not completely satisfied, we are here to help.</p>
+        <div class="container">
+          <div class="returns-breadcrumbs">
+            <a href="/">Home</a>
+            <span class="separator">/</span>
+            <span>Return Policy</span>
           </div>
-        </section>
+        </div>
+        <header class="page-header container">
+          <div class="page-header-body">
+            <span class="eyebrow"><span class="eyebrow-line"></span> Here to help</span>
+            <h1>Return Policy</h1>
+            <p>We take immense pride in the craftsmanship and quality of our wooden products. If you are not completely satisfied, we are here to help.</p>
+          </div>
+          <a href="/contact" class="editorial-link">Talk to us <span aria-hidden="true">↗</span></a>
+        </header>
 
         <!-- Main Content -->
         <div class="container returns-content">

@@ -1,223 +1,108 @@
-/* 🪵 Khashab Navbar Component */
-
 import { cart } from '../utils/cart.js';
 import { wishlist } from '../utils/wishlist.js';
+const searchIcon = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>';
+const menuIcon = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg>';
+const closeIcon = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg>';
+const deliveryIcon = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 7h11v9H2zM13 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="1.6"/><circle cx="16.5" cy="18" r="1.6"/></svg>';
+const grainIcon = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M7 5c-5 5-4 12 5 13M17 5c5 5 4 12-5 13"/></svg>';
+const handIcon = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l9-9m-3-5l4-4 8 8-4 4zM3 21l-1-5 5 1"/></svg>';
 
+// Service promises the storefront can actually keep — the free-delivery
+// threshold mirrors the one checkout applies.
+const announcements = [
+  `${deliveryIcon} Free delivery on orders over 1,500 EGP`,
+  `${grainIcon} Natural hardwood — no two pieces alike`,
+  `${handIcon} Hand-finished, delivered across Egypt`
+];
 export const Navbar = {
   render() {
-    const cartCount = cart.getCount();
-    const wishlistCount = wishlist.getCount();
-
-    return `
-      <header class="navbar" id="navbar">
-        <div class="container">
-          <!-- Logo -->
-          <a href="#/" class="logo">
-            <img src="/assets/khashablogo.png" alt="Khashab Logo">
-          </a>
-
-          <!-- Desktop Navigation -->
-          <nav class="desktop-nav">
-            <ul class="nav-links">
-              <li><a href="#/" class="nav-link" id="nav-link-home">Home</a></li>
-              <li class="nav-item-dropdown">
-                <a href="#/store" class="nav-link" id="nav-link-store">The Store <span class="nav-link-dropdown-arrow">▼</span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#/store" class="dropdown-link">All Products</a></li>
-                  <li><a href="#/store?category=cutting-serving" class="dropdown-link">Cutting & Serving Boards</a></li>
-                  <li><a href="#/store?category=butcher-blocks" class="dropdown-link">Butcher Blocks</a></li>
-                  <li><a href="#/store?category=plates" class="dropdown-link">Wooden Plates</a></li>
-                  <li><a href="#/store?category=kitchen-accessories" class="dropdown-link">Kitchen Accessories</a></li>
-                  <li><a href="#/store?category=decorative" class="dropdown-link">Decorative Items</a></li>
-                  <li><a href="#/store?category=care-maintenance" class="dropdown-link">Care & Maintenance</a></li>
-                  <li class="dropdown-divider" style="border-top: 1px solid var(--color-border); margin: 6px 0;"></li>
-                  <li><a href="#/configurator" class="dropdown-link" style="font-weight: 600; color: var(--color-accent);">Build Your Board 🎨</a></li>
-                </ul>
-              </li>
-              <li class="nav-item-dropdown">
-                <a href="#/discover" class="nav-link" id="nav-link-discover">Discover <span class="nav-link-dropdown-arrow">▼</span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#/discover" class="dropdown-link">Discover Hub</a></li>
-                  <li><a href="#/discover?tab=care" class="dropdown-link">Care & Maintenance</a></li>
-                  <li><a href="#/discover?tab=wiki" class="dropdown-link">Wood Wiki / Materials</a></li>
-                  <li><a href="#/discover?tab=blog" class="dropdown-link">Blog & News</a></li>
-                  <li><a href="#/discover?tab=videos" class="dropdown-link">Videos</a></li>
-                  <li><a href="#/discover?tab=faq" class="dropdown-link">FAQ</a></li>
-                </ul>
-              </li>
-              <li><a href="#/our-story" class="nav-link" id="nav-link-story">Our Story</a></li>
-              <li><a href="#/contact" class="nav-link" id="nav-link-contact">Contact</a></li>
-            </ul>
-          </nav>
-
-          <!-- Nav Actions (Search, Wishlist, Cart) -->
-          <div class="nav-actions">
-            <!-- Search -->
-            <div class="search-container" id="nav-search-container">
-              <div class="search-input-wrapper">
-                <input type="text" placeholder="Search products..." class="search-input" id="nav-search-input">
-              </div>
-              <button class="nav-btn" id="btn-search-toggle" aria-label="Search">
-                <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-              </button>
-            </div>
-
-            <!-- Wishlist -->
-            <a href="#/wishlist" class="nav-btn" id="btn-wishlist-nav" aria-label="Wishlist">
-              <svg class="icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-              <span class="badge-count" id="wishlist-badge" style="display: ${wishlistCount > 0 ? 'flex' : 'none'}">${wishlistCount}</span>
-            </a>
-
-            <!-- Cart -->
-            <button class="nav-btn" id="btn-cart-toggle" aria-label="Cart">
-              <svg class="icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-              <span class="badge-count" id="cart-badge" style="display: ${cartCount > 0 ? 'flex' : 'none'}">${cartCount}</span>
-            </button>
-
-            <!-- Mobile Toggle -->
-            <button class="mobile-nav-toggle" id="btn-mobile-toggle" aria-label="Menu">
-              <svg class="icon" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <!-- Mobile Navigation Drawer -->
-      <div class="mobile-drawer" id="mobile-drawer">
-        <ul class="nav-links" style="display: flex;">
-          <li><a href="#/" class="nav-link">Home</a></li>
-          <li>
-            <a href="#/store" class="nav-link" style="font-weight: 500;">The Store</a>
-            <ul class="mobile-sub-links">
-              <li><a href="#/store" class="mobile-sub-link">All Products</a></li>
-              <li><a href="#/store?category=cutting-serving" class="mobile-sub-link">Cutting Boards</a></li>
-              <li><a href="#/store?category=butcher-blocks" class="mobile-sub-link">Butcher Blocks</a></li>
-              <li><a href="#/store?category=plates" class="mobile-sub-link">Plates</a></li>
-              <li><a href="#/store?category=kitchen-accessories" class="mobile-sub-link">Accessories</a></li>
-              <li><a href="#/store?category=decorative" class="mobile-sub-link">Decorative</a></li>
-              <li><a href="#/store?category=care-maintenance" class="mobile-sub-link">Care & Oil</a></li>
-              <li style="border-top: 1px dashed var(--color-border); margin: 4px 0; padding-top: 4px;"><a href="#/configurator" class="mobile-sub-link" style="font-weight: 600; color: var(--color-accent);">Build Your Board 🎨</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#/discover" class="nav-link" style="font-weight: 500;">Discover</a>
-            <ul class="mobile-sub-links">
-              <li><a href="#/discover" class="mobile-sub-link">Discover Hub</a></li>
-              <li><a href="#/discover?tab=care" class="mobile-sub-link">Care & Maintenance</a></li>
-              <li><a href="#/discover?tab=wiki" class="mobile-sub-link">Wood Wiki</a></li>
-              <li><a href="#/discover?tab=blog" class="mobile-sub-link">Blog & News</a></li>
-              <li><a href="#/discover?tab=videos" class="mobile-sub-link">Videos</a></li>
-              <li><a href="#/discover?tab=faq" class="mobile-sub-link">FAQ</a></li>
-            </ul>
-          </li>
-          <li><a href="#/our-story" class="nav-link">Our Story</a></li>
-          <li><a href="#/contact" class="nav-link">Contact</a></li>
-        </ul>
+    return `<div class="announcement-bar"><div class="container"><div class="announcement-ticker" id="announcement-ticker">${announcements.map((item, index) => `<span ${index === 0 ? 'data-active' : 'aria-hidden="true"'}>${item}</span>`).join('')}</div><a href="/discover?tab=care">A little care, a lasting story <span aria-hidden="true">↗</span></a></div></div>
+    <header class="navbar" id="navbar"><div class="container">
+      <a href="/" class="logo" aria-label="Khashab home"><img src="/assets/khashablogo.png" alt="Khashab" width="140" height="52"></a>
+      <nav class="desktop-nav" aria-label="Main navigation"><ul class="nav-links">
+        <li><a href="/store" class="nav-link">The collection</a></li>
+        <li><a href="/configurator" class="nav-link">Design your board</a></li>
+        <li class="nav-item-dropdown"><a href="/discover" class="nav-link">Discover <span class="nav-link-dropdown-arrow" aria-hidden="true">⌄</span></a><ul class="dropdown-menu">
+          <li><a href="/discover?tab=wiki" class="dropdown-link">The wood library</a></li><li><a href="/discover?tab=care" class="dropdown-link">Care & maintenance</a></li><li><a href="/discover?tab=blog" class="dropdown-link">Stories & guides</a></li><li><a href="/discover?tab=videos" class="dropdown-link">Workshop films</a></li><li><a href="/discover?tab=faq" class="dropdown-link">Your questions, answered</a></li>
+        </ul></li>
+        <li><a href="/our-story" class="nav-link">Our story</a></li>
+      </ul></nav>
+      <div class="nav-actions">
+        <div class="search-container" id="nav-search-container"><form class="search-input-wrapper" id="nav-search-form" role="search"><label class="sr-only" for="nav-search-input">Search products</label><input type="search" placeholder="Find your next piece…" class="search-input" id="nav-search-input"><button class="nav-btn" type="submit" aria-label="Submit search">${searchIcon}</button></form><button class="nav-btn" id="btn-search-toggle" aria-label="Search" aria-expanded="false" aria-controls="nav-search-form">${searchIcon}</button></div>
+        <a href="/wishlist" class="nav-btn" aria-label="Wishlist"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="badge-count" id="wishlist-badge"></span></a>
+        <button class="nav-btn" id="btn-cart-toggle" aria-label="Shopping bag"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7zm3 0V5a4 4 0 0 1 8 0v2"/></svg><span class="badge-count" id="cart-badge"></span></button>
+        <button class="mobile-nav-toggle" id="btn-mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">${menuIcon}</button>
       </div>
-    `;
+    </div></header>
+    <nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation" inert><span class="eyebrow">Explore Khashab</span><ul class="nav-links drawer-links">
+      <li><a href="/" class="nav-link">Home</a></li><li><a href="/store" class="nav-link">The collection</a></li><li><a href="/configurator" class="nav-link">Design your board</a></li><li><a href="/discover?tab=wiki" class="nav-link">The wood library</a></li><li><a href="/discover?tab=care" class="nav-link">Care & guides</a></li><li><a href="/our-story" class="nav-link">Our story</a></li><li><a href="/contact" class="nav-link">Get in touch</a></li>
+    </ul></nav>`;
   },
+  closeMenu() {
+    const drawer = document.getElementById('mobile-drawer');
+    const toggle = document.getElementById('btn-mobile-toggle');
+    drawer?.classList.remove('open');
+    if (drawer) drawer.inert = true;
+    if (toggle) { toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Open menu'); toggle.innerHTML = menuIcon; }
+    document.body.classList.remove('menu-open');
+  },
+  initTicker() {
+    const ticker = document.getElementById('announcement-ticker');
+    if (!ticker) return;
+    const slides = [...ticker.children];
+    if (slides.length < 2) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    let index = 0;
+    let paused = false;
+    ticker.addEventListener('pointerenter', () => { paused = true; });
+    ticker.addEventListener('pointerleave', () => { paused = false; });
+
+    setInterval(() => {
+      if (paused || document.hidden) return;
+      slides[index].removeAttribute('data-active');
+      slides[index].setAttribute('aria-hidden', 'true');
+      index = (index + 1) % slides.length;
+      slides[index].setAttribute('data-active', '');
+      slides[index].removeAttribute('aria-hidden');
+    }, 5200);
+  },
   init() {
-    const navbar = document.getElementById('navbar');
-    const searchContainer = document.getElementById('nav-search-container');
+    this.initTicker();
+    const drawer = document.getElementById('mobile-drawer');
+    const toggle = document.getElementById('btn-mobile-toggle');
+    const search = document.getElementById('nav-search-container');
     const searchToggle = document.getElementById('btn-search-toggle');
     const searchInput = document.getElementById('nav-search-input');
-    const mobileToggle = document.getElementById('btn-mobile-toggle');
-    const mobileDrawer = document.getElementById('mobile-drawer');
-    const cartToggle = document.getElementById('btn-cart-toggle');
-
-    // Sticky Transparent-to-Solid scroll effect
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
+    const closeSearch = () => { search.classList.remove('active'); searchToggle.setAttribute('aria-expanded', 'false'); document.getElementById('nav-search-form').inert = true; };
+    closeSearch();
+    searchToggle.addEventListener('click', () => {
+      if (search.classList.contains('active')) closeSearch();
+      else { this.closeMenu(); search.classList.add('active'); searchToggle.setAttribute('aria-expanded', 'true'); document.getElementById('nav-search-form').inert = false; searchInput.focus(); }
+    });
+    document.getElementById('nav-search-form').addEventListener('submit', event => { event.preventDefault(); const query = searchInput.value.trim(); if (query) { window.KhashabNavigate(`/store?search=${encodeURIComponent(query)}`); closeSearch(); } });
+    document.addEventListener('click', event => { if (!search.contains(event.target)) closeSearch(); });
+    toggle.addEventListener('click', () => {
+      if (drawer.classList.contains('open')) this.closeMenu();
+      else { closeSearch(); drawer.inert = false; drawer.classList.add('open'); document.body.classList.add('menu-open'); toggle.setAttribute('aria-expanded', 'true'); toggle.setAttribute('aria-label', 'Close menu'); toggle.innerHTML = closeIcon; drawer.querySelector('a').focus(); }
+    });
+    drawer.addEventListener('click', event => { if (event.target.closest('a')) this.closeMenu(); });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') { if (drawer.classList.contains('open')) { this.closeMenu(); toggle.focus(); } if (search.classList.contains('active')) { closeSearch(); searchToggle.focus(); } }
+      if (event.key === 'Tab' && drawer.classList.contains('open')) {
+        const links = [...drawer.querySelectorAll('a')];
+        if (event.shiftKey && document.activeElement === links[0]) { event.preventDefault(); toggle.focus(); }
+        else if (!event.shiftKey && document.activeElement === links.at(-1)) { event.preventDefault(); toggle.focus(); }
+        else if (document.activeElement === toggle) { event.preventDefault(); (event.shiftKey ? links.at(-1) : links[0]).focus(); }
       }
     });
-
-    // Expandable Search Bar toggle
-    if (searchToggle && searchContainer && searchInput) {
-      searchToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        searchContainer.classList.toggle('active');
-        if (searchContainer.classList.contains('active')) {
-          searchInput.focus();
-        }
-      });
-
-      // Close search when clicking outside
-      document.addEventListener('click', (e) => {
-        if (!searchContainer.contains(e.target)) {
-          searchContainer.classList.remove('active');
-        }
-      });
-
-      // Trigger product search on Enter
-      searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          const query = searchInput.value.trim();
-          if (query) {
-            window.KhashabNavigate(`/store?search=${encodeURIComponent(query)}`);
-            searchInput.value = '';
-            searchContainer.classList.remove('active');
-          }
-        }
-      });
-    }
-
-    // Mobile Hamburger toggle
-    if (mobileToggle && mobileDrawer) {
-      mobileToggle.addEventListener('click', () => {
-        mobileDrawer.classList.toggle('open');
-        // Toggle mobile hamburger icon
-        if (mobileDrawer.classList.contains('open')) {
-          mobileToggle.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
-        } else {
-          mobileToggle.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
-        }
-      });
-    }
-
-    // Toggle Cart Drawer
-    if (cartToggle) {
-      cartToggle.addEventListener('click', () => {
-        const cartPanel = document.getElementById('cart-panel');
-        const cartOverlay = document.getElementById('cart-panel-overlay');
-        if (cartPanel && cartOverlay) {
-          cartPanel.classList.add('active');
-          cartOverlay.classList.add('active');
-        }
-      });
-    }
-
-    // Listen to Cart updates to update count badge reactively
-    window.addEventListener('cart-updated', () => {
-      this.updateBadges();
-    });
-
-    // Listen to Wishlist updates to update count badge reactively
-    window.addEventListener('wishlist-updated', () => {
-      this.updateBadges();
-    });
-
-    // Initial badge update
+    window.addEventListener('popstate', () => this.closeMenu());
+    window.matchMedia('(min-width: 1001px)').addEventListener('change', event => { if (event.matches) this.closeMenu(); });
+    document.getElementById('btn-cart-toggle').addEventListener('click', () => { document.getElementById('cart-panel')?.classList.add('active'); document.getElementById('cart-panel-overlay')?.classList.add('active'); });
+    ['cart-updated', 'wishlist-updated'].forEach(name => window.addEventListener(name, () => this.updateBadges()));
     this.updateBadges();
   },
-
   updateBadges() {
-    const cartBadge = document.getElementById('cart-badge');
-    const wishlistBadge = document.getElementById('wishlist-badge');
-    
-    if (cartBadge) {
-      const count = cart.getCount();
-      cartBadge.innerText = count;
-      cartBadge.style.display = count > 0 ? 'flex' : 'none';
-    }
-    
-    if (wishlistBadge) {
-      const count = wishlist.getCount();
-      wishlistBadge.innerText = count;
-      wishlistBadge.style.display = count > 0 ? 'flex' : 'none';
-    }
+    [['cart-badge', cart.getCount()], ['wishlist-badge', wishlist.getCount()]].forEach(([id, count]) => { const badge = document.getElementById(id); if (badge) { badge.textContent = count; badge.style.display = count ? 'flex' : 'none'; } });
   }
 };

@@ -324,3 +324,26 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* --- Swept from inline styles --- */
+#config-board-mockup { background-color: #4E3629; }
+
+.config-disclaimer {
+  font-size: .8rem;
+  color: var(--color-text-light);
+  margin-top: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.config-wood-preview {
+  background-size: cover;
+  background-position: center;
+}
+
+.config-wood-preview[data-wood="walnut"] { background-image: url('/assets/woods/walnut.png'); }
+.config-wood-preview[data-wood="oak"] { background-image: url('/assets/woods/oak.png'); }
+.config-wood-preview[data-wood="maple"] { background-image: url('/assets/woods/maple.png'); }
+
+.config-field { margin-bottom: 1.25rem; }

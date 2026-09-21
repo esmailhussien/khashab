@@ -1,5 +1,6 @@
 /* 🪵 Khashab Client-side Router (Hash-based) */
 
+import { Navbar } from './components/navbar.js';
 import { Home } from './pages/home.js';
 import { Store } from './pages/store.js';
 import { Product } from './pages/product.js';
@@ -67,6 +68,7 @@ export const router = {
     // Intercept internal navigation so paths remain real URLs without a reload.
     document.body.addEventListener('click', (e) => {
       const anchor = e.target.closest('a');
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       if (!anchor || anchor.target === '_blank' || anchor.hasAttribute('download')) return;
 
       const href = anchor.getAttribute('href');
@@ -74,7 +76,7 @@ export const router = {
       const target = href.startsWith('#/') ? href.slice(1) : href;
       const url = new URL(target, window.location.origin);
 
-      if (url.origin === window.location.origin && !href.startsWith('#') && !url.pathname.startsWith('/assets/')) {
+      if (url.origin === window.location.origin && (!href.startsWith('#') || href.startsWith('#/')) && !url.pathname.startsWith('/assets/')) {
         e.preventDefault();
         this.navigate(`${url.pathname}${url.search}`);
       }
@@ -201,6 +203,7 @@ export const router = {
       );
     }
     
+    Navbar.closeMenu();
     this.updateActiveNavLinks(routePath);
   },
 
@@ -210,8 +213,10 @@ export const router = {
       const href = link.getAttribute('href');
       if (href && (href === path || href === `#${path}`)) {
         link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
       } else {
         link.classList.remove('active');
+        link.removeAttribute('aria-current');
       }
     });
     

@@ -5,7 +5,7 @@ export const Lightbox = {
     return `
       <div class="lightbox-modal" id="global-lightbox">
         <button class="lightbox-close" id="btn-lightbox-close" aria-label="Close Lightbox">&times;</button>
-        <img src="" alt="" class="lightbox-content" id="lightbox-image">
+        <img alt="" class="lightbox-content" id="lightbox-image">
       </div>
     `;
   },

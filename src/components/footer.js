@@ -1,94 +1,12 @@
-/* 🪵 Khashab Footer Component */
-
 export const Footer = {
   render() {
-    return `
-      <footer class="footer">
-        <div class="container">
-          <div class="footer-grid">
-            <!-- Brand Column -->
-            <div class="footer-col footer-brand">
-              <a href="#/" class="logo"><img src="/assets/khashablogo.png" alt="Khashab Logo"></a>
-              <p>Premium handcrafted wooden products designed for modern living. Crafted by nature, refined by hand.</p>
-            </div>
-
-            <!-- Quick Links -->
-            <div class="footer-col">
-              <h4>Shop</h4>
-              <ul class="footer-links">
-                <li><a href="#/store">All Products</a></li>
-                <li><a href="#/store?category=cutting-serving">Serving Boards</a></li>
-                <li><a href="#/store?category=butcher-blocks">Butcher Blocks</a></li>
-                <li><a href="#/store?category=plates">Wooden Plates</a></li>
-                <li><a href="#/store?category=care-maintenance">Care Products</a></li>
-              </ul>
-            </div>
-
-            <!-- Explore Links -->
-            <div class="footer-col">
-              <h4>Company</h4>
-              <ul class="footer-links">
-                <li><a href="#/our-story">Our Story</a></li>
-                <li><a href="#/discover">Discover Hub</a></li>
-                <li><a href="#/discover?tab=care">Care & Maintenance</a></li>
-                <li><a href="#/discover?tab=wiki">Wood Wiki</a></li>
-                <li><a href="#/contact">Contact Us</a></li>
-              </ul>
-            </div>
-
-            <!-- Customer Care / Return Policy -->
-            <div class="footer-col">
-              <h4>Support</h4>
-              <ul class="footer-links">
-                <li><a href="#/contact">Help Center</a></li>
-                <li><a href="#/contact">Track Order</a></li>
-                <li><a href="#/return-policy">Return Policy</a></li>
-              </ul>
-            </div>
-
-            <!-- Newsletter -->
-            <div class="footer-col footer-newsletter">
-              <h4>Stay Connected</h4>
-              <p>Subscribe to receive news of new arrivals, care guides, and sustainable wood insights.</p>
-              <form class="newsletter-form" id="footer-newsletter-form">
-                <input type="email" placeholder="Your email address" class="newsletter-input" required id="newsletter-email">
-                <button type="submit" class="btn-newsletter-submit" aria-label="Subscribe">→</button>
-              </form>
-              <p class="success-message" id="newsletter-success" style="display:none; color: var(--color-success); font-size: 0.85rem; margin-top: 0.5rem;"></p>
-            </div>
-          </div>
-
-          <!-- Bottom Footer -->
-          <div class="footer-bottom">
-            <p>&copy; 2026 Khashab. All rights reserved. Made from 100% natural wood.</p>
-            <div class="footer-socials">
-              <a href="mailto:sales@khashab.store" aria-label="Email">sales@khashab.store</a>
-            </div>
-          </div>
-        </div>
-      </footer>
-    `;
+    return `<footer class="footer"><div class="container"><div class="footer-grid">
+      <div class="footer-col footer-brand"><a href="/" class="logo"><img src="/assets/khashablogo.png" alt="Khashab" width="140" height="52"></a><p>Natural materials. Considered design.<br>Everyday objects, made meaningful.</p><span class="footer-signature">خشب — بطبيعته، مختلف.</span></div>
+      <div class="footer-col"><h4>The collection</h4><ul class="footer-links"><li><a href="/store">All pieces</a></li><li><a href="/store?category=plates">Plates & tableware</a></li><li><a href="/configurator">Design your board</a></li><li><a href="/wishlist">Your saved pieces</a></li></ul></div>
+      <div class="footer-col"><h4>Discover</h4><ul class="footer-links"><li><a href="/our-story">Our story</a></li><li><a href="/discover?tab=wiki">The wood library</a></li><li><a href="/discover?tab=care">Care & maintenance</a></li><li><a href="/discover?tab=blog">Stories & guides</a></li></ul></div>
+      <div class="footer-col"><h4>Here to help</h4><ul class="footer-links"><li><a href="/contact">Contact us</a></li><li><a href="/contact">Order enquiries</a></li><li><a href="/return-policy">Returns & exchanges</a></li><li><a href="/discover?tab=faq">FAQs</a></li></ul></div>
+      <div class="footer-col footer-invitation"><h4>Something in mind?</h4><p>A gift, a custom piece, or simply a question about wood. We’d love to hear it.</p><a href="/contact" class="editorial-link">Start a conversation <span aria-hidden="true">↗</span></a></div>
+    </div><div class="footer-bottom"><p>© ${new Date().getFullYear()} Khashab. All rights reserved.</p><span>Natural wood. Individual character.</span><a href="mailto:sales@khashab.store">sales@khashab.store</a></div></div></footer>`;
   },
-
-  init() {
-    const form = document.getElementById('footer-newsletter-form');
-    const successMsg = document.getElementById('newsletter-success');
-    const emailInput = document.getElementById('newsletter-email');
-
-    if (form && successMsg) {
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = emailInput.value.trim();
-        if (email) {
-          successMsg.innerText = "Thank you! You've subscribed successfully.";
-          successMsg.style.display = 'block';
-          emailInput.value = '';
-          
-          setTimeout(() => {
-            successMsg.style.display = 'none';
-          }, 5000);
-        }
-      });
-    }
-  }
+  init() {}
 };

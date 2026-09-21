@@ -8,64 +8,81 @@
   margin-bottom: 6rem;
 }
 
-/* Gallery Styles */
+/* Gallery: editorial image grid — lead photo full width, the rest paired.
+   Sized so the column lands close to the buy box height beside it. */
 .product-gallery {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  align-content: start;
 }
 
-.gallery-main {
+/* The buy column runs longer than any set of photos, so the gallery travels
+   with the reader rather than leaving a dead rectangle beside the specs. */
+@media (min-width: 901px) {
+  .product-gallery {
+    position: sticky;
+    top: 1.5rem;
+    align-self: start;
+  }
+}
+
+.gallery-figure {
+  --tilt-max: 2deg;
+  margin: 0;
+  min-width: 0;
+}
+
+.gallery-figure--lead { grid-column: 1 / -1; }
+
+.gallery-figure .tilt-plane { position: relative; }
+
+.gallery-frame {
   position: relative;
-  background-color: var(--color-bg-alt);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-lg);
+  aspect-ratio: 1;
   overflow: hidden;
-  aspect-ratio: 1; /* 1:1 square */
+  border-radius: 3px;
+  background-color: var(--color-bg-alt);
   cursor: zoom-in;
+  box-shadow: var(--shadow-warm-sm);
+  transition: box-shadow .7s var(--ease-out-expo);
 }
 
-.gallery-main img {
+.gallery-figure:hover .gallery-frame,
+.gallery-figure:focus-visible .gallery-frame {
+  box-shadow: var(--shadow-warm-lg);
+}
+
+.gallery-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--transition-slow);
+  transition: transform 1.2s var(--ease-out-expo);
 }
 
-.gallery-main:hover img {
-  transform: scale(1.03);
+.gallery-figure:not(.gallery-figure--lead) .gallery-frame { aspect-ratio: 1.15; }
+
+.gallery-figure:hover .gallery-frame img { transform: scale(1.035); }
+
+.gallery-caption {
+  position: absolute;
+  left: .9rem;
+  bottom: .9rem;
+  padding: .4rem .7rem;
+  background: rgba(250, 248, 244, .93);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-size: .6875rem;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  box-shadow: var(--shadow-warm-sm);
+  transform: translate3d(calc(var(--tx, 0) * -5px), calc(var(--ty, 0) * -5px), var(--depth, 26px));
+  transition: transform .8s var(--ease-out-expo);
+  pointer-events: none;
 }
 
-.gallery-thumbnails {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-}
-
-.gallery-thumb {
-  width: 80px;
-  height: 80px;
-  background-color: var(--color-bg-alt);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: all var(--transition-fast);
-  flex-shrink: 0;
-  position: relative;
-}
-
-.gallery-thumb.active {
-  opacity: 1;
-  border-color: var(--color-accent);
-}
-
-.gallery-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+.gallery-figure.is-pointing .gallery-caption { transition: transform .18s ease-out; }
 
 /* Lightbox/Zoom Modal */
 .lightbox-modal {
@@ -205,8 +222,13 @@
   transition: all var(--transition-fast);
 }
 
+.size-option {
+  transition: border-color .3s ease, background-color .35s var(--ease-out-expo), color .3s ease, transform .35s var(--ease-spring);
+}
+
 .size-option:hover {
   border-color: var(--color-text);
+  transform: translateY(-1px);
 }
 
 .size-option.active {
@@ -217,24 +239,39 @@
 
 .wood-options {
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 1.35rem 0.9rem;
 }
 
+/* Fixed track width keeps long finish names ("Wenge & Padauk") from stretching
+   the row off-screen; the row wraps instead of clipping. */
 .wood-option {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
+  width: 74px;
+  text-align: center;
 }
 
 .wood-swatch {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 2px solid transparent;
   padding: 2px;
-  transition: all var(--transition-fast);
+  box-shadow: inset 0 0 0 1px rgba(48, 42, 35, .08), 0 2px 6px rgba(48, 42, 35, .10);
+  transition: transform .35s var(--ease-spring), border-color .3s ease, box-shadow .35s ease;
+}
+
+.wood-option:hover .wood-swatch {
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: inset 0 0 0 1px rgba(48, 42, 35, .08), 0 6px 14px rgba(48, 42, 35, .16);
+}
+
+.wood-option.active .wood-swatch {
+  transform: scale(1.04);
 }
 
 .wood-swatch-inner {
@@ -598,7 +635,94 @@
 
   /* Wishlist button full width on mobile */
   #btn-detail-wishlist {
-    width: 100% !important;
-    height: 48px !important;
+    width: 100%;
+    height: 48px;
   }
+}
+
+/* Gallery on phones: a snap carousel keeps the buy box within reach instead of
+   pushing it below three full-width photos. */
+@media (max-width: 760px) {
+  .product-gallery {
+    display: flex;
+    gap: .75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin-inline: -1.25rem;
+    padding-inline: 1.25rem;
+  }
+  .product-gallery::-webkit-scrollbar { display: none; }
+  .gallery-figure, .gallery-figure--lead {
+    flex: 0 0 84%;
+    scroll-snap-align: center;
+  }
+  .gallery-figure { --depth: 0px; }
+  .gallery-caption { left: .75rem; bottom: .75rem; }
+}
+
+/* --- Swept from inline styles --- */
+.wood-subtitle {
+  display: block;
+  font-size: .625rem;
+  line-height: 1.25;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: 2px;
+}
+
+.purchase-row #btn-add-to-cart { flex: 1; }
+
+#btn-detail-wishlist {
+  position: static;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: transparent;
+}
+
+.bundle-intro {
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.bundle-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+#bundle-total-sum { color: var(--color-accent); }
+
+.bundle-total-original {
+  font-size: .85rem;
+  text-decoration: line-through;
+  color: var(--color-text-light);
+  margin-left: .5rem;
+}
+
+.product-related {
+  border-top: 1px solid var(--color-border);
+  padding-top: 4rem;
+}
+
+.reviews-title {
+  font-size: 1.8rem;
+  letter-spacing: -.025em;
+  margin-bottom: 2rem;
+}
+
+.star-rating-lead {
+  justify-content: center;
+  margin: .5rem 0;
+}
+
+.star-rating-sm { margin-top: .25rem; }
+
+.reviews-basis {
+  font-size: .85rem;
+  color: var(--color-text-muted);
 }

@@ -40,7 +40,7 @@ export const cart = {
         woodType: wood,
         size: size,
         quantity: quantity,
-        currency: product.currency || 'USD'
+        currency: product.currency || 'EGP'
       });
     }
 

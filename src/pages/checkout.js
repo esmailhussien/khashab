@@ -12,10 +12,10 @@ export const Checkout = {
     if (items.length === 0) {
       return `
         <div class="page-container container">
-          <div style="text-align: center; padding: 6rem 0;">
-            <h1 style="font-family: var(--font-headings); font-size: 2.5rem; margin-bottom: 1.5rem;">Your Cart is Empty</h1>
-            <p style="color: var(--color-text-muted); font-size: 1.1rem; margin-bottom: 2rem;">Add a handcrafted piece before continuing to checkout.</p>
-            <a href="/store" class="btn btn-primary">Return to Store</a>
+          <div class="page-message">
+            <h1>Your bag is empty</h1>
+            <p>Add a handcrafted piece before continuing to checkout.</p>
+            <a href="/store" class="btn btn-primary">Back to the collection</a>
           </div>
         </div>
       `;
@@ -65,7 +65,7 @@ export const Checkout = {
                   <input type="text" id="ship-country" class="form-input" value="Egypt" readonly>
                 </div>
                 <div class="form-group">
-                  <label class="form-label" for="ship-zip">Postal code <span style="font-weight: 400; text-transform: none;">(optional)</span></label>
+                  <label class="form-label" for="ship-zip">Postal code <span class="form-label-optional">(optional)</span></label>
                   <input type="text" id="ship-zip" class="form-input" autocomplete="postal-code" placeholder="11511">
                 </div>
               </div>
@@ -83,8 +83,8 @@ export const Checkout = {
             <div class="summary-items">
               ${items.map(item => `
                 <div class="summary-item-card">
-                  <div class="summary-item-img" style="width: 50px; height: 50px; border-radius: var(--radius-sm); overflow: hidden; position: relative;">
-                    ${item.image ? `<img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;">` : ''}
+                  <div class="summary-item-img">
+                    ${item.image ? `<img src="${item.image}" alt="${item.name}">` : ''}
                   </div>
                   <div class="summary-item-info">
                     <h3 class="summary-item-name">${item.name}</h3>

@@ -9,9 +9,9 @@ export const CartPanel = {
       <div class="side-panel-overlay" id="cart-panel-overlay"></div>
       
       <!-- Side Drawer -->
-      <div class="side-panel" id="cart-panel">
+      <div class="side-panel" id="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title" inert>
         <div class="side-panel-header">
-          <h3>Shopping Cart</h3>
+          <h3 id="cart-title">Your bag</h3>
           <button class="side-panel-close" id="btn-cart-close" aria-label="Close Cart">&times;</button>
         </div>
         
@@ -20,17 +20,17 @@ export const CartPanel = {
         </div>
         
         <div class="side-panel-footer">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-weight: 500;">
+          <div class="cart-subtotal-row">
             <span>Subtotal</span>
-            <span id="cart-subtotal">$0.00</span>
+            <span id="cart-subtotal">0 EGP</span>
           </div>
-          <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 1.5rem; font-weight: 300;">
+          <p class="cart-tax-note">
             Shipping and taxes calculated at checkout.
           </p>
-          <a href="/checkout" class="btn btn-primary" style="width: 100%; text-align: center;" id="btn-cart-checkout">
+          <a href="/checkout" class="btn btn-primary cart-btn-block" id="btn-cart-checkout">
             Proceed to Checkout
           </a>
-          <button class="btn btn-text" style="width: 100%; margin-top: 1rem; justify-content: center;" id="btn-cart-continue">
+          <button class="btn btn-text cart-btn-block cart-btn-continue" id="btn-cart-continue">
             Continue Shopping
           </button>
         </div>
@@ -60,6 +60,28 @@ export const CartPanel = {
       });
     }
 
+    let previousFocus = null;
+    let wasOpen = false;
+    new MutationObserver(() => {
+      const open = panel.classList.contains('active');
+      if (open === wasOpen) return;
+      wasOpen = open;
+      panel.inert = !open;
+      document.body.classList.toggle('cart-open', open);
+      if (open) previousFocus = document.activeElement;
+      ['main-content', 'navbar-container', 'footer-container'].forEach(id => { const element = document.getElementById(id); if (element) element.inert = open; });
+      if (open) closeBtn.focus();
+      else if (previousFocus?.isConnected) previousFocus.focus();
+    }).observe(panel, { attributes: true, attributeFilter: ['class'] });
+    document.addEventListener('keydown', event => {
+      if (!panel.classList.contains('active')) return;
+      if (event.key === 'Escape') closeCart();
+      if (event.key === 'Tab') {
+        const controls = [...panel.querySelectorAll('button, a[href]')].filter(element => !element.disabled && element.getAttribute('tabindex') !== '-1' && element.getClientRects().length);
+        if (event.shiftKey && document.activeElement === controls[0]) { event.preventDefault(); controls.at(-1)?.focus(); }
+        else if (!event.shiftKey && document.activeElement === controls.at(-1)) { event.preventDefault(); controls[0]?.focus(); }
+      }
+    });
     // Handle updates
     window.addEventListener('cart-updated', () => {
       this.updateCartList();
@@ -80,18 +102,20 @@ export const CartPanel = {
     
     if (items.length === 0) {
       body.innerHTML = `
-        <div style="text-align: center; padding: 3rem 0; color: var(--color-text-muted);">
-          <svg class="icon icon-lg" style="margin-bottom: 1rem; stroke-width: 1.2;" viewBox="0 0 24 24">
+        <div class="cart-empty">
+          <svg class="icon icon-lg cart-empty-icon" viewBox="0 0 24 24">
             <circle cx="9" cy="21" r="1"></circle>
             <circle cx="20" cy="21" r="1"></circle>
             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
           </svg>
-          <p style="font-weight: 300;">Your cart is currently empty.</p>
-          <a href="/store" class="btn btn-secondary" style="margin-top: 1.5rem; font-size: 0.8rem; padding: 0.6rem 1.5rem;" id="btn-empty-shop">Start Shopping</a>
+          <p>Your bag is currently empty.</p>
+          <a href="/store" class="btn btn-secondary cart-empty-action" id="btn-empty-shop">Start shopping</a>
         </div>
       `;
-      subtotalText.innerText = `$0.00`;
+      subtotalText.innerText = `0 EGP`;
       if (checkoutBtn) {
+        checkoutBtn.setAttribute('aria-disabled', 'true');
+        checkoutBtn.setAttribute('tabindex', '-1');
         checkoutBtn.style.pointerEvents = 'none';
         checkoutBtn.style.opacity = '0.5';
       }
@@ -110,47 +134,49 @@ export const CartPanel = {
     }
 
     if (checkoutBtn) {
+      checkoutBtn.removeAttribute('aria-disabled');
+      checkoutBtn.removeAttribute('tabindex');
       checkoutBtn.style.pointerEvents = 'auto';
       checkoutBtn.style.opacity = '1';
     }
 
     // Render items list
     body.innerHTML = items.map(item => {
-      const currency = item.currency || 'USD';
+      const currency = item.currency || 'EGP';
       const itemPriceStr = currency === 'EGP' ? `${(item.price * item.quantity).toLocaleString()} EGP` : `$${(item.price * item.quantity).toFixed(2)}`;
       
       return `
-        <div class="cart-item" data-id="${item.cartItemId}" style="display: flex; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-border-light); padding-bottom: 1.5rem;">
-          <div style="width: 80px; height: 80px; flex-shrink: 0; background-color: var(--color-bg-alt); border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-border-light); position: relative;">
+        <div class="cart-item" data-id="${item.cartItemId}">
+          <div class="cart-item-media">
             ${item.image && !item.image.includes('hero.png') ? `
-              <img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;">
+              <img src="${item.image}" alt="${item.name}">
             ` : `
-              <div class="image-placeholder" style="padding: 0.5rem;">
-                <svg class="icon" viewBox="0 0 24 24" style="width: 20px; height: 20px; margin-bottom: 0.25rem;"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-                <span style="font-size: 0.5rem;">Wood</span>
+              <div class="image-placeholder cart-item-placeholder">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                <span>Wood</span>
               </div>
             `}
           </div>
           
-          <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+          <div class="cart-item-body">
             <div>
-              <h4 style="font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; margin-bottom: 0.25rem;">${item.name}</h4>
-              <p style="font-size: 0.75rem; color: var(--color-text-muted); font-weight: 300;">
+              <h4 class="cart-item-name">${item.name}</h4>
+              <p class="cart-item-meta">
                 ${item.woodType} / ${item.size}
               </p>
             </div>
             
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+            <div class="cart-item-controls">
               <!-- Quantity Control -->
-              <div style="display: flex; align-items: center; border: 1px solid var(--color-border); border-radius: var(--radius-sm); overflow: hidden;">
-                <button class="cart-qty-btn decrease-qty" data-id="${item.cartItemId}" style="background: none; border: none; padding: 0.25rem 0.6rem; cursor: pointer; font-weight: 600;">-</button>
-                <span style="padding: 0 0.5rem; font-size: 0.85rem; font-weight: 500;">${item.quantity}</span>
-                <button class="cart-qty-btn increase-qty" data-id="${item.cartItemId}" style="background: none; border: none; padding: 0.25rem 0.6rem; cursor: pointer; font-weight: 600;">+</button>
+              <div class="cart-qty">
+                <button class="cart-qty-btn decrease-qty" data-id="${item.cartItemId}" type="button" aria-label="Decrease quantity">-</button>
+                <span class="cart-qty-val">${item.quantity}</span>
+                <button class="cart-qty-btn increase-qty" data-id="${item.cartItemId}" type="button" aria-label="Increase quantity">+</button>
               </div>
               
-              <div style="text-align: right;">
-                <span style="font-weight: 500; font-size: 0.95rem; color: var(--color-accent);">${itemPriceStr}</span>
-                <button class="remove-cart-item" data-id="${item.cartItemId}" style="background: none; border: none; color: var(--color-text-light); cursor: pointer; font-size: 0.75rem; display: block; margin-left: auto; margin-top: 0.25rem; font-weight: 300; text-decoration: underline;">
+              <div class="cart-item-price-col">
+                <span class="cart-item-price">${itemPriceStr}</span>
+                <button class="remove-cart-item" data-id="${item.cartItemId}" type="button">
                   Remove
                 </button>
               </div>

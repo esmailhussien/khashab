@@ -1,379 +1,459 @@
-/* 🪵 Khashab Discover Page CSS */
+/* 🪵 Khashab Discover — timber guide & support
+   Built on the shared editorial vocabulary: .page-header, .eyebrow,
+   .editorial-link, .editorial-heading. No inline styles. */
 
-/* Discover Dashboard Grid */
-.discover-dashboard-grid {
+/* ---------------------------------------------------------------- Tabs --- */
+.discover-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ----------------------------------------------------------------- Hub --- */
+.discover-hub-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2.5rem;
-  margin-top: 3rem;
-  margin-bottom: 5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
 }
 
-.discover-hero-card {
+.discover-hub-card {
   position: relative;
-  height: 320px;
-  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2.5rem 2rem 2rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
   overflow: hidden;
-  border: 1px solid var(--color-border-light);
-  cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+  transition: border-color .5s var(--ease-out-expo), box-shadow .6s var(--ease-out-expo), transform .6s var(--ease-out-expo);
 }
 
-.discover-hero-card-img {
+.discover-hub-card::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 2px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .6s var(--ease-out-expo);
+}
+
+.discover-hub-card:hover {
+  border-color: var(--color-accent-light);
+  box-shadow: var(--shadow-warm-md);
+  transform: translate3d(0, -4px, 0);
+}
+
+.discover-hub-card:hover::after { transform: scaleX(1); }
+
+.discover-hub-index {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.75rem;
+  font: 400 .75rem var(--font-body);
+  letter-spacing: .1em;
+  color: var(--color-text-light);
+}
+
+.discover-hub-card h2 {
+  font-size: clamp(1.5rem, 2.2vw, 1.95rem);
+  letter-spacing: -.025em;
+  margin-bottom: .75rem;
+}
+
+.discover-hub-card p {
+  color: var(--color-text-muted);
+  font-size: .9rem;
+  line-height: 1.8;
+  margin-bottom: 1.75rem;
+  max-width: 44ch;
+}
+
+.discover-hub-card .editorial-link { margin-top: auto; }
+
+/* ------------------------------------------------------------ Articles --- */
+.discover-article-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem 1.5rem;
+}
+
+.discover-article { display: block; }
+
+.discover-article-frame {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--color-bg-alt);
+  box-shadow: var(--shadow-warm-sm);
+  transition: box-shadow .7s var(--ease-out-expo);
+}
+
+.discover-article:hover .discover-article-frame { box-shadow: var(--shadow-warm-lg); }
+
+.discover-article-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--transition-slow);
+  transition: transform 1.1s var(--ease-out-expo);
 }
 
-.discover-hero-card:hover .discover-hero-card-img {
-  transform: scale(1.03);
-}
+.discover-article:hover .discover-article-frame img { transform: scale(1.04); }
 
-.discover-card-overlay {
+.discover-article-fallback {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
+  background: linear-gradient(135deg, var(--color-bg-alt), var(--color-accent-light));
+}
+
+.discover-article-body { padding-top: 1.25rem; }
+.discover-article-body .eyebrow { margin-bottom: .6rem; font-size: .6875rem; }
+
+.discover-article-body h3 {
+  font-size: 1.35rem;
+  letter-spacing: -.02em;
+  line-height: 1.35;
+  margin-bottom: .6rem;
+}
+
+.discover-article-body p {
+  color: var(--color-text-muted);
+  font-size: .875rem;
+  line-height: 1.8;
+  margin-bottom: 1.1rem;
+}
+
+/* ------------------------------------------------------- Article page --- */
+.discover-article-page { max-width: 780px; }
+
+.discover-article-meta {
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+}
+
+.discover-article-hero {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 3px;
+  margin-bottom: 3rem;
+  box-shadow: var(--shadow-warm-md);
+}
+
+.discover-article-hero img {
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 80%);
+  object-fit: cover;
+}
+
+.discover-prose { font-size: 1.0625rem; line-height: 1.9; color: var(--color-text-muted); }
+.discover-prose > * + * { margin-top: 1.5rem; }
+
+.discover-prose h2,
+.discover-prose h3 {
+  color: var(--color-text);
+  letter-spacing: -.02em;
+  margin-top: 3rem;
+}
+
+.discover-prose h2 { font-size: 1.75rem; }
+.discover-prose h3 { font-size: 1.3rem; }
+.discover-prose ul, .discover-prose ol { padding-left: 1.25rem; }
+.discover-prose li + li { margin-top: .6rem; }
+.discover-prose strong { color: var(--color-text); font-weight: 500; }
+.discover-prose img { border-radius: 3px; margin-block: 2rem; }
+
+.discover-article-foot {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 3rem;
-  color: #fff;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
 }
 
-.discover-card-badge {
-  font-size: 0.75rem;
+/* -------------------------------------------------------- Wood library --- */
+.wiki-compare {
+  padding: 2.5rem;
+  background: var(--color-bg-alt);
+  border-radius: 3px;
+  margin-bottom: 3rem;
+}
+
+.wiki-compare .editorial-heading { margin-bottom: 1.75rem; }
+
+.wiki-compare-selects {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.wiki-compare-scroll {
+  overflow-x: auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+}
+
+.wiki-compare-table {
+  width: 100%;
+  min-width: 540px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.wiki-compare-table th,
+.wiki-compare-table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--color-border-light);
+  vertical-align: top;
+  font-size: .875rem;
+  line-height: 1.7;
+}
+
+.wiki-compare-table thead th {
+  background: var(--color-bg-alt);
+  font-size: .75rem;
+  letter-spacing: .08em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-accent);
-  font-weight: 600;
-  margin-bottom: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.wiki-compare-table thead th + th { color: var(--color-accent); }
+
+.wiki-compare-table tbody th {
+  width: 24%;
+  font-weight: 500;
+  font-size: .75rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+}
+
+.wiki-compare-table td { color: var(--color-text-muted); }
+.wiki-compare-table .is-scientific { font-style: italic; }
+.wiki-compare-table tbody tr:last-child th,
+.wiki-compare-table tbody tr:last-child td { border-bottom: none; }
+
+/* Controls */
+.wiki-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.wiki-search {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  flex: 1;
+  min-width: 260px;
+  border-bottom: 1px solid var(--color-border);
+  padding: .5rem 0;
+}
+
+.wiki-search .icon { width: 20px; height: 20px; color: var(--color-text-muted); flex-shrink: 0; }
+
+.wiki-search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 1rem;
+  padding: .35rem 0;
+}
+
+.wiki-filters { display: flex; flex-wrap: wrap; gap: .75rem; }
+.wiki-filters .select-input { min-width: 180px; }
+
+.wiki-count {
+  font-size: .875rem;
+  color: var(--color-text-muted);
+  margin: 1.5rem 0;
+}
+
+/* Species cards */
+.wiki-grid { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.wiki-card {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2.5rem;
+  padding: 2rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  transition: border-color .5s var(--ease-out-expo), box-shadow .6s var(--ease-out-expo);
+}
+
+.wiki-card:hover {
+  border-color: var(--color-accent-light);
+  box-shadow: var(--shadow-warm-md);
+}
+
+.wiki-card-aside { min-width: 0; }
+
+.wiki-swatch {
   display: block;
+  width: 100%;
+  height: 120px;
+  border-radius: 3px;
+  background-size: cover !important;
+  background-position: center !important;
+  box-shadow: inset 0 0 0 1px rgba(48, 42, 35, .08);
+  margin-bottom: 1.25rem;
 }
 
-.discover-card-title {
-  font-family: var(--font-headings);
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+.wiki-card-aside h3 {
+  font-size: 1.4rem;
+  letter-spacing: -.02em;
+  margin-bottom: .25rem;
 }
 
-.discover-card-desc {
-  font-size: 0.95rem;
-  opacity: 0.8;
-  font-weight: 300;
+.wiki-scientific {
+  display: block;
+  font-style: italic;
+  font-size: .8125rem;
+  color: var(--color-text-muted);
   margin-bottom: 1.5rem;
 }
 
-/* Discover Detail Template */
-.article-detail-header {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto 3rem auto;
-}
+.wiki-facts > div + div { margin-top: .9rem; }
 
-.article-meta {
-  font-size: 0.85rem;
-  color: var(--color-text-light);
-  margin-top: 1rem;
+.wiki-facts dt,
+.wiki-attrs dt {
+  font-size: .6875rem;
+  letter-spacing: .09em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-bottom: .25rem;
 }
 
-.article-hero-frame {
-  max-width: 900px;
-  height: 350px;
-  margin: 0 auto 4rem auto;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.05);
-}
+.wiki-facts dd { font-size: .875rem; }
 
-.article-body-content {
-  max-width: 700px;
-  margin: 0 auto 6rem auto;
-  font-size: 1.1rem;
-  font-weight: 300;
-  color: #333;
-  line-height: 1.8;
-}
-
-.article-body-content p {
-  margin-bottom: 2rem;
-}
-
-.article-body-content h3 {
-  font-family: var(--font-body);
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
+.wiki-rarity {
+  display: inline-block;
+  padding: .2rem .6rem;
+  border-radius: 2px;
+  font-size: .75rem;
+  letter-spacing: .04em;
+  background: var(--color-bg-alt);
   color: var(--color-text);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  box-shadow: inset 0 0 0 1px var(--color-border);
 }
 
-.article-body-content ul {
+.wiki-rarity[data-rarity="Rare"] { background: var(--color-accent-light); }
+.wiki-rarity[data-rarity="Exceptional"] { background: var(--color-accent); color: #fff; box-shadow: none; }
+
+.wiki-card-body { min-width: 0; }
+
+.wiki-lede {
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: var(--color-text-muted);
   margin-bottom: 2rem;
-  padding-left: 1.5rem;
 }
 
-.article-body-content li {
-  margin-bottom: 0.5rem;
-}
-
-/* Wood Wiki Cards styling */
-.wiki-grid {
+.wiki-attrs > div {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
-  margin-top: 2rem;
-  margin-bottom: 5rem;
+  grid-template-columns: 200px 1fr;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--color-border-light);
 }
 
-.wiki-card {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-lg);
-  padding: 3rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+.wiki-attrs dd {
+  font-size: .9rem;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+}
+
+/* ----------------------------------------------------------- FAQ & empty */
+.faq-container {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 320px;
   gap: 3rem;
   align-items: start;
 }
 
-.wiki-card-left {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+.faq-aside {
+  padding: 2rem;
+  background: var(--color-bg-alt);
+  border-radius: 3px;
 }
 
-.wiki-color-swatch {
-  height: 180px;
-  border-radius: var(--radius-md);
-  background-size: cover;
-  border: 1px solid var(--color-border-light);
+.faq-aside h2 {
+  font-size: 1.5rem;
+  letter-spacing: -.02em;
+  margin-bottom: .75rem;
 }
 
-.wiki-card-title {
-  font-family: var(--font-headings);
-  font-size: 2.2rem;
-  font-weight: 500;
-}
-
-.wiki-scientific {
-  font-style: italic;
-  font-size: 0.95rem;
-  color: var(--color-text-light);
-  margin-top: 0.75rem;
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-.wiki-attrs {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.wiki-attr-row {
-  border-bottom: 1px solid var(--color-border-light);
-  padding-bottom: 0.75rem;
-  font-size: 0.95rem;
-}
-
-.wiki-attr-row:last-child {
-  border-bottom: none;
-}
-
-.wiki-attr-label {
-  font-weight: 600;
-  color: var(--color-text);
-  display: block;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.25rem;
-}
-
-.wiki-attr-val {
+.faq-aside p {
+  font-size: .875rem;
+  line-height: 1.8;
   color: var(--color-text-muted);
-  font-weight: 300;
+  margin-bottom: 1.5rem;
 }
 
-/* Specs badge group */
-.wiki-specs-badge-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 1.25rem;
-  background-color: var(--color-bg-alt);
-  padding: 1.25rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border-light);
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02);
+.discover-empty {
+  grid-column: 1 / -1;
+  padding: 4rem 2rem;
+  text-align: center;
+  background: var(--color-bg-alt);
+  border-radius: 3px;
 }
 
-.wiki-spec-badge {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.85rem;
-  border-bottom: 1px dashed var(--color-border);
-  padding-bottom: 0.5rem;
+.discover-empty h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  letter-spacing: -.025em;
+  margin-bottom: .75rem;
 }
 
-.wiki-spec-badge:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.wiki-spec-badge .badge-label {
-  font-weight: 600;
+.discover-empty p {
   color: var(--color-text-muted);
-  text-transform: uppercase;
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
+  max-width: 48ch;
+  margin: 0 auto 1.75rem;
+  line-height: 1.8;
 }
 
-.wiki-spec-badge .badge-value {
-  font-weight: 500;
-  color: var(--color-text);
+.discover-empty .eyebrow { margin-bottom: .75rem; }
+
+/* --------------------------------------------------------- Responsive --- */
+@media (max-width: 1024px) {
+  .discover-article-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wiki-card { grid-template-columns: 200px 1fr; gap: 1.75rem; }
+  .wiki-attrs > div { grid-template-columns: 160px 1fr; gap: 1rem; }
+  .faq-container { grid-template-columns: 1fr; }
 }
 
-.wiki-spec-badge .price-tier {
-  color: var(--color-accent);
-  font-weight: 600;
-}
-
-/* Video Gallery Grid */
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2.5rem;
-  margin-top: 2rem;
-  margin-bottom: 5rem;
-}
-
-.video-card {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.01);
-}
-
-.video-thumb-frame {
-  position: relative;
-  aspect-ratio: 16/9;
-  background-color: var(--color-bg-alt);
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.video-thumb-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform var(--transition-slow);
-}
-
-.video-card:hover .video-thumb-frame img {
-  transform: scale(1.03);
-}
-
-.video-play-btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: var(--color-surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  color: var(--color-text);
-  transition: all var(--transition-fast);
-}
-
-.video-card:hover .video-play-btn {
-  transform: translate(-50%, -50%) scale(1.1);
-  background-color: var(--color-accent);
-  color: #fff;
-}
-
-.video-info {
-  padding: 1.5rem;
-}
-
-.video-title {
-  font-family: var(--font-body);
-  font-size: 1.1rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-}
-
-.video-desc {
-  font-size: 0.9rem;
-  color: var(--color-text-muted);
-  font-weight: 300;
-}
-
-/* FAQ page styles */
-.faq-container {
-  max-width: 800px;
-  margin: 3rem auto 6rem auto;
-}
-
-/* Responsive discover details */
-@media (max-width: 900px) {
-  .discover-dashboard-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  .wiki-card {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 2rem;
-  }
-  .video-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  .article-hero-frame {
-    height: 300px;
-  }
-}
-
-@media (max-width: 480px) {
-  .discover-hero-card {
-    height: 220px;
-  }
-  .discover-card-title {
-    font-size: 1.4rem;
-  }
-  .discover-card-overlay {
-    padding: 1.5rem;
-  }
-  .discover-dashboard-grid {
-    gap: 1.25rem;
-  }
-  .wiki-card-title {
-    font-size: 1.6rem;
-  }
-  .article-detail-header h1 {
-    font-size: 1.6rem;
-  }
-  .article-body-content {
-    font-size: 1rem;
-  }
-  .article-hero-frame {
-    height: 220px;
-  }
+@media (max-width: 760px) {
+  .discover-tabs { margin-bottom: 2rem; padding-bottom: 1.5rem; }
+  .discover-hub-grid { grid-template-columns: 1fr; }
+  .discover-hub-card { padding: 2rem 1.5rem 1.5rem; }
+  .discover-article-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .wiki-compare { padding: 1.5rem 1.25rem; }
+  .wiki-compare-selects { grid-template-columns: 1fr; }
+  .wiki-card { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem 1.25rem; }
+  .wiki-swatch { height: 90px; }
+  .wiki-attrs > div { grid-template-columns: 1fr; gap: .35rem; }
+  .wiki-filters { width: 100%; }
+  .wiki-filters .select-input { flex: 1; min-width: 0; }
+  .discover-empty { padding: 3rem 1.25rem; }
 }
